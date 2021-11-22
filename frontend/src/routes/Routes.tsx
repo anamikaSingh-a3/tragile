@@ -1,11 +1,11 @@
 import { Route, Switch } from 'react-router'
-import App from '../App'
+import Board from '../pages/Board'
 
 const Routes = () => {
   return (
     <>
       <Switch>
-        <Route path='/' exact component={App} />
+        <Route path='/board' exact component={Board} />
       </Switch>
     </>
   )
