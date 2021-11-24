@@ -1,30 +1,37 @@
-import { Container } from '@material-ui/core'
+import { CardActionArea, CardContent } from '@material-ui/core'
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import Cards from '../components/Card'
-
-const drawerWidth = 240
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    paddingLeft: drawerWidth + theme.spacing(5),
-    padding: theme.spacing(5),
-  },
-}))
+import { useSelector } from 'react-redux'
+import { IActiveWorkspaceState, IBoard, IBoardState } from '../redux/interfaces'
+import { StyledCard } from '../style/styledComponents/Card'
+import { StyledContainer } from '../style/styledComponents/Container'
 
 const Board: React.FC = () => {
-  const classes = useStyles()
+  const board = useSelector((state: IBoardState) => state.boards)
+  const workspaces = useSelector(
+    (state: IActiveWorkspaceState) => state.activeWorkspace.board
+  )
+  const workspace = useSelector(
+    (state: IActiveWorkspaceState) => state.activeWorkspace.title
+  )
+
   return (
     <>
-      <Container maxWidth='lg' className={classes.content}>
+      <StyledContainer maxWidth='lg'>
+        <div> WorkSpace : {workspace}</div>
+        {workspaces
+          ? workspaces.map((board: IBoard) => (
+              <StyledCard key={board.id}>
+                <CardActionArea>
+                  <CardContent>{board.title}</CardContent>
+                </CardActionArea>
+              </StyledCard>
+            ))
+          : ''}
         <Cards />
-      </Container>
+      </StyledContainer>
     </>
   )
 }
+
 export default Board

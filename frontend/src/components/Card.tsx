@@ -1,49 +1,26 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { v4 as uuidv4 } from 'uuid'
 import Modal from '@material-ui/core/Modal'
-import { Card } from '@material-ui/core'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-
-const top = 0
-const right = 90
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 200,
-    minWidth: 100,
-    minHeight: 100,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    backgroundColor: theme.palette.grey[100],
-  },
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    transform: `translate(${right}%, ${top}%)`,
-  },
-  media: {
-    height: 140,
-  },
-  button: { marginTop: 20 },
-}))
+import { useDispatch, useSelector } from 'react-redux'
+import { addBoard } from '../redux/action'
+import { IActiveWorkspaceState } from '../redux/interfaces'
+import store from '../redux/store'
+import { StyledCard } from '../style/styledComponents/Card'
+import { StyledModalContainer } from '../style/styledComponents/ModalContainer'
+import { StyledButton } from '../style/styledComponents/Button'
+import CloseIcon from '@material-ui/icons/Close'
 
 const Cards: React.FC = () => {
-  const classes = useStyles()
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  //   const [modalStyle] = React.useState(getModalStyle)
-  //   const [open, setOpen] = React.useState(false)
+  const [openModal, setOpenModal] = useState(false)
+  const [title, setTile] = useState<string>('')
 
-  // const handleOpen = () => {
-  //   setOpen(true)
-  // }
+  const dispatch = useDispatch()
+  const activeWorkspace = useSelector(
+    (state: IActiveWorkspaceState) => state.activeWorkspace
+  )
 
   const handleClose = () => {
     setOpenModal(false)
@@ -51,17 +28,25 @@ const Cards: React.FC = () => {
   }
 
   const handleButtonClick = () => {
-    alert('button Clicked')
-    setTile('')
+    dispatch(
+      addBoard(
+        {
+          id: uuidv4(),
+          title: title,
+          list: [],
+          workspaceId: activeWorkspace.id,
+        },
+        store.getState()
+      )
+    )
+    handleClose()
   }
-  const [openModal, setOpenModal] = useState(false)
-  const [title, setTile] = useState<string>()
+
   const body = (
-    <div className={classes.paper}>
-      <h2 id='simple-modal-title'>Workspace Name</h2>
+    <StyledModalContainer>
+      <h2 id='simple-modal-title'>{activeWorkspace.title}</h2>
       <TextField
         id='filled-secondary'
-        // label='Filled secondary'
         placeholder='Add board title'
         variant='filled'
         color='secondary'
@@ -69,24 +54,25 @@ const Cards: React.FC = () => {
         onChange={(e) => setTile(e.target.value)}
         fullWidth
       />
-      <Button
+      <StyledButton
         variant='contained'
         color='primary'
-        className={classes.button}
         onClick={handleButtonClick}
+        disabled={!title}
       >
         Create Board
-      </Button>
-    </div>
+      </StyledButton>
+      <CloseIcon onClick={handleClose} />
+    </StyledModalContainer>
   )
 
   return (
     <>
-      <Card className={classes.root} onClick={() => setOpenModal(true)}>
+      <StyledCard onClick={() => setOpenModal(true)}>
         <CardActionArea>
           <CardContent>Create new Board</CardContent>
         </CardActionArea>
-      </Card>
+      </StyledCard>
       {openModal && (
         <Modal
           open={openModal}
