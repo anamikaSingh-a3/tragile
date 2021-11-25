@@ -12,7 +12,7 @@ import { Modal, TextField } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { activeWorkspace, addWrokspace } from '../redux/action'
 import { IWorkspace, IWorkspaceState } from '../redux/interfaces'
-import { StyledModalContainer } from '../style/styledComponents/ModalContainer'
+import { StyledModal } from '../style/styledComponents/Modal'
 import { StyledButton } from '../style/styledComponents/Button'
 import { StyledDrawer } from '../style/styledComponents/Drawer'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -83,7 +83,7 @@ const SideDrawer: React.FC = () => {
   }
 
   const body = (
-    <StyledModalContainer>
+    <StyledModal>
       <TextField
         id='filled-secondary'
         placeholder='Add Workspace title'
@@ -141,7 +141,7 @@ const SideDrawer: React.FC = () => {
         Create Workspace
       </StyledButton>
       <CloseIcon onClick={handleClose} />
-    </StyledModalContainer>
+    </StyledModal>
   )
 
   return (
