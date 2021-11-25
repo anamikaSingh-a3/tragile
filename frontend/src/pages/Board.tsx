@@ -18,7 +18,7 @@ const Board: React.FC = () => {
   return (
     <>
       <StyledContainer maxWidth='lg'>
-        <div> WorkSpace : {workspace}</div>
+        WorkSpace : {workspace}
         {workspaces
           ? workspaces.map((board: IBoard) => (
               <StyledCard key={board.id}>

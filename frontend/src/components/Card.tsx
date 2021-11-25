@@ -9,7 +9,7 @@ import { addBoard } from '../redux/action'
 import { IActiveWorkspaceState } from '../redux/interfaces'
 import store from '../redux/store'
 import { StyledCard } from '../style/styledComponents/Card'
-import { StyledModalContainer } from '../style/styledComponents/ModalContainer'
+import { StyledModal } from '../style/styledComponents/Modal'
 import { StyledButton } from '../style/styledComponents/Button'
 import CloseIcon from '@material-ui/icons/Close'
 
@@ -43,7 +43,7 @@ const Cards: React.FC = () => {
   }
 
   const body = (
-    <StyledModalContainer>
+    <StyledModal>
       <h2 id='simple-modal-title'>{activeWorkspace.title}</h2>
       <TextField
         id='filled-secondary'
@@ -63,7 +63,7 @@ const Cards: React.FC = () => {
         Create Board
       </StyledButton>
       <CloseIcon onClick={handleClose} />
-    </StyledModalContainer>
+    </StyledModal>
   )
 
   return (

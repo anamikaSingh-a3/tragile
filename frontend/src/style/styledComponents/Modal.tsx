@@ -2,7 +2,8 @@ import { styled } from '@material-ui/core/styles'
 
 const top = 0
 const right = 90
-export const StyledModalContainer = styled('div')(({ theme }) => ({
+
+export const StyledModal = styled('div')(({ theme }) => ({
   position: 'absolute',
   width: 400,
   backgroundColor: theme.palette.background.paper,
