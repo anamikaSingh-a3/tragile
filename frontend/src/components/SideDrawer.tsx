@@ -65,7 +65,6 @@ const SideDrawer: React.FC = () => {
         board: [],
       })
     )
-    // alert('workspace created')
     handleClose()
   }
 
@@ -94,38 +93,36 @@ const SideDrawer: React.FC = () => {
         onChange={(e) => setTile(e.target.value)}
         fullWidth
       />
-      <div>
-        <List component='nav' aria-label='WorkspaceType'>
-          <ListItem
-            button
-            aria-haspopup='true'
-            aria-controls='lock-menu'
-            onClick={handleClickListItem}
-          >
-            <ListItemText
-              primary='Workspace Type'
-              secondary={options[selectedIndex]}
-            />
-          </ListItem>
-        </List>
-        <Menu
-          id='lock-menu'
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleMenuClose}
+      <List component='nav' aria-label='WorkspaceType'>
+        <ListItem
+          button
+          aria-haspopup='true'
+          aria-controls='lock-menu'
+          onClick={handleClickListItem}
         >
-          {options.map((option, index) => (
-            <MenuItem
-              key={option}
-              selected={index === selectedIndex}
-              onClick={(event) => handleMenuItemClick(event, index)}
-            >
-              {option}
-            </MenuItem>
-          ))}
-        </Menu>
-      </div>
+          <ListItemText
+            primary='Workspace Type'
+            secondary={options[selectedIndex]}
+          />
+        </ListItem>
+      </List>
+      <Menu
+        id='lock-menu'
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        {options.map((option, index) => (
+          <MenuItem
+            key={option}
+            selected={index === selectedIndex}
+            onClick={(event) => handleMenuItemClick(event, index)}
+          >
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
       <TextField
         id='filled-secondary'
         placeholder='Add Workspace description'
@@ -152,9 +149,7 @@ const SideDrawer: React.FC = () => {
       <StyledDrawer variant='permanent' anchor='left'>
         <Divider />
         <List>
-          <ListItem
-          // onClick={() => onWorkspaceHandler()}
-          >
+          <ListItem>
             <ListItemText primary='Workspace' />
             <ListItemIcon>
               <AddIcon onClick={() => setOpenModal(true)} />

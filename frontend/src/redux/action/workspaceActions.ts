@@ -1,4 +1,4 @@
-import { IActiveWorkspace, IBoard, IWorkspace } from '../interfaces'
+import { IActiveWorkspace, IWorkspace } from '../interfaces'
 
 export const addWrokspace = (workspace: IWorkspace) => {
   return {
