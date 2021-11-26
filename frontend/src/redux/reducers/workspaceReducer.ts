@@ -8,6 +8,7 @@ const workspaceReducer = (
 ) => {
   switch (action.type) {
     case 'ADD_WORKSPACE': {
+      console.log('WORKSPACE REDUCER PAY:LOAD', action.payload)
       return [...state, action.payload]
     }
     default:

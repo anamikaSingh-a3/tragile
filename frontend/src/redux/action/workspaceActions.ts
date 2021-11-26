@@ -2,7 +2,7 @@ import { IActiveWorkspace, IWorkspace } from '../interfaces'
 
 export const addWrokspace = (workspace: IWorkspace) => {
   return {
-    id: workspace.id,
+    // id: workspace.workspace_id,
     type: 'ADD_WORKSPACE',
     payload: workspace,
   }
