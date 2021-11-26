@@ -6,17 +6,19 @@ import { workspaceSchema } from '../schema/workspaceSchema'
 export const createWorkspace = async (req: Request, res: Response) => {
   try {
     const data: IWorkspace = {
-      id: req.body.id,
+      workspace_id: req.body.workspace_id,
       title: req.body.title,
       type: req.body.type,
       description: req.body.description,
       // board: req.body.board,
     }
+    console.log('data Api', data)
     const workspace = await workspaceSchema.validate(data)
+    console.log('YUP WORKSPACE', workspace)
     const newWorkspace = await pool.query(
       'INSERT INTO workspace (workspace_id,title,type,description,created_at) VALUES ($1,$2,$3,$4,$5) RETURNING *',
       [
-        workspace.id,
+        workspace.workspace_id,
         workspace.title,
         workspace.type,
         workspace.description,

@@ -37,6 +37,21 @@ export const getBoard = async (req: Request, res: Response) => {
   }
 }
 
+export const getWorkspaceBoard = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.workspace_id
+    await boardSchema.isValid({ workspaceId: req.params.workspace_id })
+    const board = await pool.query('SELECT * FROM board where workspace=$1', [
+      id,
+    ])
+    console.log(board)
+    if (board.rowCount < 1) return res.status(400).send('No board found')
+    res.status(200).send(board.rows)
+  } catch (error) {
+    res.status(401).send(error)
+  }
+}
+
 export const getAllBoard = async (req: Request, res: Response) => {
   try {
     const boards = await pool.query('SELECT * FROM board')
