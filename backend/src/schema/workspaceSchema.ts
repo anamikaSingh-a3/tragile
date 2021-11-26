@@ -6,5 +6,4 @@ export const workspaceSchema = yup.object().shape({
   type: yup.string().required(),
   description: yup.string(),
   createdAt: yup.date().default(new Date()),
-  //   board: yup.array(),
 })

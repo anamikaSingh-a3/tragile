@@ -44,7 +44,6 @@ export const getWorkspaceBoard = async (req: Request, res: Response) => {
     const board = await pool.query('SELECT * FROM board where workspace=$1', [
       id,
     ])
-    console.log(board)
     if (board.rowCount < 1) return res.status(400).send('No board found')
     res.status(200).send(board.rows)
   } catch (error) {

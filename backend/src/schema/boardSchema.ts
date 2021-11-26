@@ -5,5 +5,4 @@ export const boardSchema = yup.object().shape({
   title: yup.string().required('required title'),
   visibility: yup.string().required(),
   workspaceId: yup.string().required(),
-  //   list: yup.array(),
 })

@@ -10,11 +10,10 @@ export const createWorkspace = async (req: Request, res: Response) => {
       title: req.body.title,
       type: req.body.type,
       description: req.body.description,
-      // board: req.body.board,
     }
-    console.log('data Api', data)
+
     const workspace = await workspaceSchema.validate(data)
-    console.log('YUP WORKSPACE', workspace)
+
     const newWorkspace = await pool.query(
       'INSERT INTO workspace (workspace_id,title,type,description,created_at) VALUES ($1,$2,$3,$4,$5) RETURNING *',
       [
@@ -34,7 +33,9 @@ export const createWorkspace = async (req: Request, res: Response) => {
 export const getWorkspace = async (req: Request, res: Response) => {
   try {
     const id = req.params.workspace_id
+
     await workspaceSchema.isValid({ id: req.params.workspace_id })
+
     const workspace = await pool.query(
       'SELECT * FROM workspace where workspace_id=$1',
       [id]
