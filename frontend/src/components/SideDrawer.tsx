@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
@@ -18,6 +18,9 @@ import { StyledDrawer } from '../style/styledComponents/Drawer'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import CloseIcon from '@material-ui/icons/Close'
+import api from '../api/workspace'
+import { createWorkspaceThunk } from '../redux/thunk/createWorkspaceThunk'
+import { getAllWorkspacesThunk } from '../redux/thunk/getAllWorkspaceThunk'
 
 const SideDrawer: React.FC = () => {
   const history = useHistory()
@@ -28,6 +31,7 @@ const SideDrawer: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [array, setArray] = useState([])
 
   const options = [
     'Education',
@@ -40,7 +44,7 @@ const SideDrawer: React.FC = () => {
     'Other',
   ]
 
-  const workspace = useSelector((state: IWorkspaceState) => state.workspaces)
+  const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
 
   const handleClose = () => {
     setOpenModal(false)
@@ -55,16 +59,18 @@ const SideDrawer: React.FC = () => {
     console.log('Active', active.payload.title)
   }
 
-  const handleButtonClick = () => {
-    dispatch(
-      addWrokspace({
-        id: uuidv4(),
-        title: title,
-        type: options[selectedIndex],
-        description: description,
-        board: [],
-      })
-    )
+  const handleButtonClick = async () => {
+    const requestBody: IWorkspace = {
+      workspace_id: uuidv4(),
+      title: title,
+      type: options[selectedIndex],
+      description: description,
+    }
+    console.log('reqbody', requestBody)
+    dispatch(createWorkspaceThunk(requestBody))
+    // const response = await api.post('/create', requestBody)
+    // console.log('RESSSSs', response)
+    // dispatch(addWrokspace(response.data))
     handleClose()
   }
 
@@ -144,6 +150,17 @@ const SideDrawer: React.FC = () => {
     </StyledModal>
   )
 
+  useEffect(() => {
+    const getAllWorkspaces = async () => {
+      const workspace = await api.get('/getAll')
+      console.log('Workspaces', workspace)
+      // dispatch(addWrokspace(workspace.data))
+      setArray(workspace.data)
+    }
+    getAllWorkspaces()
+    // const response = dispatch(getAllWorkspacesThunk)
+    // setArray(response)
+  }, [workspaces])
   return (
     <>
       <StyledDrawer variant='permanent' anchor='left'>
@@ -155,7 +172,18 @@ const SideDrawer: React.FC = () => {
               <AddIcon onClick={() => setOpenModal(true)} />
             </ListItemIcon>
           </ListItem>
-          {workspace.map((workspace: IWorkspace) => (
+          {array.map((array: IWorkspace) => (
+            <ListItem
+              key={array.workspace_id}
+              onClick={() => onWorkspaceHandler(array)}
+            >
+              <ListItemIcon>
+                <AssessmentIcon />
+              </ListItemIcon>
+              <ListItemText primary={array.title} />
+            </ListItem>
+          ))}
+          {/* {workspaces.map((workspace: IWorkspace) => (
             <ListItem
               key={workspace.id}
               onClick={() => onWorkspaceHandler(workspace)}
@@ -165,7 +193,7 @@ const SideDrawer: React.FC = () => {
               </ListItemIcon>
               <ListItemText primary={workspace.title} />
             </ListItem>
-          ))}
+          ))} */}
         </List>
       </StyledDrawer>
       {openModal && (

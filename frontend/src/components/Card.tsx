@@ -6,21 +6,28 @@ import CardContent from '@material-ui/core/CardContent'
 import TextField from '@material-ui/core/TextField'
 import { useDispatch, useSelector } from 'react-redux'
 import { addBoard } from '../redux/action'
-import { IActiveWorkspaceState } from '../redux/interfaces'
+import { IActiveWorkspaceState, IBoard } from '../redux/interfaces'
 import store from '../redux/store'
 import { StyledCard } from '../style/styledComponents/Card'
 import { StyledModal } from '../style/styledComponents/Modal'
 import { StyledButton } from '../style/styledComponents/Button'
 import CloseIcon from '@material-ui/icons/Close'
+import { createBoardThunk } from '../redux/thunk/createBoardThunk'
 
 const Cards: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [title, setTile] = useState<string>('')
 
   const dispatch = useDispatch()
+  // const activeWorkspace = useSelector(
+  //   (state: IActiveWorkspaceState) => state.activeWorkspace
+  // )
+
   const activeWorkspace = useSelector(
     (state: IActiveWorkspaceState) => state.activeWorkspace
   )
+  console.log('activeWorkspace', activeWorkspace)
+  console.log('activeWorkspaceID', activeWorkspace.workspace_id)
 
   const handleClose = () => {
     setOpenModal(false)
@@ -28,16 +35,22 @@ const Cards: React.FC = () => {
   }
 
   const handleButtonClick = () => {
+    const requestBody: IBoard = {
+      id: uuidv4(),
+      title: title,
+      workspaceId: activeWorkspace.workspace_id,
+      visibility: 'public',
+    }
     dispatch(
-      addBoard(
-        {
-          id: uuidv4(),
-          title: title,
-          list: [],
-          workspaceId: activeWorkspace.id,
-        },
-        store.getState()
-      )
+      // addBoard(
+      //   {
+      //     id: uuidv4(),
+      //     title: title,
+      //     workspaceId: activeWorkspace.id,
+      //   }
+      //   // store.getState()
+      // )
+      createBoardThunk(requestBody)
     )
     handleClose()
   }
