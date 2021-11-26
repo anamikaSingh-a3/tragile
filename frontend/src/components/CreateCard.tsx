@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
 import TextField from '@material-ui/core/TextField'
 import { useDispatch, useSelector } from 'react-redux'
 import { IActiveWorkspaceState, IBoard } from '../redux/interfaces'
-import { StyledCard } from '../theme/uiComponents/Card'
 import { StyledModal } from '../theme/uiComponents/Modal'
 import { StyledButton } from '../theme/uiComponents/Button'
 import CloseIcon from '@material-ui/icons/Close'
 import { createBoardThunk } from '../redux/thunk/createBoardThunk'
 import ModalContainer from './common/Modal'
+import Cards from './common/Card'
 
-const Cards: React.FC = () => {
+const CreateCard = () => {
   const [openModal, setOpenModal] = useState(false)
   const [title, setTile] = useState<string>('')
 
@@ -37,7 +35,6 @@ const Cards: React.FC = () => {
     dispatch(createBoardThunk(requestBody))
     handleClose()
   }
-
   const body = (
     <StyledModal>
       <h2 id='simple-modal-title'>{activeWorkspace.title}</h2>
@@ -64,14 +61,12 @@ const Cards: React.FC = () => {
 
   return (
     <>
-      <StyledCard onClick={() => setOpenModal(true)}>
-        <CardActionArea>
-          <CardContent>Create new Board</CardContent>
-        </CardActionArea>
-      </StyledCard>
+      <div onClick={() => setOpenModal(true)}>
+        <Cards title={'Create new Board'} />
+      </div>
       {openModal && <ModalContainer openModal={openModal} body={body} />}
     </>
   )
 }
 
-export default Cards
+export default CreateCard

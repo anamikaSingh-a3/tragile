@@ -4,7 +4,7 @@ import { Card } from '@material-ui/core'
 export const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 200,
   minWidth: 100,
-  minHeight: 100,
+  // minHeight: 100,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
