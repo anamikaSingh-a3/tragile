@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { IActiveWorkspaceState, IBoard, IBoardState } from '../redux/interfaces'
 import { StyledCard } from '../theme/uiComponents/Card'
-import { StyledContainer } from '../components/layout/Container'
+import { StyledContainer } from '../theme/uiComponents/layout/Container'
 import api from '../api/board'
 import CreateCard from '../components/CreateCard'
 

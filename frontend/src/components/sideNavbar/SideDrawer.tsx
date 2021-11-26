@@ -24,6 +24,7 @@ import { StyledDrawer } from '../../theme/uiComponents/Drawer'
 import ModalContainer from '../common/Modal'
 import api from '../../api/workspace'
 import { options } from './menuOptions'
+import { getAllWorkspacesThunk } from '../../redux/thunk/getAllWorkspaceThunk'
 
 const SideDrawer: React.FC = () => {
   const history = useHistory()
@@ -37,6 +38,7 @@ const SideDrawer: React.FC = () => {
   const [array, setArray] = useState([])
 
   const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
+  console.log(workspaces)
 
   const handleClose = () => {
     setOpenModal(false)
@@ -143,6 +145,11 @@ const SideDrawer: React.FC = () => {
     }
     getAllWorkspaces()
   }, [workspaces])
+
+  // useEffect(() => {
+  //   dispatch(getAllWorkspacesThunk)
+  // }, [dispatch])
+
   return (
     <>
       <StyledDrawer variant='permanent' anchor='left'>
