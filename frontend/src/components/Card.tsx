@@ -1,33 +1,26 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import Modal from '@material-ui/core/Modal'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import TextField from '@material-ui/core/TextField'
 import { useDispatch, useSelector } from 'react-redux'
-import { addBoard } from '../redux/action'
 import { IActiveWorkspaceState, IBoard } from '../redux/interfaces'
-import store from '../redux/store'
-import { StyledCard } from '../style/styledComponents/Card'
-import { StyledModal } from '../style/styledComponents/Modal'
-import { StyledButton } from '../style/styledComponents/Button'
+import { StyledCard } from '../theme/uiComponents/Card'
+import { StyledModal } from '../theme/uiComponents/Modal'
+import { StyledButton } from '../theme/uiComponents/Button'
 import CloseIcon from '@material-ui/icons/Close'
 import { createBoardThunk } from '../redux/thunk/createBoardThunk'
+import ModalContainer from './common/Modal'
 
 const Cards: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [title, setTile] = useState<string>('')
 
   const dispatch = useDispatch()
-  // const activeWorkspace = useSelector(
-  //   (state: IActiveWorkspaceState) => state.activeWorkspace
-  // )
 
   const activeWorkspace = useSelector(
     (state: IActiveWorkspaceState) => state.activeWorkspace
   )
-  console.log('activeWorkspace', activeWorkspace)
-  console.log('activeWorkspaceID', activeWorkspace.workspace_id)
 
   const handleClose = () => {
     setOpenModal(false)
@@ -41,17 +34,7 @@ const Cards: React.FC = () => {
       workspaceId: activeWorkspace.workspace_id,
       visibility: 'public',
     }
-    dispatch(
-      // addBoard(
-      //   {
-      //     id: uuidv4(),
-      //     title: title,
-      //     workspaceId: activeWorkspace.id,
-      //   }
-      //   // store.getState()
-      // )
-      createBoardThunk(requestBody)
-    )
+    dispatch(createBoardThunk(requestBody))
     handleClose()
   }
 
@@ -86,16 +69,7 @@ const Cards: React.FC = () => {
           <CardContent>Create new Board</CardContent>
         </CardActionArea>
       </StyledCard>
-      {openModal && (
-        <Modal
-          open={openModal}
-          onClose={handleClose}
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
-        >
-          {body}
-        </Modal>
-      )}
+      {openModal && <ModalContainer openModal={openModal} body={body} />}
     </>
   )
 }

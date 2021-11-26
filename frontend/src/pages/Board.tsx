@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Cards from '../components/Card'
 import { useSelector } from 'react-redux'
 import { IActiveWorkspaceState, IBoard, IBoardState } from '../redux/interfaces'
-import { StyledCard } from '../style/styledComponents/Card'
-import { StyledContainer } from '../style/styledComponents/Container'
+import { StyledCard } from '../theme/uiComponents/Card'
+import { StyledContainer } from '../components/layout/Container'
 import api from '../api/board'
 
 const Board: React.FC = () => {

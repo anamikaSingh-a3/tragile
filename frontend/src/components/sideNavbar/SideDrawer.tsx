@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+import { useHistory } from 'react-router'
+import { activeWorkspace } from '../../redux/action'
+import { useDispatch, useSelector } from 'react-redux'
+import { IWorkspace, IWorkspaceState } from '../../redux/interfaces'
+import { createWorkspaceThunk } from '../../redux/thunk/createWorkspaceThunk'
+import {
+  TextField,
+  Menu,
+  MenuItem,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@material-ui/core'
 import AssessmentIcon from '@material-ui/icons/Assessment'
 import AddIcon from '@material-ui/icons/Add'
-import { useHistory } from 'react-router'
-import { Modal, TextField } from '@material-ui/core'
-import { useDispatch, useSelector } from 'react-redux'
-import { activeWorkspace, addWrokspace } from '../redux/action'
-import { IWorkspace, IWorkspaceState } from '../redux/interfaces'
-import { StyledModal } from '../style/styledComponents/Modal'
-import { StyledButton } from '../style/styledComponents/Button'
-import { StyledDrawer } from '../style/styledComponents/Drawer'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
 import CloseIcon from '@material-ui/icons/Close'
-import api from '../api/workspace'
-import { createWorkspaceThunk } from '../redux/thunk/createWorkspaceThunk'
-import { getAllWorkspacesThunk } from '../redux/thunk/getAllWorkspaceThunk'
+import { StyledModal } from '../../theme/uiComponents/Modal'
+import { StyledButton } from '../../theme/uiComponents/Button'
+import { StyledDrawer } from '../../theme/uiComponents/Drawer'
+import ModalContainer from '../common/Modal'
+import api from '../../api/workspace'
+import { options } from './menuOptions'
 
 const SideDrawer: React.FC = () => {
   const history = useHistory()
@@ -33,17 +36,6 @@ const SideDrawer: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const [array, setArray] = useState([])
 
-  const options = [
-    'Education',
-    'Human Rights',
-    'Small Business',
-    'Operations',
-    'Engineering IT',
-    'Sales CRM',
-    'marketing',
-    'Other',
-  ]
-
   const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
 
   const handleClose = () => {
@@ -53,10 +45,8 @@ const SideDrawer: React.FC = () => {
     setSelectedIndex(-1)
   }
   const onWorkspaceHandler = (workspace: IWorkspace) => {
-    console.log('workspace.id', workspace)
-    const active = dispatch(activeWorkspace(workspace))
+    dispatch(activeWorkspace(workspace))
     history.push('/board')
-    console.log('Active', active.payload.title)
   }
 
   const handleButtonClick = async () => {
@@ -66,11 +56,7 @@ const SideDrawer: React.FC = () => {
       type: options[selectedIndex],
       description: description,
     }
-    console.log('reqbody', requestBody)
     dispatch(createWorkspaceThunk(requestBody))
-    // const response = await api.post('/create', requestBody)
-    // console.log('RESSSSs', response)
-    // dispatch(addWrokspace(response.data))
     handleClose()
   }
 
@@ -153,13 +139,9 @@ const SideDrawer: React.FC = () => {
   useEffect(() => {
     const getAllWorkspaces = async () => {
       const workspace = await api.get('/getAll')
-      console.log('Workspaces', workspace)
-      // dispatch(addWrokspace(workspace.data))
       setArray(workspace.data)
     }
     getAllWorkspaces()
-    // const response = dispatch(getAllWorkspacesThunk)
-    // setArray(response)
   }, [workspaces])
   return (
     <>
@@ -183,29 +165,9 @@ const SideDrawer: React.FC = () => {
               <ListItemText primary={array.title} />
             </ListItem>
           ))}
-          {/* {workspaces.map((workspace: IWorkspace) => (
-            <ListItem
-              key={workspace.id}
-              onClick={() => onWorkspaceHandler(workspace)}
-            >
-              <ListItemIcon>
-                <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary={workspace.title} />
-            </ListItem>
-          ))} */}
         </List>
       </StyledDrawer>
-      {openModal && (
-        <Modal
-          open={openModal}
-          onClose={handleClose}
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
-        >
-          {body}
-        </Modal>
-      )}
+      {openModal && <ModalContainer openModal={openModal} body={body} />}
     </>
   )
 }
