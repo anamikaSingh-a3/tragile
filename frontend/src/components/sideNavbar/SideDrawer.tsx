@@ -22,7 +22,6 @@ import { StyledModal } from '../../theme/uiComponents/Modal'
 import { StyledButton } from '../../theme/uiComponents/Button'
 import { StyledDrawer } from '../../theme/uiComponents/Drawer'
 import ModalContainer from '../common/Modal'
-import api from '../../api/workspace'
 import { options } from './menuOptions'
 import { getAllWorkspacesThunk } from '../../redux/thunk/getAllWorkspaceThunk'
 
@@ -35,10 +34,8 @@ const SideDrawer: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
-  const [array, setArray] = useState([])
 
   const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
-  console.log(workspaces)
 
   const handleClose = () => {
     setOpenModal(false)
@@ -139,16 +136,8 @@ const SideDrawer: React.FC = () => {
   )
 
   useEffect(() => {
-    const getAllWorkspaces = async () => {
-      const workspace = await api.get('/getAll')
-      setArray(workspace.data)
-    }
-    getAllWorkspaces()
-  }, [workspaces])
-
-  // useEffect(() => {
-  //   dispatch(getAllWorkspacesThunk)
-  // }, [dispatch])
+    dispatch(getAllWorkspacesThunk())
+  }, [dispatch])
 
   return (
     <>
@@ -161,7 +150,7 @@ const SideDrawer: React.FC = () => {
               <AddIcon onClick={() => setOpenModal(true)} />
             </ListItemIcon>
           </ListItem>
-          {array.map((array: IWorkspace) => (
+          {workspaces.map((array: IWorkspace) => (
             <ListItem
               key={array.workspace_id}
               onClick={() => onWorkspaceHandler(array)}

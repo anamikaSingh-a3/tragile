@@ -1,7 +1,6 @@
 export interface IBoard {
   id: string
   title: string
-  // list: string[]
   workspaceId: string
   visibility: string
 }
@@ -15,7 +14,6 @@ export interface IWorkspace {
   title: string
   type: string
   description: string
-  // board: IBoard[]
   createdAt?: Date
 }
 
@@ -23,7 +21,6 @@ export interface IActiveWorkspace {
   workspace_id: string
   title: string
   description: string
-  // board: IBoard[]
   createdAt?: Date
 }
 export interface IWorkspaceState {
@@ -32,4 +29,15 @@ export interface IWorkspaceState {
 
 export interface IActiveWorkspaceState {
   activeWorkspace: IActiveWorkspace
+}
+
+export interface IActiveBoard {
+  id: string
+  title: string
+  workspaceId: string
+  visibility: string
+}
+
+export interface IActiveBoardState {
+  activeBoard: IActiveBoard[]
 }

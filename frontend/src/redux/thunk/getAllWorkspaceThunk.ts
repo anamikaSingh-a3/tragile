@@ -1,8 +1,8 @@
 import api from '../../api/workspace'
-import { addWrokspace } from '../action'
+import { addWorkspaces } from '../action'
 
-export const getAllWorkspacesThunk = async () => async (dispatch: any) => {
+export const getAllWorkspacesThunk = () => async (dispatch: any) => {
   const workspace = await api.get('/getAll')
-  dispatch(addWrokspace(workspace.data))
-  // return workspace.data
+
+  dispatch(addWorkspaces(workspace.data))
 }
