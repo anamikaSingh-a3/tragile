@@ -2,6 +2,8 @@ import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import board from './routes/board'
 import workspace from './routes/workspace'
+import list from './routes/list'
+import card from './routes/card'
 const app: Application = express()
 
 app.use(express.json())
@@ -13,7 +15,10 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/workspace', workspace)
 app.use('/api/board', board)
+app.use('/api/list',list)
+app.use('/api/card',card)
 
 const port = process.env.PORT || 3001
 
 app.listen(port, () => console.log(`Listening to port ${port}`))
+
