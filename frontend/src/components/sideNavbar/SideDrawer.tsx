@@ -36,7 +36,8 @@ const SideDrawer: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
-
+  console.log('workspaces selector', workspaces)
+  console.log('workspaces selector length', workspaces.length)
   const handleClose = () => {
     setOpenModal(false)
     setTile('')
@@ -150,17 +151,19 @@ const SideDrawer: React.FC = () => {
               <AddIcon onClick={() => setOpenModal(true)} />
             </ListItemIcon>
           </ListItem>
-          {workspaces.map((array: IWorkspace) => (
-            <ListItem
-              key={array.workspace_id}
-              onClick={() => onWorkspaceHandler(array)}
-            >
-              <ListItemIcon>
-                <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary={array.title} />
-            </ListItem>
-          ))}
+          {workspaces.length !== 0
+            ? workspaces.map((array: IWorkspace) => (
+                <ListItem
+                  key={array.workspace_id}
+                  onClick={() => onWorkspaceHandler(array)}
+                >
+                  <ListItemIcon>
+                    <AssessmentIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={array.title} />
+                </ListItem>
+              ))
+            : 'There are no workspaces'}
         </List>
       </StyledDrawer>
       {openModal && <ModalContainer openModal={openModal} body={body} />}

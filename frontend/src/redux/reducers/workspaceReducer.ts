@@ -8,7 +8,9 @@ const workspaceReducer = (
 ) => {
   switch (action.type) {
     case 'ADD_WORKSPACE': {
-      if (action.payload.length > 1) return [...state, ...action.payload]
+      console.log('in add workspace action creater ')
+      console.log('action.payload', action.payload)
+      if (action.payload.length >= 1) return [...state, ...action.payload]
       else return [...state, action.payload]
     }
     default:

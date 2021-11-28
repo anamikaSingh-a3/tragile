@@ -52,7 +52,7 @@ export const getWorkspace = async (req: Request, res: Response) => {
 export const getAllWorkspace = async (req: Request, res: Response) => {
   try {
     const workspaces = await pool.query('SELECT * FROM workspace')
-    res.status(200).send(workspaces.rows)
+    if (workspaces.rows.length > 0) res.status(200).send(workspaces.rows)
   } catch (error) {
     res.status(401).send(error)
   }

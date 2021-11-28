@@ -7,6 +7,7 @@ export const StyledDrawer = styled(Drawer)({
   width: drawerWidth,
   flexShrink: 0,
   '& .MuiDrawer-paper': {
+    width: 240,
     marginLeft: 'inherit',
     paddingLeft: 20,
     top: 55,
