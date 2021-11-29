@@ -7,7 +7,8 @@ const activeBoardReducer = (
 ) => {
   switch (action.type) {
     case 'ACTIVE_BOARD': {
-      return action.payload
+      if(action.payload.length>1) return [ ...action.payload]
+      else return [...state, action.payload]
     }
     default:
       return state

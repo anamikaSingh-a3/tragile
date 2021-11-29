@@ -10,9 +10,11 @@ import { StyledCard } from '../theme/uiComponents/Card'
 import { StyledContainer } from '../theme/uiComponents/layout/Container'
 import CreateCard from '../components/CreateCard'
 import { getBoardByWorkspaceThunk } from '../redux/thunk/getBoardByWorkspaceThunk'
+import { useHistory } from 'react-router'
 
 const Board: React.FC = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const board = useSelector((state: IActiveBoardState) => state.activeBoard)
 
@@ -22,7 +24,7 @@ const Board: React.FC = () => {
 
   useEffect(() => {
     dispatch(getBoardByWorkspaceThunk(activeWorkspace.workspace_id))
-  }, [activeWorkspace.workspace_id, dispatch])
+  }, [activeWorkspace.workspace_id,  dispatch])
 
   return (
     <>
@@ -30,11 +32,13 @@ const Board: React.FC = () => {
         WorkSpace : {activeWorkspace.title}
         {board
           ? board.map((board: IBoard) => (
-              <StyledCard key={board.id}>
+            <div onClick={()=>history.push(`/board/${board.board_id}`)}>
+              <StyledCard key={board.board_id}>
                 <CardActionArea>
                   <CardContent>{board.title}</CardContent>
                 </CardActionArea>
               </StyledCard>
+            </div>
             ))
           : 'No boards till now'}
         <CreateCard />

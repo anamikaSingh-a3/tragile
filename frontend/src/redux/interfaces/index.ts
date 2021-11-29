@@ -1,5 +1,5 @@
 export interface IBoard {
-  id: string
+  board_id: string
   title: string
   workspaceId: string
   visibility: string
@@ -32,7 +32,7 @@ export interface IActiveWorkspaceState {
 }
 
 export interface IActiveBoard {
-  id: string
+  board_id: string
   title: string
   workspaceId: string
   visibility: string

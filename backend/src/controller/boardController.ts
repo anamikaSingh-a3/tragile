@@ -6,7 +6,7 @@ import { boardSchema } from '../schema/boardSchema'
 export const createBoard = async (req: Request, res: Response) => {
   try {
     const data: IBoard = {
-      id: req.body.id,
+      id: req.body.board_id,
       title: req.body.title,
       workspaceId: req.body.workspaceId,
       visibility: req.body.visibility,

@@ -27,7 +27,7 @@ const CreateCard = () => {
 
   const handleButtonClick = () => {
     const requestBody: IBoard = {
-      id: uuidv4(),
+      board_id: uuidv4(),
       title: title,
       workspaceId: activeWorkspace.workspace_id,
       visibility: 'public',

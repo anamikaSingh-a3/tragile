@@ -46,7 +46,7 @@ const SideDrawer: React.FC = () => {
   }
   const onWorkspaceHandler = (workspace: IWorkspace) => {
     dispatch(activeWorkspace(workspace))
-    history.push('/board')
+    history.push('/workspaceBoards')
   }
 
   const handleButtonClick = async () => {
