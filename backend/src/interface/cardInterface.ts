@@ -1,5 +1,5 @@
 export interface ICard {
-    id: string
+    card_id: string
     title: string
     description?: string
     due_date?: Date

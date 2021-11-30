@@ -54,7 +54,7 @@ export interface IActiveBoardListState {
 }
 
 export interface ICard {
-  id: string
+  card_id: string
     title: string
     description?: string
     due_date?: Date
@@ -67,4 +67,8 @@ export interface IAllCardState {
 
 export interface IActiveListState {
   activeList : IList
+}
+
+export interface IActiveCardState {
+  activeCard: ICard
 }

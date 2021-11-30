@@ -8,6 +8,7 @@ import activeWorkspaceBoardReducer from './activeWorkspaceBoardsReducer'
 import activeBoardListReducer from './activeBoardListReducer';
 import cardReducer from './cardReducer';
 import activeListReducer from './activeListReducer'
+import activeCardReducer from './activeCardReducer'
 
 
 export default combineReducers({
@@ -19,6 +20,7 @@ export default combineReducers({
   activeBoard : activeBoardReducer,
   activeBoardList : activeBoardListReducer,
   card: cardReducer,
+  activeCard: activeCardReducer,
   activeList: activeListReducer,
 })
 

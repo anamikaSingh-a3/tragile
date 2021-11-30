@@ -6,7 +6,7 @@ import { cardSchema } from '../schema/cardSchema'
 export const createCard = async (req: Request, res: Response) => {
   try {
     const data: ICard = {
-      id: req.body.id,
+      card_id: req.body.card_id,
       title: req.body.title,
       description: req.body.description,
       listId: req.body.list
@@ -14,7 +14,7 @@ export const createCard = async (req: Request, res: Response) => {
     const card = await cardSchema.validate(data)
     const newCard = await pool.query(
       'INSERT INTO card (card_id,title,description,due_date,list) VALUES ($1,$2,$3,$4,$5) RETURNING *',
-      [card.id, card.title, card.description, card.due_date, card.listId]
+      [card.card_id, card.title, card.description, card.due_date, card.listId]
     )
     res.status(200).send(newCard.rows[0])
   } catch (error) {
@@ -38,6 +38,18 @@ export const getAllCard = async (req: Request, res: Response) => {
   try {
     const cards = await pool.query('SELECT * FROM card')
     if (cards.rows.length > 0) res.status(200).send(cards.rows)
+  } catch (error) {
+    res.status(401).send(error)
+  }
+}
+
+export const updateCard = async (req: Request, res: Response) => {
+  try {
+    const id = req.body.card_id
+    const desc = req.body.description
+    await cardSchema.isValid({ card_id: id })
+    const card = await pool.query('UPDATE card SET description=$1 WHERE card_id=$2 RETURNING *', [desc, id])
+    res.status(200).send(card.rows)
   } catch (error) {
     res.status(401).send(error)
   }
