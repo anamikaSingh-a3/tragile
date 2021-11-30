@@ -8,20 +8,29 @@ import {
 } from '../redux/interfaces'
 import { StyledCard } from '../theme/uiComponents/Card'
 import { StyledContainer } from '../theme/uiComponents/layout/Container'
-import CreateCard from '../components/CreateCard'
+import CreateCard from '../components/CreateBoard'
 import { getBoardByWorkspaceThunk } from '../redux/thunk/getBoardByWorkspaceThunk'
 import { useHistory } from 'react-router'
+import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
+import activeBoardReducer from '../redux/reducers/activeBoardReducer'
+import { addActiveBoards } from '../redux/action'
+import { getBoardByIdThunk } from '../redux/thunk/getBoardByIdThunk'
 
 const Board: React.FC = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const board = useSelector((state: IActiveBoardState) => state.activeBoard)
+  const board = useSelector((state: IActiveBoardState) => state.activeWorkspaceBoard)
 
   const activeWorkspace = useSelector(
     (state: IActiveWorkspaceState) => state.activeWorkspace
   )
 
+  const boardHandler = (board: IBoard) =>{
+    history.push(`/board/${board.board_id}`)
+    dispatch(getBoardByIdThunk(board.board_id))
+    dispatch(getListByBoardThunk(board.board_id))
+  }
   useEffect(() => {
     dispatch(getBoardByWorkspaceThunk(activeWorkspace.workspace_id))
   }, [activeWorkspace.workspace_id,  dispatch])
@@ -32,7 +41,7 @@ const Board: React.FC = () => {
         WorkSpace : {activeWorkspace.title}
         {board
           ? board.map((board: IBoard) => (
-            <div onClick={()=>history.push(`/board/${board.board_id}`)}>
+            <div onClick={()=>boardHandler(board)}>
               <StyledCard key={board.board_id}>
                 <CardActionArea>
                   <CardContent>{board.title}</CardContent>

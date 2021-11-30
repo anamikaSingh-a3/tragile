@@ -1,7 +1,7 @@
 export interface IList {
-    id: string
+    list_id: string
     title: string
-    description: string
-    boardId: string
+    description?: string
+    board: string
   }
   

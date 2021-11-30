@@ -39,5 +39,32 @@ export interface IActiveBoard {
 }
 
 export interface IActiveBoardState {
-  activeBoard: IActiveBoard[]
+  activeWorkspaceBoard: IActiveBoard[]
+}
+
+export interface IList {
+  list_id: string
+  title: string
+  description?: string
+  board: string
+}
+
+export interface IActiveBoardListState {
+  activeBoardList :IList[]
+}
+
+export interface ICard {
+  id: string
+    title: string
+    description?: string
+    due_date?: Date
+    list: string
+}
+
+export interface IAllCardState {
+  card: ICard[]
+}
+
+export interface IActiveListState {
+  activeList : IList
 }
