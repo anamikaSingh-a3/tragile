@@ -29,7 +29,7 @@ export const getBoard = async (req: Request, res: Response) => {
     const board = await pool.query('SELECT * FROM board where board_id=$1', [
       id,
     ])
-console.log("in fetch one api board")
+
     if (board.rowCount < 1) return res.status(400).send('No board found')
     res.status(200).send(board.rows[0])
   } catch (error) {

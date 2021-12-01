@@ -12,7 +12,7 @@ interface ICardPageProps {
 const CardPage: React.FC<ICardPageProps> = (props: ICardPageProps) => {
     const activeCard = useSelector((state: IActiveCardState) => state.activeCard)
     const [description, setDescription] = useState<string | undefined>(activeCard.description)
-    console.log("description", props.card.description)
+
     const dispatch = useDispatch()
 
     const handleButtonClick = () => {

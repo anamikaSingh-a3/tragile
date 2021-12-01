@@ -17,14 +17,15 @@ export const addActiveBoards = (board: IBoard) => {
 }
 
 export const addActiveWorkspaceBoard = (board: IBoard)=>{
-  console.log("in addActiveWorkspaceBoard active")
+
   return {id: board.board_id,
   type: 'ACTIVE_BOARD_IN_BOARDPAGE',
-payload: board}
+    payload: board
+  }
 }
 
 export const resetActiveBoards = () => {
-  console.log("in reset ")
+
   return {
     type: 'RESET_BOARD',
   }

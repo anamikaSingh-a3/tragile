@@ -8,11 +8,10 @@ const activeWorkspaceBoardsReducer = (
 ) => {
   switch (action.type) {
     case 'ACTIVE_BOARD': {
-      if(action.payload.length>1) return [ ...action.payload]
+      if (action.payload.length > 1) return [...action.payload]
       else return [...state, action.payload]
     }
-    case 'RESET_BOARD' : {
-      console.log("in reser reducer")
+    case 'RESET_BOARD': {
       return initialState
     }
     default:

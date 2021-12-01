@@ -36,8 +36,7 @@ const SideDrawer: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
-  console.log('workspaces selector', workspaces)
-  console.log('workspaces selector length', workspaces.length)
+
   const handleClose = () => {
     setOpenModal(false)
     setTile('')
