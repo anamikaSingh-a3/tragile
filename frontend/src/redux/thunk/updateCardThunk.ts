@@ -1,8 +1,13 @@
-import api from '../../api/card'
-import { addActiveCard } from '../action/cardActions';
+import axios from 'axios';
+import { cardApi } from '../../endpoints.ts';
+import { addActiveCard, resetActiveCard } from '../action/cardActions';
 
 const updateCardThunk = (reqestBody: any) => async (dispatch: any) => {
-    const response = await api.patch('/update', reqestBody)
-    dispatch(addActiveCard(response.data))
+    try {
+        const response = await axios.patch(`${cardApi}/update`, reqestBody)
+        dispatch(addActiveCard(response.data))
+    } catch (error) {
+        dispatch(resetActiveCard())
+    }
 }
 export default updateCardThunk

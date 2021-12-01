@@ -1,8 +1,12 @@
-import api from '../../api/card'
+import axios from 'axios';
+import { cardApi } from '../../endpoints.ts';
 import { addCard } from '../action/cardActions';
 
-
 export const getAllCardsThunk = () => async (dispatch: any) => {
-  const cards = await api.get('/getAll')
-  dispatch(addCard(cards.data))
+  try {
+    const cards = await axios.get(`${cardApi}/getAll`)
+    dispatch(addCard(cards.data))
+  } catch (error) {
+    alert(error)
+  }
 }

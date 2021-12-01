@@ -1,5 +1,5 @@
 import { ICard } from "../interfaces"
-import { ACTIVE_CARD } from "../types"
+import { ACTIVE_CARD, RESET_ACTIVE_CARD } from "../types"
 
 const initialState: ICard = {
     card_id: "",
@@ -14,6 +14,9 @@ const activeCardReducer = (
     switch (action.type) {
         case ACTIVE_CARD: {
             return action.payload
+        }
+        case RESET_ACTIVE_CARD: {
+            return state
         }
         default:
             return state

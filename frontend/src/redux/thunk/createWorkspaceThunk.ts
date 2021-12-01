@@ -1,9 +1,14 @@
 import { IWorkspace } from '../interfaces'
-import api from '../../api/workspace'
 import { addWorkspaces } from '../action'
+import { workspaceApi } from '../../endpoints.ts'
+import axios from 'axios'
 
 export const createWorkspaceThunk =
   (requestBody: IWorkspace) => async (dispatch: any) => {
-    const response = await api.post('/create', requestBody)
-    dispatch(addWorkspaces(response.data))
+    try {
+      const response = await axios.post(`${workspaceApi}/create`, requestBody)
+      dispatch(addWorkspaces(response.data))
+    } catch (error) {
+      alert(error)
+    }
   }

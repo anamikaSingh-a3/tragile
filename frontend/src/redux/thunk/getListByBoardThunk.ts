@@ -1,4 +1,6 @@
-import api from '../../api/list'
+import axios from 'axios'
+// import api from '../../api/list'
+import { listApi } from '../../endpoints.ts'
 import { addActiveBoardsList, resetActiveBoardsList } from '../action/listActions'
 
 export const getListByBoardThunk = (boardId: string) => async (
@@ -6,8 +8,7 @@ export const getListByBoardThunk = (boardId: string) => async (
   getState: any
 ) => {
   try {
-    
-    const list = await api.get(`getByBoard/${boardId}`)
+    const list = await axios.get(`${listApi}/getByBoard/${boardId}`)
     dispatch(addActiveBoardsList(list.data))
   } catch (error) {
     dispatch(resetActiveBoardsList())

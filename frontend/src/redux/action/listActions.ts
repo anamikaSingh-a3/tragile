@@ -1,5 +1,5 @@
 import { IList } from '../interfaces'
-import { ACTIVE_BOARD_LIST, ACTIVE_LIST, ADD_LIST, REST_ACTIVE_BOARDS_LIST } from '../types'
+import { ACTIVE_BOARD_LIST, ACTIVE_LIST, ADD_LIST, RESET_ACTIVE_BOARD_LIST, REST_ACTIVE_BOARDS_LIST } from '../types'
 
 export const addList = (list: IList) => {
   return {
@@ -16,6 +16,12 @@ export const addActiveBoardsList = (list: IList) => {
   }
 }
 
+export const resetActiveBoardsList = () => {
+  return {
+    type: REST_ACTIVE_BOARDS_LIST
+  }
+}
+
 export const addActiveList = (list: IList) => {
   return {
     type: ACTIVE_LIST,
@@ -23,8 +29,3 @@ export const addActiveList = (list: IList) => {
   }
 }
 
-export const resetActiveBoardsList = () => {
-  return {
-    type: REST_ACTIVE_BOARDS_LIST
-  }
-}

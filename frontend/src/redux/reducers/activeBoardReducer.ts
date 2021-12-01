@@ -1,5 +1,5 @@
 import { IBoard } from '../interfaces'
-import { ACTIVE_BOARD_IN_BOARDPAGE } from '../types'
+import { ACTIVE_BOARD_IN_BOARDPAGE, RESET_ACTIVE_BOARD_IN_BOARDPAGE } from '../types'
 
 const initialState: IBoard[] = []
 
@@ -11,7 +11,9 @@ const activeBoardReducer = (
     case ACTIVE_BOARD_IN_BOARDPAGE: {
       return action.payload
     }
-   
+    case RESET_ACTIVE_BOARD_IN_BOARDPAGE: {
+      return initialState
+    }
     default:
       return state
   }
