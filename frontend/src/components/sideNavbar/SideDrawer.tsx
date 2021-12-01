@@ -153,16 +153,16 @@ const SideDrawer: React.FC = () => {
           </ListItem>
           {workspaces.length !== 0
             ? workspaces.map((array: IWorkspace) => (
-                <ListItem
-                  key={array.workspace_id}
-                  onClick={() => onWorkspaceHandler(array)}
-                >
-                  <ListItemIcon>
-                    <AssessmentIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={array.title} />
-                </ListItem>
-              ))
+              <ListItem
+                key={array.workspace_id}
+                onClick={() => onWorkspaceHandler(array)}
+              >
+                <ListItemIcon>
+                  <AssessmentIcon />
+                </ListItemIcon>
+                <ListItemText primary={array.title} />
+              </ListItem>
+            ))
             : 'There are no workspaces'}
         </List>
       </StyledDrawer>

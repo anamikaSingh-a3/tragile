@@ -34,44 +34,14 @@ interface IBoardListProps {
     list: IList
 }
 
-function getModalStyle() {
-    const top = 50
-    const left = 50
-
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`
-    }
-}
-
-const useStyles = makeStyles(theme => ({
-    paper: {
-        position: 'absolute',
-        width: 400,
-        backgroundColor: theme.palette.background.default,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3)
-    }
-}))
-
 const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
-    const { id } = useParams<IParams>()
     const [anchorEl, setAnchorEl] = useState(null)
     const [title, setTile] = useState<string>('')
 
-    const classes = useStyles()
-    const [modalStyle] = React.useState(getModalStyle)
-
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const cards = useSelector((state: IAllCardState) => state.card)
     const activeList = useSelector((state: IActiveListState) => state.activeList)
-    const list = useSelector(
-        (state: IActiveBoardListState) => state.activeBoardList
-    )
 
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget)

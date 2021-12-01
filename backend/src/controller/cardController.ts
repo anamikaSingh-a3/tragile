@@ -48,7 +48,10 @@ export const updateCard = async (req: Request, res: Response) => {
     const id = req.body.card_id
     const desc = req.body.description
     await cardSchema.isValid({ card_id: id })
-    const card = await pool.query('UPDATE card SET description=$1 WHERE card_id=$2 RETURNING *', [desc, id])
+    const card = await pool.query(
+      'UPDATE card SET description=$1 WHERE card_id=$2 RETURNING *',
+      [desc, id]
+    )
     res.status(200).send(card.rows)
   } catch (error) {
     res.status(401).send(error)
