@@ -5,7 +5,7 @@ const initialState: IWorkspace[] = []
 
 const activeWorkspaceReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: IWorkspace[] }
 ) => {
   switch (action.type) {
     case ACTIVE_WORKSPACE: {

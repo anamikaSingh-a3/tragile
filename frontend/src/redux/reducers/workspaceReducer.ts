@@ -9,7 +9,7 @@ const addWorkspaceLogic = (state: IWorkspace[], payload: any) => {
 }
 const workspaceReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: IWorkspace[] }
 ) => {
   switch (action.type) {
     case ADD_WORKSPACE: {

@@ -9,7 +9,7 @@ const initialState: IList = {
 
 const activeListReducer = (
     state= initialState,
-    action : {type: string, payload: any}
+    action: { type: string, payload: IList }
 ) => {
     switch (action.type) {
         case ACTIVE_LIST: {

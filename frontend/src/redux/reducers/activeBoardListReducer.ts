@@ -9,7 +9,7 @@ const addActiveBoardListLogic = (state: IList[], payload: any) => {
 }
 const activeBoardListReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: IList[] }
 ) => {
     switch (action.type) {
       case ACTIVE_BOARD_LIST: {

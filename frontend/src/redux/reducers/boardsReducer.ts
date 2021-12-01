@@ -5,7 +5,7 @@ const initialState: IBoard[] = []
 
 const boardsReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: IBoard[] }
 ) => {
   switch (action.type) {
     case ADD_BOARD: {

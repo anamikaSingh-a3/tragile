@@ -9,7 +9,7 @@ const addCardLogic = (state: ICard[], payload: any) => {
 }
 const cardReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: ICard[] }
 ) => {
   switch (action.type) {
     case ADD_CARD: {

@@ -5,7 +5,7 @@ const initialState: IBoard[] = []
 
 const activeBoardReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: IBoard[] }
 ) => {
   switch (action.type) {
     case ACTIVE_BOARD_IN_BOARDPAGE: {

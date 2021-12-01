@@ -9,7 +9,7 @@ const activeWorkspaceBoardReducerLogic = (state: IBoard[], payload: any) => {
 }
 const activeWorkspaceBoardsReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: IBoard[] }
 ) => {
   switch (action.type) {
     case ACTIVE_BOARD: {
