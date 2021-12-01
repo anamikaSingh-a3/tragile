@@ -12,8 +12,6 @@ import CreateCard from '../components/CreateBoard'
 import { getBoardByWorkspaceThunk } from '../redux/thunk/getBoardByWorkspaceThunk'
 import { useHistory } from 'react-router'
 import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
-import activeBoardReducer from '../redux/reducers/activeBoardReducer'
-import { addActiveBoards } from '../redux/action'
 import { getBoardByIdThunk } from '../redux/thunk/getBoardByIdThunk'
 
 const Board: React.FC = () => {

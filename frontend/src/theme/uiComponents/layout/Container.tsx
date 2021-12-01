@@ -1,6 +1,5 @@
 import { styled } from '@material-ui/core/styles'
 import { Container } from '@material-ui/core'
-import { Height } from '@material-ui/icons'
 
 const drawerWidth = 240
 

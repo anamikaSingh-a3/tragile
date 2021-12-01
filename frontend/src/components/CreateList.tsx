@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
-import { StyledContainer } from '../theme/uiComponents/layout/Container'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'

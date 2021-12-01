@@ -30,7 +30,7 @@ const CreateBoard = () => {
       board_id: uuidv4(),
       title: title,
       workspaceId: activeWorkspace.workspace_id,
-      visibility: 'public',
+      visibility: 'public'
     }
     dispatch(createBoardThunk(requestBody))
     handleClose()
@@ -44,7 +44,7 @@ const CreateBoard = () => {
         variant='filled'
         color='secondary'
         value={title}
-        onChange={(e) => setTile(e.target.value)}
+        onChange={e => setTile(e.target.value)}
         fullWidth
       />
       <StyledButton

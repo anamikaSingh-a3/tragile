@@ -5,7 +5,6 @@ import CardPage from '../pages/CardPage'
 import { ICard } from '../redux/interfaces'
 import { StyledCard } from '../theme/uiComponents/Card'
 import { addActiveCard } from '../redux/action/cardActions'
-import { Draggable } from 'react-beautiful-dnd'
 import { StyledModal } from '../theme/uiComponents/Modal'
 
 interface ListCardProps {
@@ -13,7 +12,7 @@ interface ListCardProps {
   index: number
 }
 
-const ListCard = (props: ListCardProps) => {
+const ListCard:React.FC<ListCardProps> = (props: ListCardProps) => {
   const [open, setOpen] = useState(false)
 
   const dispatch = useDispatch()

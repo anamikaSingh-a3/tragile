@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
-import {
-  StyledListContainer
-} from '../theme/uiComponents/layout/Container'
+import { StyledListContainer } from '../theme/uiComponents/layout/Container'
 import CreateList from '../components/CreateList'
 import { useDispatch, useSelector } from 'react-redux'
 import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
-import {
-  IActiveBoardListState,
-  IList
-} from '../redux/interfaces/index'
+import { IActiveBoardListState, IList } from '../redux/interfaces/index'
 import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
 import BoardList from '../components/BoardList'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 interface IParams {
   id: string
@@ -34,12 +28,11 @@ const BoardPage: React.FC = () => {
   }, [id, dispatch])
 
   return (
-    <StyledListContainer maxWidth='lg'
-        >
-          {list.map((list: IList, index) => (
-            <BoardList list={list} />
-        ))}
-        <CreateList />
+    <StyledListContainer maxWidth='lg'>
+      {list.map((list: IList) => (
+        <BoardList list={list} />
+      ))}
+      <CreateList />
     </StyledListContainer>
   )
 }

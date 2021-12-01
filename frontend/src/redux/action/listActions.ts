@@ -1,5 +1,5 @@
 import { IList } from '../interfaces'
-import { ACTIVE_BOARD_LIST, ACTIVE_LIST, ADD_LIST, RESET_ACTIVE_BOARD_LIST, REST_ACTIVE_BOARDS_LIST } from '../types'
+import { ACTIVE_BOARD_LIST, ACTIVE_LIST, ADD_LIST, REST_ACTIVE_BOARDS_LIST } from '../types'
 
 export const addList = (list: IList) => {
   return {
