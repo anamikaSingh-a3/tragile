@@ -1,16 +1,21 @@
 import { IList } from '../interfaces/index'
+import { ACTIVE_BOARD_LIST, REST_ACTIVE_BOARDS_LIST } from '../types'
 
 const initialState: IList[] = []
+
+const addActiveBoardListLogic = (state: IList[], payload: any) => {
+  if (payload.length > 1) return [...payload]
+  return [...state, ...payload]
+}
 const activeBoardListReducer = (
   state = initialState,
   action: { type: string; payload: any }
 ) => {
     switch (action.type) {
-      case 'ACTIVE_BOARD_LIST': {
-          if (action.payload.length > 1) return [...action.payload]
-          return [...state, ...action.payload]
+      case ACTIVE_BOARD_LIST: {
+        return addActiveBoardListLogic(state, action.payload)
       }
-      case 'REST_ACTIVE_BOARDS_LIST': {
+      case REST_ACTIVE_BOARDS_LIST: {
           return initialState
       }
       default:

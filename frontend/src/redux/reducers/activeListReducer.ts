@@ -1,4 +1,5 @@
 import { IList } from "../interfaces"
+import { ACTIVE_LIST } from "../types"
 
 const initialState: IList = {
     list_id: "",
@@ -11,7 +12,7 @@ const activeListReducer = (
     action : {type: string, payload: any}
 ) => {
     switch (action.type) {
-        case 'ACTIVE_LIST': {
+        case ACTIVE_LIST: {
           return action.payload
         }
         default:

@@ -1,4 +1,5 @@
 import { IWorkspace } from '../interfaces'
+import { ACTIVE_WORKSPACE } from '../types'
 
 const initialState: IWorkspace[] = []
 
@@ -7,7 +8,7 @@ const activeWorkspaceReducer = (
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case 'ACTIVE_WORKSPACE': {
+    case ACTIVE_WORKSPACE: {
       return action.payload
     }
     default:

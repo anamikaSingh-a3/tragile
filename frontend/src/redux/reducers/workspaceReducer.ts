@@ -1,15 +1,19 @@
 import { IWorkspace } from '../interfaces'
+import { ADD_WORKSPACE } from '../types'
 
 const initialState: IWorkspace[] = []
 
+const addWorkspaceLogic = (state: IWorkspace[], payload: any) => {
+  if (payload.length >= 1) return [...state, ...payload]
+  else return [...state, payload]
+}
 const workspaceReducer = (
   state = initialState,
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case 'ADD_WORKSPACE': {
-      if (action.payload.length >= 1) return [...state, ...action.payload]
-      else return [...state, action.payload]
+    case ADD_WORKSPACE: {
+      return addWorkspaceLogic(state, action.payload)
     }
     default:
       return state

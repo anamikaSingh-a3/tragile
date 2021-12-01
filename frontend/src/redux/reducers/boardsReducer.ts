@@ -1,4 +1,5 @@
 import { IBoard } from '../interfaces'
+import { ADD_BOARD } from '../types'
 
 const initialState: IBoard[] = []
 
@@ -7,7 +8,7 @@ const boardsReducer = (
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case 'ADD_BOARD': {
+    case ADD_BOARD: {
       return [...state, action.payload]
     }
 

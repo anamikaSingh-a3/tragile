@@ -1,4 +1,5 @@
 import { ICard } from "../interfaces"
+import { ACTIVE_CARD } from "../types"
 
 const initialState: ICard = {
     card_id: "",
@@ -11,7 +12,7 @@ const activeCardReducer = (
     action: { type: string, payload: ICard }
 ) => {
     switch (action.type) {
-        case 'ACTIVE_CARD': {
+        case ACTIVE_CARD: {
             return action.payload
         }
         default:
