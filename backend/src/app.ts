@@ -12,7 +12,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/workspace', workspace)
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3002
 
 app.listen(port, () => console.log(`Listening to port ${port}`))
 
