@@ -52,14 +52,12 @@ const ListCard = (props: ListCardProps) => {
     }
 
     return (
-        <Draggable draggableId={props.card.card_id.toString()} index={props.index}>
-            {(provided) => (
-
-                <StyledCard onClick={() => onCardHandler()} ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
+        <>
+            <StyledCard onClick={() => onCardHandler()}>
                     title: {props.card.title}
 
                 </StyledCard>
-            )}
+
             <Modal
                 open={open}
                 onClose={handleCloseCardModal}
@@ -71,7 +69,7 @@ const ListCard = (props: ListCardProps) => {
                     <CardPage card={props.card} />
                 </div>
             </Modal>
-        </Draggable>
+        </>
     )
 }
 export default ListCard

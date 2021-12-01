@@ -1,18 +1,29 @@
-import { Button, List, makeStyles, Menu, MenuItem, Modal, TextField } from '@material-ui/core'
+import {
+    Button,
+    List,
+    makeStyles,
+    Menu,
+    MenuItem,
+    Modal,
+    TextField
+} from '@material-ui/core'
 import React, { useState } from 'react'
 import { StyledButton } from '../theme/uiComponents/Button'
 import { StyledCard } from '../theme/uiComponents/Card'
 import { StyledList, StyledListItem } from '../theme/uiComponents/List'
 import CloseIcon from '@material-ui/icons/Close'
-import { IActiveBoardListState, IActiveListState, IAllCardState, ICard, IList } from '../redux/interfaces'
+import {
+    IActiveBoardListState,
+    IActiveListState,
+    IAllCardState,
+    ICard,
+    IList
+} from '../redux/interfaces'
 import { useHistory, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { addActiveList } from '../redux/action'
 import createCardThunk from '../redux/thunk/createCardThunk'
 import { v4 as uuidv4 } from 'uuid'
-import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { PersonalVideoRounded } from '@material-ui/icons'
-import CardPage from '../pages/CardPage'
 import ListCard from './ListCard'
 
 interface IParams {
@@ -20,40 +31,38 @@ interface IParams {
 }
 
 interface IBoardListProps {
-    list: IList,
-    index: number
+    list: IList
 }
 
 function getModalStyle() {
-    const top = 50;
-    const left = 50;
+    const top = 50
+    const left = 50
 
     return {
         top: `${top}%`,
         left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    };
+        transform: `translate(-${top}%, -${left}%)`
+    }
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
         width: 400,
         backgroundColor: theme.palette.background.default,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    },
-}));
+        padding: theme.spacing(2, 4, 3)
+    }
+}))
 
 const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
     const { id } = useParams<IParams>()
     const [anchorEl, setAnchorEl] = useState(null)
     const [title, setTile] = useState<string>('')
 
-
-    const classes = useStyles();
-    const [modalStyle] = React.useState(getModalStyle);
+    const classes = useStyles()
+    const [modalStyle] = React.useState(getModalStyle)
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -63,9 +72,6 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
     const list = useSelector(
         (state: IActiveBoardListState) => state.activeBoardList
     )
-    console.log('list', list)
-    console.log('cards', cards)
-    console.log('active list', activeList)
 
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget)
@@ -87,67 +93,56 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
     }
 
     return (
-        <Droppable droppableId='list' >
-            {(provided) => (
-
-                <StyledList
-                    onClick={() => dispatch(addActiveList(props.list))}
-                    {...provided.droppableProps}
-
-                    ref={provided.innerRef}
-                >
-                    <List component='nav' aria-label='main mailbox folders'>
-                        <StyledListItem button disableRipple>
-                            List Title: {props.list.title}
-                            {cards.map((card: ICard, index: number) =>
-                                props.list.list_id == card.list ? (
-                                    <ListCard card={card} index={index} />
-                                ) : (
-                                    ''
-                                )
-                            )}
-                            <Button
-                                aria-controls='simple-menu'
-                                aria-haspopup='true'
-                                onClick={handleClick}
-                                variant='contained'
-                            >
-                                Create Card
-                            </Button>
-                            <Menu
-                                id='simple-menu'
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem>
-                                    <TextField
-                                        id='filled-secondary'
-                                        placeholder='Add card title'
-                                        variant='filled'
-                                        color='secondary'
-                                        value={title}
-                                        onChange={e => setTile(e.target.value)}
-                                        fullWidth
-                                    />
-                                </MenuItem>
-                                <StyledButton
-                                    variant='contained'
-                                    color='primary'
-                                    onClick={() => handleButtonClick(activeList.list_id)}
-                                    disabled={!title}
-                                >
-                                    Create card
-                                </StyledButton>
-                                <CloseIcon onClick={handleClose} />
-                            </Menu>
-
-                        </StyledListItem>
-                    </List>
-                </StyledList>
-            )}
-        </Droppable>
+        <StyledList onClick={() => dispatch(addActiveList(props.list))}>
+            <List component='nav' aria-label='main mailbox folders'>
+                <StyledListItem button disableRipple>
+                    List Title: {props.list.title}
+                    {cards.map((card: ICard, index: number) =>
+                        props.list.list_id == card.list ? (
+                            <ListCard card={card} index={index} />
+                        ) : (
+                            ''
+                        )
+                    )}
+                    <Button
+                        aria-controls='simple-menu'
+                        aria-haspopup='true'
+                        onClick={handleClick}
+                        variant='contained'
+                    >
+                        Create Card
+                    </Button>
+                    <Menu
+                        id='simple-menu'
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem>
+                            <TextField
+                                id='filled-secondary'
+                                placeholder='Add card title'
+                                variant='filled'
+                                color='secondary'
+                                value={title}
+                                onChange={e => setTile(e.target.value)}
+                                fullWidth
+                            />
+                        </MenuItem>
+                        <StyledButton
+                            variant='contained'
+                            color='primary'
+                            onClick={() => handleButtonClick(activeList.list_id)}
+                            disabled={!title}
+                        >
+                            Create card
+                        </StyledButton>
+                        <CloseIcon onClick={handleClose} />
+                    </Menu>
+                </StyledListItem>
+            </List>
+        </StyledList>
     )
 }
 

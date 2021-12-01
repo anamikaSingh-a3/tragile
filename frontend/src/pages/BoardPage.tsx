@@ -34,23 +34,13 @@ const BoardPage: React.FC = () => {
   }, [id, dispatch])
 
   return (
-    <Droppable droppableId='boardList'>
-      {(provided) => (
-        <StyledListContainer
-          maxWidth='lg'
-          ref={provided.innerRef}
-          {...provided.droppableProps}
+    <StyledListContainer maxWidth='lg'
         >
           {list.map((list: IList, index) => (
-            <DragDropContext onDragEnd={() => { }}>
-              <BoardList list={list} index={index} />
-            </DragDropContext>
+            <BoardList list={list} />
         ))}
         <CreateList />
-      </StyledListContainer>
-
-      )}
-    </Droppable>
+    </StyledListContainer>
   )
 }
 

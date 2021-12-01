@@ -44,7 +44,6 @@ const CreateList: React.FC = () => {
 
   return (
     <>
-      {/* <h6>board id: {id}</h6> */}
       <Button
         aria-controls='simple-menu'
         aria-haspopup='true'
