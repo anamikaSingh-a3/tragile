@@ -4,10 +4,16 @@ import { StyledButton } from '../theme/uiComponents/Button'
 import { StyledList, StyledListItem } from '../theme/uiComponents/List'
 import CloseIcon from '@material-ui/icons/Close'
 import {
+  IActiveListState,
+  IAllCardState,
+  ICard,
   IList
 } from '../redux/interfaces'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addActiveList } from '../redux/action'
+import createCardThunk from '../redux/thunk/createCardThunk'
+import { v4 as uuidv4 } from 'uuid'
+import ListCard from './ListCard'
 
 interface IBoardListProps {
   list: IList
@@ -19,6 +25,9 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
 
   const dispatch = useDispatch()
 
+  const cards = useSelector((state: IAllCardState) => state.card)
+  const activeList = useSelector((state: IActiveListState) => state.activeList)
+
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget)
   }
@@ -28,11 +37,28 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
     setTile('')
   }
 
+  const handleButtonClick = (listId: string) => {
+    const requestBody: ICard = {
+      card_id: uuidv4(),
+      title: title,
+      list: listId
+    }
+    dispatch(createCardThunk(requestBody))
+    handleClose()
+  }
+
   return (
     <StyledList onClick={() => dispatch(addActiveList(props.list))}>
       <List component='nav' aria-label='main mailbox folders'>
         <StyledListItem button disableRipple>
           List Title: {props.list.title}
+          {cards.map((card: ICard, index: number) =>
+            props.list.list_id === card.list ? (
+              <ListCard card={card} index={index} />
+            ) : (
+              ''
+            )
+          )}
           <Button
             aria-controls='simple-menu'
             aria-haspopup='true'
@@ -62,6 +88,7 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
             <StyledButton
               variant='contained'
               color='primary'
+              onClick={() => handleButtonClick(activeList.list_id)}
               disabled={!title}
             >
               Create card

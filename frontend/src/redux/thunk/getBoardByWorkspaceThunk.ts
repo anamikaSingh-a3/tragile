@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { boardApi } from '../../endpoints.ts'
-import { addActiveBoards, resetActiveBoards } from '../action'
+import { addActiveBoards, resetActiveBoards, resetActiveBoardsList } from '../action'
 
 export const getBoardByWorkspaceThunk = (workspaceId: string) => async (
     dispatch: any,
@@ -11,5 +11,6 @@ export const getBoardByWorkspaceThunk = (workspaceId: string) => async (
         dispatch(addActiveBoards(board.data))
     } catch (error) {
         dispatch(resetActiveBoards())
+        dispatch(resetActiveBoardsList())
     }
 }
