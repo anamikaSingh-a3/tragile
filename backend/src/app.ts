@@ -4,7 +4,7 @@ import workspace from './routes/workspace'
 import board from './routes/board'
 import list from './routes/list'
 import card from './routes/card'
-
+import logger from './utility/logger'
 
 const app: Application = express()
 
@@ -23,5 +23,6 @@ app.use('/api/card',card)
 
 const port = process.env.PORT || 3002
 
-app.listen(port, () => console.log(`Listening to port ${port}`))
+app.listen(port, () => logger.info(`Listening to port ${port}`))
+
 

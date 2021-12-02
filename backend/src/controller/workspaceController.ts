@@ -2,14 +2,17 @@ import { Request, Response } from 'express'
 import { pool } from '../db'
 import { IWorkspace } from '../interface/workspaceInterface'
 import { workspaceByIdSchema, workspaceSchema } from '../schema/workspaceSchema'
+import logger from '../utility/logger'
 
 export const createWorkspace = async (req: Request, res: Response) => {
+  logger.info('In create workspace API')
+
   try {
     const data: IWorkspace = {
       workspace_id: req.body.workspace_id,
       title: req.body.title,
       type: req.body.type,
-      description: req.body.description,
+      description: req.body.description
     }
 
     const workspace = await workspaceSchema.validate(data)
@@ -21,16 +24,19 @@ export const createWorkspace = async (req: Request, res: Response) => {
         workspace.title,
         workspace.type,
         workspace.description,
-        workspace.createdAt,
+        workspace.createdAt
       ]
     )
     res.status(200).send(newWorkspace.rows[0])
+    logger.info('New workspace created')
   } catch (error) {
     res.status(401).send(error)
+    logger.error(error)
   }
 }
 
 export const getWorkspace = async (req: Request, res: Response) => {
+  logger.info('In get workspace API')
   try {
     const workspace_id = req.params.workspace_id
 
@@ -41,19 +47,28 @@ export const getWorkspace = async (req: Request, res: Response) => {
       [workspace_id]
     )
 
-    if (workspace.rowCount < 1)
+    if (workspace.rowCount < 1) {
+      logger.warn('No workspace found')
       return res.status(400).send('No workspace found')
+    }
+    logger.info(`Workspace successfully fetched}`)
     res.status(200).send(workspace.rows[0])
   } catch (error) {
+    logger.error(error)
     res.status(401).send(error)
   }
 }
 
 export const getAllWorkspace = async (req: Request, res: Response) => {
+  logger.info('In get all workspace API')
   try {
     const workspaces = await pool.query('SELECT * FROM workspace')
-    if (workspaces.rows.length > 0) res.status(200).send(workspaces.rows)
+    if (workspaces.rows.length) {
+      logger.info('Workspaces fetched successfully')
+      res.status(200).send(workspaces.rows)
+    }
   } catch (error) {
+    logger.error(error)
     res.status(401).send(error)
   }
 }
