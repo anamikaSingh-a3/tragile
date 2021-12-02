@@ -2,10 +2,10 @@ import { Modal } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CardPage from '../pages/CardPage'
-import { ICard } from '../redux/interfaces'
 import { StyledCard } from '../theme/uiComponents/Card'
 import { addActiveCard } from '../redux/action/cardActions'
 import { StyledModal } from '../theme/uiComponents/Modal'
+import { ICard } from 'tragile-card'
 
 interface ListCardProps {
   card: ICard

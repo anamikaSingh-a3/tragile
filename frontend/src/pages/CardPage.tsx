@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { IActiveCardState, ICard } from '../redux/interfaces'
+import { IActiveCardState, ICard } from 'tragile-card'
 import updateCardThunk from '../redux/thunk/updateCardThunk'
 import { StyledButton } from '../theme/uiComponents/Button'
 

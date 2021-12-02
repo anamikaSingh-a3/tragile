@@ -1,11 +1,6 @@
 import { CardActionArea, CardContent } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  IActiveBoardState,
-  IActiveWorkspaceState,
-  IBoard,
-} from '../redux/interfaces'
 import { StyledCard } from '../theme/uiComponents/Card'
 import { StyledContainer } from '../theme/uiComponents/layout/Container'
 import CreateCard from '../components/CreateBoard'
@@ -13,6 +8,8 @@ import { getBoardByWorkspaceThunk } from '../redux/thunk/getBoardByWorkspaceThun
 import { useHistory } from 'react-router'
 import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
 import { getBoardByIdThunk } from '../redux/thunk/getBoardByIdThunk'
+import { IActiveBoardState, IBoard } from 'tragile-board'
+import { IActiveWorkspaceState } from 'tragile-workspace'
 
 const Board: React.FC = () => {
   const dispatch = useDispatch()

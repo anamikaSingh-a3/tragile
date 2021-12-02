@@ -1,4 +1,5 @@
-import { ICard } from "../interfaces"
+import { ICard } from 'tragile-card'
+
 import { ACTIVE_CARD, RESET_ACTIVE_CARD } from "../types"
 
 const initialState: ICard = {

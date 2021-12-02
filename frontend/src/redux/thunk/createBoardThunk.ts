@@ -1,7 +1,8 @@
-import { IBoard } from '../interfaces'
 import { addActiveBoards, addBoard, resetActiveBoards } from '../action'
 import { boardApi } from '../../endpoints.ts'
 import axios from 'axios'
+import { IBoard } from 'tragile-board'
+
 
 export const createBoardThunk =
     (requestBody: IBoard) => async (dispatch: any) => {

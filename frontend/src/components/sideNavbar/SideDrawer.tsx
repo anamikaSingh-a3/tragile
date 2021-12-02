@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { useHistory } from 'react-router'
 import { activeWorkspace } from '../../redux/action'
 import { useDispatch, useSelector } from 'react-redux'
-import { IWorkspace, IWorkspaceState } from '../../redux/interfaces'
 import { createWorkspaceThunk } from '../../redux/thunk/createWorkspaceThunk'
 import {
   TextField,
@@ -24,6 +23,7 @@ import { StyledDrawer } from '../../theme/uiComponents/Drawer'
 import ModalContainer from '../common/Modal'
 import { options } from './menuOptions'
 import { getAllWorkspacesThunk } from '../../redux/thunk/getAllWorkspaceThunk'
+import { IWorkspace, IWorkspaceState } from 'tragile-workspace'
 
 const SideDrawer: React.FC = () => {
   const history = useHistory()

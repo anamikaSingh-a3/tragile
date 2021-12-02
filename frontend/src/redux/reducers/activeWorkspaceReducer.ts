@@ -1,4 +1,5 @@
-import { IWorkspace } from '../interfaces'
+import { IWorkspace } from 'tragile-workspace'
+
 import { ACTIVE_WORKSPACE } from '../types'
 
 const initialState: IWorkspace[] = []

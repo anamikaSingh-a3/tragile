@@ -3,17 +3,13 @@ import React, { useState } from 'react'
 import { StyledButton } from '../theme/uiComponents/Button'
 import { StyledList, StyledListItem } from '../theme/uiComponents/List'
 import CloseIcon from '@material-ui/icons/Close'
-import {
-  IActiveListState,
-  IAllCardState,
-  ICard,
-  IList
-} from '../redux/interfaces'
 import { useDispatch, useSelector } from 'react-redux'
 import { addActiveList } from '../redux/action'
 import createCardThunk from '../redux/thunk/createCardThunk'
 import { v4 as uuidv4 } from 'uuid'
 import ListCard from './ListCard'
+import { IAllCardState, ICard } from 'tragile-card'
+import { IActiveListState, IList } from 'tragile-list'
 
 interface IBoardListProps {
   list: IList

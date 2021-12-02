@@ -1,4 +1,5 @@
-import { IBoard } from '../interfaces'
+import { IBoard } from 'tragile-board'
+
 import { ACTIVE_BOARD, ACTIVE_BOARD_IN_BOARDPAGE, ADD_BOARD, RESET_ACTIVE_BOARD_IN_BOARDPAGE, RESET_BOARD } from '../types'
 
 export const addBoard = (board: IBoard) => {

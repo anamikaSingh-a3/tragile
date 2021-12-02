@@ -1,4 +1,5 @@
-import { IList } from '../interfaces'
+import { IList } from 'tragile-list'
+
 import {
   ACTIVE_BOARD_LIST,
   ACTIVE_LIST,
