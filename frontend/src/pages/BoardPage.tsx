@@ -5,6 +5,7 @@ import CreateList from '../components/CreateList'
 import { useDispatch, useSelector } from 'react-redux'
 import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
 import { IActiveBoardListState, IList } from '../redux/interfaces/index'
+import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
 import BoardList from '../components/BoardList'
 
 interface IParams {
@@ -22,6 +23,7 @@ const BoardPage: React.FC = () => {
   useEffect(() => {
     return () => {
       dispatch(getListByBoardThunk(id))
+      dispatch(getAllCardsThunk())
     }
   }, [id, dispatch])
 
