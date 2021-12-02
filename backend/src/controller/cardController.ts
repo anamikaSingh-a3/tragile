@@ -9,7 +9,7 @@ export const createCard = async (req: Request, res: Response) => {
       card_id: req.body.card_id,
       title: req.body.title,
       description: req.body.description,
-      list_id: req.body.list_id
+      list_id: req.body.list
     }
     const card = await cardSchema.validate(data)
     const newCard = await pool.query(
