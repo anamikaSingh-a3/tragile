@@ -2,6 +2,7 @@ import { Box, ThemeProvider } from '@material-ui/core'
 import { BrowserRouter } from 'react-router-dom'
 import SideDrawer from './components/sideNavbar/SideDrawer'
 import { theme } from './theme/theme'
+import Routes from './routes/Routes'
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <Box maxWidth='lg'>
         <BrowserRouter>
           <SideDrawer />
+          <Routes />
         </BrowserRouter>
       </Box>
     </ThemeProvider>
