@@ -9,10 +9,10 @@ import {
 import { StyledCard } from '../theme/uiComponents/Card'
 import { StyledContainer } from '../theme/uiComponents/layout/Container'
 import CreateCard from '../components/CreateBoard'
+import { getBoardByWorkspaceThunk } from '../redux/thunk/getBoardByWorkspaceThunk'
 import { useHistory } from 'react-router'
 import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
 import { getBoardByIdThunk } from '../redux/thunk/getBoardByIdThunk'
-import { getBoardByWorkspaceThunk } from '../redux/thunk/getBoardByWorkspaceThunk'
 
 const Board: React.FC = () => {
   const dispatch = useDispatch()

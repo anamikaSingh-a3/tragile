@@ -46,11 +46,11 @@ export interface IList {
   list_id: string
   title: string
   description?: string
-  board: string
+  board_id: string 
 }
 
 export interface IActiveBoardListState {
-  activeBoardList :IList[]
+  activeBoardList: IList[]
 }
 
 export interface ICard {
@@ -66,7 +66,8 @@ export interface IAllCardState {
 }
 
 export interface IActiveListState {
-  activeList : IList
+activeList: IList
+
 }
 
 export interface IActiveCardState {
