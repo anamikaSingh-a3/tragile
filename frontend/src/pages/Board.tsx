@@ -10,6 +10,7 @@ import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
 import { getBoardByIdThunk } from '../redux/thunk/getBoardByIdThunk'
 import { IActiveBoardState, IBoard } from 'tragile-board'
 import { IActiveWorkspaceState } from 'tragile-workspace'
+import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk';
 
 const Board: React.FC = () => {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const Board: React.FC = () => {
     history.push(`/board/${board.board_id}`)
     dispatch(getBoardByIdThunk(board.board_id))
     dispatch(getListByBoardThunk(board.board_id))
+    dispatch(getAllCardsThunk())
   }
   useEffect(() => {
     dispatch(getBoardByWorkspaceThunk(activeWorkspace.workspace_id))
