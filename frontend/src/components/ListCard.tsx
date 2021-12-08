@@ -6,6 +6,7 @@ import { StyledCard } from '../theme/uiComponents/Card'
 import { addActiveCard } from '../redux/action/cardActions'
 import { StyledModal } from '../theme/uiComponents/Modal'
 import { ICard } from 'tragile-card'
+import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
 
 interface ListCardProps {
   card: ICard
@@ -21,13 +22,14 @@ const ListCard:React.FC<ListCardProps> = (props: ListCardProps) => {
   }
   const onCardHandler = () => {
     dispatch(addActiveCard(props.card))
+    dispatch(getAllCardsThunk())
     setOpen(true)
   }
 
   return (
     <>
       <StyledCard onClick={() => onCardHandler()}>
-        title: {props.card.title}
+        {props.card.title}
       </StyledCard>
 
       <Modal

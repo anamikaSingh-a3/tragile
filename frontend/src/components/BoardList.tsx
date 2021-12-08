@@ -47,7 +47,7 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
     <StyledList onClick={() => dispatch(addActiveList(props.list))}>
       <List component='nav' aria-label='main mailbox folders'>
         <StyledListItem button disableRipple>
-          List Title: {props.list.title}
+          {props.list.title}
           {cards.map((card: ICard, index: number) =>
             props.list.list_id === card.list ? (
               <ListCard card={card} index={index} />

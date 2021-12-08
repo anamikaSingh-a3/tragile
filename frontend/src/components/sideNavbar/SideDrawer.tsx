@@ -16,7 +16,6 @@ import {
 } from '@material-ui/core'
 import AssessmentIcon from '@material-ui/icons/Assessment'
 import AddIcon from '@material-ui/icons/Add'
-import CloseIcon from '@material-ui/icons/Close'
 import { StyledModal } from '../../theme/uiComponents/Modal'
 import { StyledButton } from '../../theme/uiComponents/Button'
 import { StyledDrawer } from '../../theme/uiComponents/Drawer'
@@ -24,6 +23,7 @@ import ModalContainer from '../common/Modal'
 import { options } from './menuOptions'
 import { getAllWorkspacesThunk } from '../../redux/thunk/getAllWorkspaceThunk'
 import { IWorkspace, IWorkspaceState } from 'tragile-workspace'
+import { StyledCloseIcon } from '../../theme/uiComponents/CloseIcon'
 
 const SideDrawer: React.FC = () => {
   const history = useHistory()
@@ -117,8 +117,10 @@ const SideDrawer: React.FC = () => {
       <TextField
         id='filled-secondary'
         placeholder='Add Workspace description'
-        variant='filled'
+        variant='outlined'
         color='secondary'
+        multiline
+        rows="3"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         fullWidth
@@ -131,7 +133,7 @@ const SideDrawer: React.FC = () => {
       >
         Create Workspace
       </StyledButton>
-      <CloseIcon onClick={handleClose} />
+      <StyledCloseIcon onClick={handleClose} />
     </StyledModal>
   )
 

@@ -2,9 +2,9 @@ import { styled } from '@material-ui/core/styles'
 import { Card } from '@material-ui/core'
 
 export const StyledCard = styled(Card)(({ theme }) => ({
-  maxWidth: 200,
-  minWidth: 100,
-  // minHeight: 100,
+  maxWidth: 300,
+  minWidth: 150,
+  minHeight: 70,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -15,4 +15,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   '& .MuiCardActionArea-root': {
     height: '100%',
   },
+  '& .MuiCardActionArea-focusHighlight': {
+    backgroundColor: 'inherit'
+  }
 }))

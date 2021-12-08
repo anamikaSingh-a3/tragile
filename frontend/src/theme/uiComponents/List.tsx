@@ -6,6 +6,12 @@ export const StyledList = styled('div')(({ theme }) => ({
   height: '100%',
   margin: theme.spacing(5),
   backgroundColor: theme.palette.secondary.main,
+  '&:hover': {
+    outline: 'none',
+  },
+  '&.button:focus': {
+    outline: 'none',                                                                   
+  }
 }))
 
 export const StyledListItem = styled(ListItem)({
@@ -17,6 +23,12 @@ export const StyledListItem = styled(ListItem)({
   alignContent: 'spaceBetween',
   justifyContent: 'spaceBetween',
   alignItems: 'center',
+  '&:hover': {
+    outline: 'none',
+  },
+  '&.button:focus': {
+    outline: 'none',                                                                   
+  }
   // min-height: 150px;
   // display: flex;
   // flex-direction: column;
