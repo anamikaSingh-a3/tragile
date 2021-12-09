@@ -27,7 +27,7 @@ const BoardPage: React.FC = () => {
       dispatch(getListByBoardThunk(id))
       dispatch(getAllCardsThunk())
     }
-  }, [id, dispatch])
+  }, [id, list, dispatch])
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId, type } = result
@@ -36,7 +36,6 @@ const BoardPage: React.FC = () => {
     if (!destination) {
       return;
     }
-   
     dispatch(updateCardListIdThunk({card_id: draggableId, list_id: destination.droppableId}))
   }
   return (
