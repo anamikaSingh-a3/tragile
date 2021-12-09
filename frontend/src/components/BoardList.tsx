@@ -10,9 +10,11 @@ import { v4 as uuidv4 } from 'uuid'
 import ListCard from './ListCard'
 import { IAllCardState, ICard } from 'tragile-card'
 import { IActiveListState, IList } from 'tragile-list'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 interface IBoardListProps {
   list: IList
+  index: number
 }
 
 const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
@@ -44,18 +46,46 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
   }
 
   return (
-    <StyledList onClick={() => dispatch(addActiveList(props.list))}>
-      <List component='nav' aria-label='main mailbox folders'>
-        <StyledListItem button disableRipple>
+    <Draggable draggableId={props.list.list_id} index={props.index}>
+      {provided => (
+        <div {...provided.draggableProps} ref={provided.innerRef} onClick={() => dispatch(addActiveList(props.list))} style={{display: 'inline-flex', gap: 20}}>
+          <StyledList onClick={() => dispatch(addActiveList(props.list))}>
+            <List component='nav' aria-label='main mailbox folders'>
+              <Droppable droppableId={props.list.list_id}>
+                {provided => (
+                  <StyledListItem button disableRipple ref={provided.innerRef} {...provided.droppableProps}>
+                    {props.list.title}
+                    {cards.map((card: ICard, index: number) =>
+                      props.list.list_id === card.list ? (
+                        <ListCard card={card} index={index} />
+                      ) : (
+                        ''
+                      )
+                    )}
+              {provided.placeholder}
+                  </StyledListItem>
+                )}
+                
+              </Droppable>
+              {/* <StyledListItem button disableRipple>
           {props.list.title}
           {cards.map((card: ICard, index: number) =>
             props.list.list_id === card.list ? (
-              <ListCard card={card} index={index} />
+              <Draggable
+                key={card.card_id}
+                draggableId={card.card_id}
+                index={index}
+              >
+                {(provided, snapshot) => <ListCard card={card} index={index} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}/>}
+              </Draggable>
             ) : (
               ''
             )
-          )}
-          <Button
+          )} */}
+       
+        {/* </StyledListItem>  */}
+            </List>
+            <Button
             aria-controls='simple-menu'
             aria-haspopup='true'
             onClick={handleClick}
@@ -91,9 +121,10 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
             </StyledButton>
             <CloseIcon onClick={handleClose} />
           </Menu>
-        </StyledListItem>
-      </List>
-    </StyledList>
+          </StyledList>
+        </div>
+      )}
+    </Draggable>
   )
 }
 

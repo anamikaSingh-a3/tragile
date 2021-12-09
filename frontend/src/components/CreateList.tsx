@@ -48,7 +48,7 @@ const CreateList: React.FC = () => {
         aria-haspopup='true'
         onClick={handleClick}
         variant='contained'
-        size="small"
+        size="large"
       >
         Create List
       </Button>
