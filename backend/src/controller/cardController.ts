@@ -58,7 +58,7 @@ export const getAllCard = async (req: Request, res: Response) => {
   }
 }
 
-export const updateCard = async (req: Request, res: Response) => {
+export const updateCardDescription = async (req: Request, res: Response) => {
   logger.info('In update card API')
   try {
     const id = req.body.card_id
@@ -67,6 +67,24 @@ export const updateCard = async (req: Request, res: Response) => {
     const card = await pool.query(
       'UPDATE card SET description=$1 WHERE card_id=$2 RETURNING *',
       [desc, id]
+    )
+    res.status(200).send(card.rows)
+    logger.info('Card updated')
+  } catch (error) {
+    logger.error(error)
+    res.status(401).send(error)
+  }
+}
+
+export const updateCardList = async (req: Request, res: Response) => {
+  logger.info('In update card list API')
+  try {
+    const id = req.body.card_id
+    const listId = req.body.list_id
+    await cardSchema.isValid({ card_id: id })
+    const card = await pool.query(
+      'UPDATE card SET list=$1 WHERE card_id=$2 RETURNING *',
+      [listId, id]
     )
     res.status(200).send(card.rows)
     logger.info('Card updated')
