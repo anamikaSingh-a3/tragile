@@ -8,7 +8,7 @@ import { getBoardByWorkspaceThunk } from '../redux/thunk/getBoardByWorkspaceThun
 import { useHistory } from 'react-router'
 import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
 import { getBoardByIdThunk } from '../redux/thunk/getBoardByIdThunk'
-import { IActiveBoardState, IBoard } from 'tragile-board'
+import { IActiveWorkspaceBoardState, IBoard } from 'tragile-board'
 import { IActiveWorkspaceState } from 'tragile-workspace'
 import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk';
 
@@ -16,7 +16,7 @@ const Board: React.FC = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const board = useSelector((state: IActiveBoardState) => state.activeWorkspaceBoard)
+  const board = useSelector((state: IActiveWorkspaceBoardState) => state.activeWorkspaceBoard)
 
   const activeWorkspace = useSelector(
     (state: IActiveWorkspaceState) => state.activeWorkspace

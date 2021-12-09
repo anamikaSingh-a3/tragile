@@ -14,7 +14,10 @@ declare module 'tragile-board' {
     workspaceId: string
     visibility: string
   }
-  export interface IActiveBoardState {
+  export interface IActiveWorkspaceBoardState {
     activeWorkspaceBoard: IActiveBoard[]
+  }
+  export interface IActiveBoardState {
+    activeBoard: IActiveBoard
   }
 }

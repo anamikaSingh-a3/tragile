@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import { useParams } from 'react-router'
 import { StyledListContainer } from '../theme/uiComponents/layout/Container'
 import CreateList from '../components/CreateList'
@@ -9,6 +10,9 @@ import BoardList from '../components/BoardList'
 import { IActiveBoardListState, IList } from 'tragile-list'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import updateCardListIdThunk from '../redux/thunk/updateCardListIdThunk'
+import { IActiveBoardState } from 'tragile-board'
+import { IActiveCardState } from 'tragile-card'
+
 
 interface IParams {
   id: string
@@ -21,13 +25,17 @@ const BoardPage: React.FC = () => {
   const list = useSelector(
     (state: IActiveBoardListState) => state.activeBoardList
   )
+  const activeBoard = useSelector((state: IActiveBoardState) => state.activeBoard)
+
+  const activeCard = useSelector((state: IActiveCardState) => state.activeCard)
+
 
   useEffect(() => {
     return () => {
       dispatch(getListByBoardThunk(id))
       dispatch(getAllCardsThunk())
     }
-  }, [id, list, dispatch])
+  }, [id, activeCard, dispatch])
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId, type } = result
@@ -36,10 +44,16 @@ const BoardPage: React.FC = () => {
     if (!destination) {
       return;
     }
-    dispatch(updateCardListIdThunk({card_id: draggableId, list_id: destination.droppableId}))
+    dispatch(
+      updateCardListIdThunk(
+        { card_id: draggableId, list_id: destination.droppableId }
+      )
+    )
+
   }
   return (
     <StyledListContainer maxWidth='lg'>
+      Board Id : {activeBoard.title}
       <DragDropContext
         onDragEnd={(result, provided) => {
           onDragEnd(result)
@@ -50,6 +64,7 @@ const BoardPage: React.FC = () => {
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {list.map((list: IList, index: number) => (
                 <BoardList list={list} key={list.list_id} index={index} />
+
               ))}
               {provided.placeholder}
             </div>

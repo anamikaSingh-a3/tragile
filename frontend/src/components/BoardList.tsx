@@ -1,5 +1,6 @@
 import { Button, List, Menu, MenuItem, TextField } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import { StyledButton } from '../theme/uiComponents/Button'
 import { StyledList, StyledListItem } from '../theme/uiComponents/List'
 import CloseIcon from '@material-ui/icons/Close'
@@ -67,23 +68,6 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
                 )}
                 
               </Droppable>
-              {/* <StyledListItem button disableRipple>
-          {props.list.title}
-          {cards.map((card: ICard, index: number) =>
-            props.list.list_id === card.list ? (
-              <Draggable
-                key={card.card_id}
-                draggableId={card.card_id}
-                index={index}
-              >
-                {(provided, snapshot) => <ListCard card={card} index={index} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}/>}
-              </Draggable>
-            ) : (
-              ''
-            )
-          )} */}
-       
-        {/* </StyledListItem>  */}
             </List>
             <Button
             aria-controls='simple-menu'
