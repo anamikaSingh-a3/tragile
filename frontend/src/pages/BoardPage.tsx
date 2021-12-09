@@ -8,6 +8,7 @@ import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
 import BoardList from '../components/BoardList'
 import { IActiveBoardListState, IList } from 'tragile-list'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
+import updateCardListIdThunk from '../redux/thunk/updateCardListIdThunk'
 
 interface IParams {
   id: string
@@ -36,9 +37,7 @@ const BoardPage: React.FC = () => {
       return;
     }
    
-    
-    
-
+    dispatch(updateCardListIdThunk({card_id: draggableId, list_id: destination.droppableId}))
   }
   return (
     <StyledListContainer maxWidth='lg'>

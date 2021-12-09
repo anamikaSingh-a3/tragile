@@ -48,7 +48,7 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
   return (
     <Draggable draggableId={props.list.list_id} index={props.index}>
       {provided => (
-        <div {...provided.draggableProps} ref={provided.innerRef} onClick={() => dispatch(addActiveList(props.list))} style={{display: 'inline-flex', gap: 20}}>
+        <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} onClick={() => dispatch(addActiveList(props.list))} style={{display: 'inline-flex', gap: 20}}>
           <StyledList onClick={() => dispatch(addActiveList(props.list))}>
             <List component='nav' aria-label='main mailbox folders'>
               <Droppable droppableId={props.list.list_id}>
