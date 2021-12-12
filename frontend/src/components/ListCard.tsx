@@ -1,5 +1,5 @@
 import { Modal, TextField } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { StyledCard } from '../theme/uiComponents/Card'
 import { addActiveCard } from '../redux/action/cardActions'
@@ -15,22 +15,26 @@ interface ListCardProps {
   index: number
 }
 
-const ListCard:React.FC<ListCardProps> = (props: ListCardProps) => {
+const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
   const activeCard = useSelector((state: IActiveCardState) => state.activeCard)
   const [open, setOpen] = useState(false)
-  const [description, setDescription] = useState<string | undefined>(
+  const [description, setDescription] = useState(
     activeCard.description
   )
+
+  console.log('description', activeCard.description)
+  console.log('activeCard.description', activeCard.description)
+  console.log('activeCrad', activeCard)
 
   const dispatch = useDispatch()
 
   const handleCloseCardModal = () => {
     setOpen(false)
   }
-  
+
   const onCardHandler = () => {
-    dispatch(addActiveCard(props.card))
     dispatch(getAllCardsThunk())
+    dispatch(addActiveCard(props.card))
     setOpen(true)
   }
 
@@ -43,21 +47,28 @@ const ListCard:React.FC<ListCardProps> = (props: ListCardProps) => {
     setOpen(false)
   }
 
+  // useEffect(() => {
+
+  //   return () => {
+  //     dispatch(getAllCardsThunk())
+
+  //   }
+  // }, [activeCard])
   return (
     <>
-    <Draggable draggableId={props.card.card_id} index={props.index}>
-      {(provided)=> (
-        <div 
-        ref={provided.innerRef}
-        {...provided.dragHandleProps}
-        {...provided.draggableProps}>
-
-      <StyledCard onClick={() => onCardHandler()}>
-        {props.card.title}
-      </StyledCard>
-        </div>
-      )}
-    </Draggable>
+      <Draggable draggableId={props.card.card_id} index={props.index}>
+        {provided => (
+          <div
+            ref={provided.innerRef}
+            {...provided.dragHandleProps}
+            {...provided.draggableProps}
+          >
+            <StyledCard onClick={() => onCardHandler()}>
+              {props.card.title}
+            </StyledCard>
+          </div>
+        )}
+      </Draggable>
 
       <Modal
         open={open}

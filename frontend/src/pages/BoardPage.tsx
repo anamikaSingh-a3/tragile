@@ -31,7 +31,6 @@ const BoardPage: React.FC = () => {
 
   const activeCard = useSelector((state: IActiveCardState) => state.activeCard)
 
-
   useEffect(() => {
     return () => {
       dispatch(getListByBoardThunk(id))
