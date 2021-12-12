@@ -4,7 +4,7 @@ import TopNavbar from './Toolbar'
 
 const Navbar: React.FC = () => {
   return (
-    <AppBar position='static'>
+    <AppBar position="fixed">
       <TopNavbar />
     </AppBar>
   )

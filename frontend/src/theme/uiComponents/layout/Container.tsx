@@ -1,5 +1,5 @@
 import { styled } from '@material-ui/core/styles'
-import { Container } from '@material-ui/core'
+import { Box, Container } from '@material-ui/core'
 
 const drawerWidth = 240
 
@@ -8,17 +8,30 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   flexDirection: 'row',
-  paddingLeft: drawerWidth + theme.spacing(5),
+  width: '80%',
+  marginTop: 50,
+  marginLeft: drawerWidth + theme.spacing(1),
   padding: theme.spacing(5),
+  overflowX: 'visible'
 }))
 
-export const StyledListContainer = styled(Container)(({ theme }) => ({
+export const StyledListContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'nowrap',
-  justifyContent: 'flexStart',
-  paddingLeft: drawerWidth + theme.spacing(5),
-  margin: theme.spacing(5),
+  marginTop: theme.spacing(3),
   overflowX: 'scroll',
-  minheight: '10vh'
+  minheight: '10vh',
+}))
+
+export const StyledBoardContainer = styled(Container)(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginTop: theme.spacing(3),
+  overflowX: 'scroll',
+  minheight: '10vh',
+}))
+
+export const StyledDroppableList = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'nowrap',
+  gap: 10,
 }))

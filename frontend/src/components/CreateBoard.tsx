@@ -11,7 +11,7 @@ import Cards from './common/Card'
 import { IActiveWorkspaceState } from 'tragile-workspace'
 import { IBoard } from 'tragile-board'
 
-const CreateBoard = () => {
+const CreateBoard: React.FC= () => {
   const [openModal, setOpenModal] = useState(false)
   const [title, setTile] = useState<string>('')
 

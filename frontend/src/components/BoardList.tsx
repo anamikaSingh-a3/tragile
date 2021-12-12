@@ -1,17 +1,16 @@
-import { Button, List, Menu, MenuItem, TextField } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
-
-import { StyledButton } from '../theme/uiComponents/Button'
+import React from 'react'
+import { List, Typography } from '@material-ui/core'
 import { StyledList, StyledListItem } from '../theme/uiComponents/List'
-import CloseIcon from '@material-ui/icons/Close'
 import { useDispatch, useSelector } from 'react-redux'
 import { addActiveList } from '../redux/action'
-import createCardThunk from '../redux/thunk/createCardThunk'
-import { v4 as uuidv4 } from 'uuid'
 import ListCard from './ListCard'
 import { IAllCardState, ICard } from 'tragile-card'
-import { IActiveListState, IList } from 'tragile-list'
+import { IList } from 'tragile-list'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
+import { StyledDroppableList } from '../theme/uiComponents/layout/Container'
+import InputContainer from './createComponent/InputContainer'
+import { StyledHeader } from '../theme/uiComponents/layout/Header'
+
 
 interface IBoardListProps {
   list: IList
@@ -19,94 +18,53 @@ interface IBoardListProps {
 }
 
 const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [title, setTile] = useState<string>('')
-
   const dispatch = useDispatch()
 
   const cards = useSelector((state: IAllCardState) => state.card)
-  const activeList = useSelector((state: IActiveListState) => state.activeList)
 
-  const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-    setTile('')
-  }
-
-  const handleButtonClick = (listId: string) => {
-    const requestBody: ICard = {
-      card_id: uuidv4(),
-      title: title,
-      list: listId
-    }
-    dispatch(createCardThunk(requestBody))
-    handleClose()
-  }
 
   return (
     <Draggable draggableId={props.list.list_id} index={props.index}>
       {provided => (
-        <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} onClick={() => dispatch(addActiveList(props.list))} style={{display: 'inline-flex', gap: 20}}>
+        <StyledDroppableList
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          onClick={() => dispatch(addActiveList(props.list))}
+          style={{ display: 'inline-flex', gap: 20 }}
+        >
           <StyledList onClick={() => dispatch(addActiveList(props.list))}>
             <List component='nav' aria-label='main mailbox folders'>
               <Droppable droppableId={props.list.list_id}>
                 {provided => (
-                  <StyledListItem button disableRipple ref={provided.innerRef} {...provided.droppableProps}>
-                    {props.list.title}
-                    {cards.map((card: ICard, index: number) =>
-                      props.list.list_id === card.list ? (
-                        <ListCard card={card} index={index} />
-                      ) : (
-                        ''
-                      )
-                    )}
-              {provided.placeholder}
-                  </StyledListItem>
+                  <>
+                    <StyledHeader>
+                      <Typography variant='h4' gutterBottom>
+                        {props.list.title}
+                      </Typography>
+                    </StyledHeader>
+                    <StyledListItem
+                      button
+                      disableRipple
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      {cards.map((card: ICard, index: number) =>
+                        props.list.list_id === card.list ? (
+                          <ListCard card={card} index={index} />
+                        ) : (
+                          ''
+                        )
+                      )}
+                      {provided.placeholder}
+                    </StyledListItem>
+                  </>
                 )}
-                
               </Droppable>
             </List>
-            <Button
-            aria-controls='simple-menu'
-            aria-haspopup='true'
-            onClick={handleClick}
-            variant='contained'
-          >
-            Create Card
-          </Button>
-          <Menu
-            id='simple-menu'
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem>
-              <TextField
-                id='filled-secondary'
-                placeholder='Add card title'
-                variant='filled'
-                color='secondary'
-                value={title}
-                onChange={e => setTile(e.target.value)}
-                fullWidth
-              />
-            </MenuItem>
-            <StyledButton
-              variant='contained'
-              color='primary'
-              onClick={() => handleButtonClick(activeList.list_id)}
-              disabled={!title}
-            >
-              Create card
-            </StyledButton>
-            <CloseIcon onClick={handleClose} />
-          </Menu>
+            <InputContainer listId={props.list.list_id} type='card' />
           </StyledList>
-        </div>
+        </StyledDroppableList>
       )}
     </Draggable>
   )

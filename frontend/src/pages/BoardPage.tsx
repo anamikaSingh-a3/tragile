@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
-import { StyledListContainer } from '../theme/uiComponents/layout/Container'
-import CreateList from '../components/CreateList'
+import {
+  StyledContainer,
+  StyledListContainer
+} from '../theme/uiComponents/layout/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
 import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
@@ -12,7 +13,8 @@ import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import updateCardListIdThunk from '../redux/thunk/updateCardListIdThunk'
 import { IActiveBoardState } from 'tragile-board'
 import { IActiveCardState } from 'tragile-card'
-
+import Heading from '../components/common/Heading'
+import InputContainer from '../components/createComponent/InputContainer'
 
 interface IParams {
   id: string
@@ -38,9 +40,8 @@ const BoardPage: React.FC = () => {
   }, [id, activeCard, dispatch])
 
   const onDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId, type } = result
-    console.log('destination', destination, 'source', source, 'draggableId',draggableId, 'type', type)
-  
+    const { destination, draggableId } = result
+
     if (!destination) {
       return;
     }
@@ -52,30 +53,29 @@ const BoardPage: React.FC = () => {
 
   }
   return (
-    <StyledListContainer maxWidth='lg'>
-      Board Id : {activeBoard.title}
-      <DragDropContext
-        onDragEnd={(result, provided) => {
-          onDragEnd(result)
-        }}
-      >
-        <Droppable droppableId='app' type='list' direction='horizontal'>
-          {provided => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {list.map((list: IList, index: number) => (
-                <BoardList list={list} key={list.list_id} index={index} />
+    <StyledContainer maxWidth='lg'>
+      <Heading type={'Board '} value={activeBoard.title} />
+      <StyledListContainer maxWidth='lg'>
+        <DragDropContext
+          onDragEnd={(result, provided) => {
+            onDragEnd(result)
+          }}
+        >
+          <Droppable droppableId='app' type='list' direction='horizontal'>
+            {provided => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {list.map((list: IList, index: number) => (
+                  <BoardList list={list} key={list.list_id} index={index} />
 
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <div >
-
-      <CreateList />
-      </div>
-    </StyledListContainer>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <InputContainer type='list' listId={''} />
+      </StyledListContainer>
+    </StyledContainer>
   )
 }
 

@@ -9,9 +9,10 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   textAlign: 'center',
-  backgroundColor: theme.palette.grey[100],
+  background: theme.palette.grey[50],
   margin: theme.spacing(1),
-  marginTop: theme.spacing(5),
+  marginTop: theme.spacing(1),
+  padding: theme.spacing(1),
   '& .MuiCardActionArea-root': {
     height: '100%',
   },

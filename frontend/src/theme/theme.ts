@@ -31,6 +31,7 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: 'Rajdhani, sans-serif',
+   
     h1: {
       fontSize: 36,
       lineHeight: 1.2,
@@ -40,11 +41,11 @@ export const theme = createTheme({
       lineHeight: 1.4,
     },
     h3: {
-      fontSize: 20,
+      fontSize: 24,
       lineHeight: 1.4,
     },
     h4: {
-      fontSize: 18,
+      fontSize: 22,
       lineHeight: 1.4,
     },
     h5: {
