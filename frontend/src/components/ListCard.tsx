@@ -28,8 +28,8 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
   }
 
   const onCardHandler = () => {
-    dispatch(addActiveCard(props.card))
     dispatch(getAllCardsThunk())
+    dispatch(addActiveCard(props.card))
     setOpen(true)
   }
 
