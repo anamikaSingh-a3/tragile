@@ -5,7 +5,8 @@ import { ACTIVE_CARD, RESET_ACTIVE_CARD } from "../types"
 const initialState: ICard = {
     card_id: "",
     title: "",
-    list: ""
+    list: "",
+    description: "",
 }
 
 const activeCardReducer = (

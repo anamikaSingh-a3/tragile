@@ -1,8 +1,7 @@
-import React from 'react'
 import { List, Typography } from '@material-ui/core'
 import { StyledList, StyledListItem } from '../theme/uiComponents/List'
 import { useDispatch, useSelector } from 'react-redux'
-import { addActiveList } from '../redux/action'
+import {  addActiveList } from '../redux/action'
 import ListCard from './ListCard'
 import { IAllCardState, ICard } from 'tragile-card'
 import { IList } from 'tragile-list'
@@ -21,7 +20,6 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
   const dispatch = useDispatch()
 
   const cards = useSelector((state: IAllCardState) => state.card)
-
 
   return (
     <Draggable draggableId={props.list.list_id} index={props.index}>
@@ -56,7 +54,6 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
                           ''
                         )
                       )}
-                      {provided.placeholder}
                     </StyledListItem>
                   </>
                 )}
