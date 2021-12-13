@@ -24,6 +24,8 @@ import { options } from './menuOptions'
 import { getAllWorkspacesThunk } from '../../redux/thunk/getAllWorkspaceThunk'
 import { IWorkspace, IWorkspaceState } from 'tragile-workspace'
 import { StyledCloseIcon } from '../../theme/uiComponents/CloseIcon'
+import { useLocation } from 'react-router-dom'
+
 
 const SideDrawer: React.FC = () => {
   const history = useHistory()
@@ -140,6 +142,12 @@ const SideDrawer: React.FC = () => {
   useEffect(() => {
     dispatch(getAllWorkspacesThunk())
   }, [dispatch])
+
+  let location = useLocation()
+
+  if(location.pathname==="/signIn" || location.pathname==="/signUp") {
+    return null
+  } else
 
   return (
     <>

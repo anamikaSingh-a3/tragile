@@ -15,6 +15,14 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
   overflowX: 'visible'
 }))
 
+export const StyledContainerUser = styled(Container)(({ theme }) => ({
+  marginTop: 60,
+  flexGrow: 1,
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center'
+}))
+
 export const StyledListContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   marginTop: theme.spacing(3),
