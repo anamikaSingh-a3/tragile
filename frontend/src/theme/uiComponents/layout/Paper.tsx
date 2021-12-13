@@ -11,3 +11,11 @@ export const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: fade(theme.palette.grey[200], 0.85)
   }
 }))
+
+export const StyledPaperUser = styled(Paper)(({ theme }) => ({
+  marginTop: theme.spacing(8),
+  padding: theme.spacing(5),
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}))
