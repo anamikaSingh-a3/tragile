@@ -4,8 +4,8 @@ import workspace from './routes/workspace'
 import board from './routes/board'
 import list from './routes/list'
 import card from './routes/card'
-import logger from './utility/logger'
 import user from './routes/user'
+import logger from './utility/logger'
 
 const app: Application = express()
 
