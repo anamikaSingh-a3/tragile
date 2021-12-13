@@ -5,6 +5,7 @@ import board from './routes/board'
 import list from './routes/list'
 import card from './routes/card'
 import logger from './utility/logger'
+import user from './routes/user'
 
 const app: Application = express()
 
@@ -19,7 +20,7 @@ app.use('/api/workspace', workspace)
 app.use('/api/board', board)
 app.use('/api/list', list)
 app.use('/api/card',card)
-
+app.use('/api/user',user)
 
 const port = process.env.PORT || 3002
 
