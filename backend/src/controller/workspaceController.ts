@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
+import { IWorkspace } from 'tragile-workspace'
 import { pool } from '../db'
-import { IWorkspace } from '../interface/workspaceInterface'
 import { workspaceByIdSchema, workspaceSchema } from '../schema/workspaceSchema'
 import logger from '../utility/logger'
 
