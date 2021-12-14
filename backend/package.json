@@ -8,6 +8,7 @@
     "make-seeds": "knex seed:make dev --knexfile ./src/database/knexfile.ts",
     "seeds": "knex seed:run --knexfile ./src/database/knexfile.ts",
     "migrations": "knex migrate:latest --knexfile ./src/database/knexfile.ts",
+    "migrate:down": "knex migrate:down --knexfile ./src/database/knexfile.ts",
     "start": "node dist/app.js",
     "start:dev": "nodemon src/app.ts",
     "build": "tsc -p ."
