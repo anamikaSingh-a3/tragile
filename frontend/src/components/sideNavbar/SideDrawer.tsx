@@ -63,7 +63,7 @@ const SideDrawer: React.FC = () => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleMenuItemClick = (event: any, index: any) => {
+  const handleMenuItemClick = (index: number) => {
     setSelectedIndex(index)
     setAnchorEl(null)
   }
@@ -89,7 +89,7 @@ const SideDrawer: React.FC = () => {
           button
           aria-haspopup='true'
           aria-controls='lock-menu'
-          onClick={handleClickListItem}
+          onClick={(event) => handleClickListItem(event)}
         >
           <ListItemText
             primary='Workspace Type'
@@ -108,7 +108,7 @@ const SideDrawer: React.FC = () => {
           <MenuItem
             key={option}
             selected={index === selectedIndex}
-            onClick={(event) => handleMenuItemClick(event, index)}
+            onClick={() => handleMenuItemClick(index)}
           >
             {option}
           </MenuItem>

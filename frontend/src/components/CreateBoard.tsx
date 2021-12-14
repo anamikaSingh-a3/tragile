@@ -4,12 +4,12 @@ import TextField from '@material-ui/core/TextField'
 import { useDispatch, useSelector } from 'react-redux'
 import { StyledModal } from '../theme/uiComponents/Modal'
 import { StyledButton } from '../theme/uiComponents/Button'
-import CloseIcon from '@material-ui/icons/Close'
 import { createBoardThunk } from '../redux/thunk/createBoardThunk'
 import ModalContainer from './common/Modal'
 import Cards from './common/Card'
 import { IActiveWorkspaceState } from 'tragile-workspace'
 import { IBoard } from 'tragile-board'
+import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon'
 
 const CreateBoard: React.FC= () => {
   const [openModal, setOpenModal] = useState(false)
@@ -22,8 +22,8 @@ const CreateBoard: React.FC= () => {
   )
 
   const handleClose = () => {
-    setOpenModal(false)
     setTile('')
+    setOpenModal(false)
   }
 
   const handleButtonClick = () => {
@@ -56,7 +56,7 @@ const CreateBoard: React.FC= () => {
       >
         Create Board
       </StyledButton>
-      <CloseIcon onClick={handleClose} />
+      <StyledCloseIcon onClick={() => handleClose()} />
     </StyledModal>
   )
 

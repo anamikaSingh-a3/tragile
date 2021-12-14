@@ -4,7 +4,7 @@ import { ACTIVE_LIST, ADD_LIST } from '../types'
 
 const initialState: IList[] = []
 
-const addListLogic = (state: IList[], payload: any) => {
+const addListLogic = (state: IList[], payload: IList[]) => {
   if (payload.length >= 1)
     return [...state, ...payload]
   else

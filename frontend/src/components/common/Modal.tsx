@@ -2,7 +2,7 @@ import { Modal } from '@material-ui/core'
 
 interface ModalContainerProps {
   openModal: boolean
-  body: any
+  body: JSX.Element
 }
 
 const ModalContainer = (props: ModalContainerProps) => {

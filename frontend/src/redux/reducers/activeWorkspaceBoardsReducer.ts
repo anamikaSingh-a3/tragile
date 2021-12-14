@@ -4,7 +4,7 @@ import { ACTIVE_BOARD, RESET_BOARD } from '../types'
 
 const initialState: IBoard[] = []
 
-const activeWorkspaceBoardReducerLogic = (state: IBoard[], payload: any) => {
+const activeWorkspaceBoardReducerLogic = (state: IBoard[], payload: IBoard[]) => {
   if (payload.length >= 1) return [...payload]
   else return [...state, payload]
 }

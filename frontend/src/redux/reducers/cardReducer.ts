@@ -4,7 +4,7 @@ import { ADD_CARD } from '../types'
 
 const initialState: ICard[] = []
 
-const addCardLogic = (state: ICard[], payload: any) => {
+const addCardLogic = (state: ICard[], payload: ICard[]) => {
   if (payload.length >= 1) return [...payload]
   else return [...state, payload]
 }

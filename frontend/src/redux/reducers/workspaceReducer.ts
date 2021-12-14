@@ -4,7 +4,7 @@ import { ADD_WORKSPACE } from '../types'
 
 const initialState: IWorkspace[] = []
 
-const addWorkspaceLogic = (state: IWorkspace[], payload: any) => {
+const addWorkspaceLogic = (state: IWorkspace[], payload: IWorkspace[]) => {
   if (payload.length >= 1) return [...state, ...payload]
   else return [...state, payload]
 }

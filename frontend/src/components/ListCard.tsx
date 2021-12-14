@@ -9,6 +9,7 @@ import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
 import { Draggable } from 'react-beautiful-dnd'
 import { StyledButton } from '../theme/uiComponents/Button'
 import updateCardThunk from '../redux/thunk/updateCardThunk'
+import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon'
 
 interface ListCardProps {
   card: ICard
@@ -40,6 +41,10 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
     }
     dispatch(updateCardThunk(requestBody))
     setOpen(false)
+  }
+
+  const handleClose = () => {
+    handleCloseCardModal()
   }
 
   return (
@@ -83,6 +88,7 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
           >
             Save
           </StyledButton>
+          <StyledCloseIcon onClick={handleClose} />
         </StyledModal>
       </Modal>
     </>
