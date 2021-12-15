@@ -1,8 +1,15 @@
 import { Request, Response } from 'express'
+import { IList } from 'tragile-list'
+import { ITragileResponse } from 'tragile-response'
 import { pool } from '../db'
-import { IList } from '../interface/listInterface'
 import { getBoardListSchema, listSchema } from '../schema/listSchema'
 import logger from '../utility/logger'
+
+const response: ITragileResponse = {
+  statusCode: 0,
+  payload: {},
+  message: "Something went wrong!"
+}
 
 export const createList = async (req: Request, res: Response) => {
   logger.info('In create list API')
@@ -18,11 +25,16 @@ export const createList = async (req: Request, res: Response) => {
       'INSERT INTO list (list_id,title,description,board) VALUES ($1,$2,$3,$4) RETURNING *',
       [list.list_id, list.title, list.description, list.board_id]
     )
-    res.status(200).send(newList.rows)
+    response.statusCode = 201
+    response.payload = newList.rows
+    response.message = "List created"
+    res.status(response.statusCode).send(response)
     logger.info('New list created')
-  
   } catch (error) {
-    res.status(401).send(error)
+    response.statusCode = 400
+    response.payload = {}
+    response.message = "List could not be created!"
+    res.status(response.statusCode).send(response)
     logger.error(error)
   }
 }
@@ -36,13 +48,22 @@ export const getBoardList = async (req: Request, res: Response) => {
       board_id
     ])
     if (list.rowCount < 1) {
+      response.statusCode = 404
+      response.payload = {}
+      response.message = "No List found"
+      res.status(response.statusCode).send(response)
       logger.warn('No List found')
-      return res.status(400).send('No list found')
     }
-    logger.info('List fetched successfully')
-    res.status(200).send(list.rows)
+    else {
+      response.statusCode = 200
+      response.payload = list.rows
+      response.message = 'Card fetched successfully'
+      res.status(response.statusCode).send(response)
+      logger.info('List fetched successfully')
+    }
   } catch (error) {
+    response.statusCode = 400
+    res.status(response.statusCode).send(response)
     logger.error(error)
-    res.status(401).send(error)
   }
 }

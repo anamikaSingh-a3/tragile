@@ -1,5 +1,4 @@
 declare module 'tragile-card' {
-
     export interface ICard {
         card_id: string
         title: string
@@ -7,4 +6,4 @@ declare module 'tragile-card' {
         due_date?: Date
         list_id: string
     }
-}ß
+}
