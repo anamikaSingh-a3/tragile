@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
+import { IBoard } from 'tragile-board'
 import { pool } from '../db'
-import { IBoard } from '../interface/boardInterface'
+// import { IBoard } from '../interface/boardInterface'
 import {
   boardSchema,
   getBoardSchema,

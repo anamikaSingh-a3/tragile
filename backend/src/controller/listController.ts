@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
+import { IList } from 'tragile-list'
 import { pool } from '../db'
-import { IList } from '../interface/listInterface'
+// import { IList } from '../interface/listInterface'
 import { getBoardListSchema, listSchema } from '../schema/listSchema'
 import logger from '../utility/logger'
 

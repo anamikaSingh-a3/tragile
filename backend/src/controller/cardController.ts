@@ -1,6 +1,7 @@
 import { Response, Request } from 'express'
+import { ICard } from 'tragile-card'
 import { pool } from '../db'
-import { ICard } from '../interface/cardInterface'
+// import { ICard } from '../interface/cardInterface'
 import { cardSchema } from '../schema/cardSchema'
 import logger from '../utility/logger'
 

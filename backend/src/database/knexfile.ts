@@ -1,14 +1,19 @@
 // Update with your config settings.
-import knexSnakeseMapper from 'objection'
+import { Knex, knex } from 'knex';
+import knexFactory from 'knex';
+import knexSnakeseMapper, { Model } from 'objection'
+import { DATABASE, HOST, PASSWORD, USER } from '../constants'
 
-module.exports = {
+const knexConfig = {
   development: {
     client: 'postgresql',
-    connection: {
-      database: 'Tragile_database',
-      user: 'anamikasingh',
-      password: null
-    },
+    // connection: {
+    //   database: 'Tragile_database',
+    //   user: USER,
+    //   password: PASSWORD,
+    //   host: HOST
+    // },
+    connection: `postgres://postgres:${PASSWORD}@${HOST}/${DATABASE}`,
     pool: {
       min: 2,
       max: 10
@@ -22,3 +27,4 @@ module.exports = {
     ...knexSnakeseMapper
   }
 }
+export default knexConfig
