@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { ITragileResponse } from 'tragile-response'
 import { IWorkspace } from 'tragile-workspace'
+import { Workspace } from '../database/models/workspace'
 import { pool } from '../db'
 import { workspaceByIdSchema, workspaceSchema } from '../schema/workspaceSchema'
 import logger from '../utility/logger'
@@ -16,27 +17,31 @@ export const createWorkspace = async (req: Request, res: Response) => {
 
   try {
     const data: IWorkspace = {
-      workspace_id: req.body.workspace_id,
+      // workspace_id: req.body.workspace_id,
       title: req.body.title,
       type: req.body.type,
-      description: req.body.description
+      description: req.body.description,
+      // created_by: req.body.created_by
     }
 
-    const workspace = await workspaceSchema.validate(data)
+    // const workspace = await workspaceSchema.validate(data)
 
-    const newWorkspace = await pool.query(
-      'INSERT INTO workspace (workspace_id,title,type,description,created_at) VALUES ($1,$2,$3,$4,$5) RETURNING *',
-      [
-        workspace.workspace_id,
-        workspace.title,
-        workspace.type,
-        workspace.description,
-        workspace.createdAt
-      ]
-    )
-    response.statusCode = 201
-    response.payload = newWorkspace.rows
-    response.message = "Workspace created"
+    const newWorkspace = await Workspace.query().insert({
+      title: data.title,
+      type: data.type,
+      description: data.description,
+      // created_by: data.created_by
+    })
+    //   'INSERT INTO workspace (workspace_id,title,type,description,created_at) VALUES ($1,$2,$3,$4,$5) RETURNING *',
+    //   [
+    //     workspace.workspace_id,
+    //     workspace.title,
+    //     workspace.type,
+    //     workspace.description,
+    //     workspace.createdAt
+    //   ]
+    // )
+    res.status(200).send(newWorkspace)
     logger.info('New workspace created')
     res.status(response.statusCode).send(response)
   } catch (error) {
