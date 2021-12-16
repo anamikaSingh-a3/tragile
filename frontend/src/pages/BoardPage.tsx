@@ -35,7 +35,7 @@ const BoardPage: React.FC = () => {
       dispatch(getListByBoardThunk(id))
       dispatch(getAllCardsThunk())
     }
-  }, [id, activeCard, dispatch])
+  }, [id, dispatch])
 
   const onDragEnd = (result: DropResult) => {
     const { destination, draggableId } = result
@@ -63,8 +63,7 @@ const BoardPage: React.FC = () => {
             {provided => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {list.map((list: IList, index: number) => (
-                  <BoardList list={list} key={list.list_id} index={index} />
-
+                  <BoardList list={list} index={index} />
                 ))}
                 {provided.placeholder}
               </div>
