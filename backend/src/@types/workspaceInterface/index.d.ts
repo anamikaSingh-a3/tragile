@@ -3,7 +3,7 @@ declare module 'tragile-workspace' {
         workspace_id?: number
         title: string
         type: string
-        description: string
+        description?: string
         createdAt?: Date
         // created_by: number
     }

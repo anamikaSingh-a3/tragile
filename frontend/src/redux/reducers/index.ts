@@ -9,6 +9,7 @@ import activeBoardReducer from './activeBoardReducer'
 import cardReducer from './cardReducer'
 import activeCardReducer from './activeCardReducer'
 import activeListReducer from './activeListReducer'
+import errorReducer from './errorReducer';
 
 export default combineReducers({
   boards: boardsReducer,
@@ -21,5 +22,6 @@ export default combineReducers({
   card: cardReducer,
   activeCard: activeCardReducer,
   activeList: activeListReducer,
+  errorMessage: errorReducer
 })
 

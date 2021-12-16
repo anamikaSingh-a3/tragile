@@ -1,8 +1,8 @@
 declare module 'tragile-board' {
-    export interface IBoard {
-      board_id: string
+  export interface IBoard {
+    board_id?: number
       title: string
-      workspaceId: string
+    workspace: number
       visibility: string
     }
 }

@@ -1,9 +1,7 @@
 import { Request, Response } from 'express'
 import { ITragileResponse } from 'tragile-response'
 import { IWorkspace } from 'tragile-workspace'
-import { Workspace } from '../database/models/workspace'
-import { pool } from '../db'
-import { workspaceByIdSchema, workspaceSchema } from '../schema/workspaceSchema'
+import { Workspace } from '../database/models/workspace';
 import logger from '../utility/logger'
 
 const response: ITragileResponse = {
@@ -14,38 +12,23 @@ const response: ITragileResponse = {
 
 export const createWorkspace = async (req: Request, res: Response) => {
   logger.info('In create workspace API')
-
   try {
     const data: IWorkspace = {
-      // workspace_id: req.body.workspace_id,
       title: req.body.title,
       type: req.body.type,
       description: req.body.description,
-      // created_by: req.body.created_by
     }
-
-    // const workspace = await workspaceSchema.validate(data)
-
     const newWorkspace = await Workspace.query().insert({
       title: data.title,
       type: data.type,
       description: data.description,
-      // created_by: data.created_by
     })
-    //   'INSERT INTO workspace (workspace_id,title,type,description,created_at) VALUES ($1,$2,$3,$4,$5) RETURNING *',
-    //   [
-    //     workspace.workspace_id,
-    //     workspace.title,
-    //     workspace.type,
-    //     workspace.description,
-    //     workspace.createdAt
-    //   ]
-    // )
-    res.status(200).send(newWorkspace)
+    response.statusCode = 201
+    response.payload = newWorkspace
+    res.status(response.statusCode).send(response)
     logger.info('New workspace created')
-    // res.status(response.statusCode).send(response)
   } catch (error) {
-    logger.error(error)
+    logger.error("Create workspace API failed")
     response.statusCode = 400
     response.payload = {}
     response.message = "Workspace could not be created!"
@@ -58,14 +41,10 @@ export const getWorkspace = async (req: Request, res: Response) => {
   logger.info('In get workspace API')
   try {
     const workspace_id = req.params.workspace_id
-    await workspaceByIdSchema.isValid(workspace_id)
-    const workspace = await pool.query(
-      'SELECT * FROM workspace where workspace_id=$1',
-      [workspace_id]
-    )
 
-    if (workspace.rowCount < 1) {
-      response.statusCode = 404
+    const workspace = await Workspace.query().findById(workspace_id)
+    if (!workspace) {
+      response.statusCode = 204
       response.payload = {}
       response.message = "No workspace found"
       res.status(response.statusCode).send(response)
@@ -73,13 +52,14 @@ export const getWorkspace = async (req: Request, res: Response) => {
     }
     else {
       response.statusCode = 200
-      response.payload = workspace.rows
+      response.payload = workspace
       response.message = 'Workspace fetched successfully'
       res.status(response.statusCode).send(response)
       logger.info('Workspace fetched successfully')
     }
   } catch (error) {
     response.statusCode = 400
+    response.message = "Check workspace id"
     res.status(response.statusCode).send(response)
     logger.error(error)
   }
@@ -88,9 +68,9 @@ export const getWorkspace = async (req: Request, res: Response) => {
 export const getAllWorkspace = async (req: Request, res: Response) => {
   logger.info('In get all workspace API')
   try {
-    const workspaces = await pool.query('SELECT * FROM workspace')
-    if (workspaces.rowCount < 1) {
-      response.statusCode = 404
+    const workspaces = await Workspace.query();
+    if (workspaces.length == 0) {
+      response.statusCode = 204
       response.payload = {}
       response.message = "No workspace found"
       logger.warn('No workspace found')
@@ -98,7 +78,7 @@ export const getAllWorkspace = async (req: Request, res: Response) => {
     }
     else {
       response.statusCode = 200
-      response.payload = workspaces.rows
+      response.payload = workspaces
       response.message = 'workspace fetched successfully'
       res.status(response.statusCode).send(response)
       logger.info('Workspace fetched successfully')

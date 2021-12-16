@@ -129,7 +129,6 @@ export const updateCardList = async (req: Request, res: Response) => {
     response.payload = card.rows
     response.message = "Card's listId updated"
     res.status(response.statusCode).send(response)
-    res.status(response.statusCode).send(response)
     logger.info('Card updated')
   } catch (error) {
     response.statusCode = 400

@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import { useDispatch, useSelector } from 'react-redux'
 import { StyledModal } from '../theme/uiComponents/Modal'
 import { StyledButton } from '../theme/uiComponents/Button'
-import { createBoardThunk } from '../redux/thunk/createBoardThunk'
+import { createBoardThunk } from '../redux/thunk/boardThunk/createBoardThunk'
 import ModalContainer from './common/Modal'
 import Cards from './common/Card'
 import { IActiveWorkspaceState } from 'tragile-workspace'
@@ -30,7 +30,7 @@ const CreateBoard: React.FC= () => {
     const requestBody: IBoard = {
       board_id: uuidv4(),
       title: title,
-      workspaceId: activeWorkspace.workspace_id,
+      workspace: activeWorkspace.workspace_id,
       visibility: 'public'
     }
     dispatch(createBoardThunk(requestBody))

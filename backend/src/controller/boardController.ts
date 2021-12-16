@@ -1,12 +1,8 @@
 import { Request, Response } from 'express'
 import { IBoard } from 'tragile-board'
 import { ITragileResponse } from 'tragile-response'
-import { pool } from '../db'
-import {
-  boardSchema,
-  getBoardSchema,
-  getWorkspaceBoardSchema
-} from '../schema/boardSchema'
+import { Board } from '../database/models/board'
+
 import logger from '../utility/logger'
 
 const response: ITragileResponse = {
@@ -19,22 +15,26 @@ export const createBoard = async (req: Request, res: Response) => {
   logger.info('In create board API')
   try {
     const data: IBoard = {
-      board_id: req.body.board_id,
       title: req.body.title,
-      workspaceId: req.body.workspaceId,
+      workspace: req.body.workspace,
       visibility: req.body.visibility
     }
-    const board = await boardSchema.validate(data)
-    const newBoard = await pool.query(
-      'INSERT INTO board (board_id,title,visibility,workspace) VALUES ($1,$2,$3,$4) RETURNING *',
-      [board.board_id, board.title, board.visibility, board.workspaceId]
-    )
+    const newBoard = await Board.query().insert({
+      title: data.title,
+      visibility: data.visibility,
+      workspace: data.workspace
+    })
+    console.log('newboard', newBoard)
+
     response.statusCode = 201
-    response.payload = newBoard.rows
+    response.payload = newBoard
+
     response.message = "Board created"
     logger.info('New board created')
     res.status(response.statusCode).send(response)
   } catch (error) {
+    logger.error('Create board API failed')
+
     response.statusCode = 400
     response.payload = {}
     response.message = "Board could not be created!"
@@ -48,13 +48,10 @@ export const getBoard = async (req: Request, res: Response) => {
 
   try {
     const board_id = req.params.board_id
-    await getBoardSchema.isValid(board_id)
-    const board = await pool.query('SELECT * FROM board where board_id=$1', [
-      board_id
-    ])
+    const board = await Board.query().findById(board_id)
 
-    if (board.rowCount < 1) {
-      response.statusCode = 404
+    if (!board) {
+      response.statusCode = 204
       response.payload = {}
       response.message = "No board found"
       logger.warn('No board found')
@@ -62,7 +59,8 @@ export const getBoard = async (req: Request, res: Response) => {
     }
     else {
       response.statusCode = 200
-      response.payload = board.rows
+      response.payload = board
+
       response.message = 'Board fetched successfully'
       res.status(response.statusCode).send(response)
       logger.info('Board fetched successfully')
@@ -79,13 +77,11 @@ export const getWorkspaceBoard = async (req: Request, res: Response) => {
 
   try {
     const workspace_id = req.params.workspace_id
-    await getWorkspaceBoardSchema.isValid(workspace_id)
-    const board = await pool.query('SELECT * FROM board where workspace=$1', [
-      workspace_id
-    ])
-    if (board.rowCount < 1) { 
-      logger.warn('No Board found')
-      response.statusCode = 404
+    const board = await Board.query().where('workspace', '=', `${workspace_id}`)
+    if (!board.length) {
+      logger.warn('No Board found!')
+      response.statusCode = 204
+
       response.payload = {}
       response.message = "No Board found"
       res.status(response.statusCode).send(response)
@@ -93,7 +89,8 @@ export const getWorkspaceBoard = async (req: Request, res: Response) => {
     else {
       logger.info('Boards fetched successfully')
       response.statusCode = 200,
-      response.payload = board.rows
+        response.payload = board
+
       response.message = "Boards fetched successfully"
       res.status(response.statusCode).send(response)
     }
@@ -107,9 +104,9 @@ export const getWorkspaceBoard = async (req: Request, res: Response) => {
 export const getAllBoard = async (req: Request, res: Response) => {
   logger.info('In get all board API')
   try {
-    const boards = await pool.query('SELECT * FROM board')
-    if (boards.rowCount < 1) {
-      response.statusCode = 404
+    const boards = await Board.query()
+    if (boards.length == 0) {
+      response.statusCode = 204
       response.payload = {}
       response.message = "No board found"
       logger.warn('No board found')
@@ -117,7 +114,8 @@ export const getAllBoard = async (req: Request, res: Response) => {
     }
     else {
       response.statusCode = 200
-      response.payload = boards.rows
+      response.payload = boards
+
       response.message = 'Board fetched successfully'
       res.status(response.statusCode).send(response)
       logger.info('Board fetched successfully')

@@ -8,7 +8,7 @@ const knexConfig: Knex.Config = {
   // development: {
   client: 'postgres',
   connection: {
-    database: 'Tragile_database',
+    database: 'Tragile_db',
     user: USER,
     password: PASSWORD,
     host: HOST

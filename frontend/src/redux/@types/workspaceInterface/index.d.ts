@@ -1,6 +1,8 @@
 declare module 'tragile-workspace' {
   export interface IWorkspace {
     workspace_id: string
+
+
     title: string
     type: string
     description: string
@@ -11,6 +13,8 @@ declare module 'tragile-workspace' {
   }
   export interface IActiveWorkspace {
     workspace_id: string
+
+
     title: string
     description: string
     createdAt?: Date

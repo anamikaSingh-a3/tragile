@@ -11,7 +11,7 @@ const knexConnection = Knex(knexConfig)
 Model.knex(knexConnection)
 
 export class Workspace extends Model {
-  public title!: string;
+  public title: string | undefined;
   public type: string | undefined
   public description: string | undefined
   public created_by: number | undefined
