@@ -1,10 +1,10 @@
 import { Modal, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { StyledCard } from '../theme/uiComponents/Card'
 import { addActiveCard } from '../redux/action/cardActions'
 import { StyledModal } from '../theme/uiComponents/Modal'
-import { ICard } from 'tragile-card'
+import { IActiveCardState, ICard } from 'tragile-card'
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk'
 import { Draggable } from 'react-beautiful-dnd'
 import { StyledButton } from '../theme/uiComponents/Button'
@@ -31,6 +31,7 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
   const onCardHandler = () => {
     dispatch(getAllCardsThunk())
     dispatch(addActiveCard(props.card))
+
     setOpen(true)
   }
 
@@ -47,18 +48,21 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
     handleCloseCardModal()
   }
 
+  const activeCard = useSelector((state: IActiveCardState) => state.activeCard.card_id)
+  console.log("STRINGGGGGG", activeCard.toString())
+  console.log("DATA TYPE", typeof (activeCard.toString()))
   return (
     <>
-      <Draggable draggableId={props.card.card_id} index={props.index}>
+      <Draggable draggableId={props.card.card_id.toString()} index={props.index}>
         {(provided) => (
           <div
             ref={provided.innerRef}
             {...provided.dragHandleProps}
             {...provided.draggableProps}>
-
             <StyledCard onClick={() => onCardHandler()}>
               {props.card.title}
             </StyledCard>
+
           </div>
         )}
       </Draggable>

@@ -45,10 +45,9 @@ const BoardPage: React.FC = () => {
     }
     dispatch(
       updateCardListIdThunk(
-        { card_id: draggableId, list_id: destination.droppableId }
+        { card_id: Number(draggableId), list_id: Number(destination.droppableId) }
       )
     )
-
   }
   return (
     <StyledContainer maxWidth='lg'>

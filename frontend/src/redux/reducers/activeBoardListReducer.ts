@@ -6,7 +6,7 @@ const initialState: IList[] = []
 
 const addActiveBoardListLogic = (state: IList[], payload: IList[]) => {
   console.log("paylod", payload)
-  if (payload.length > 1) return [...state, ...payload]
+  if (payload.length > 1) return [...payload]
   else return [...state, payload]
 }
 const activeBoardListReducer = (
