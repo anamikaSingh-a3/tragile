@@ -1,6 +1,6 @@
 import { IBoard } from 'tragile-board'
 
-import { ACTIVE_BOARD_IN_BOARDPAGE, RESET_ACTIVE_BOARD_IN_BOARDPAGE } from '../types'
+import { ACTIVE_BOARD_IN_BOARDPAGE, RESET_ACTIVE_BOARD_IN_BOARDPAGE } from '../../types'
 
 const initialState: IBoard[] = []
 

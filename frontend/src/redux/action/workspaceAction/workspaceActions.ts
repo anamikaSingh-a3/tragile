@@ -1,5 +1,5 @@
 import { IActiveWorkspace, IWorkspace } from 'tragile-workspace'
-import { ACTIVE_WORKSPACE, ADD_WORKSPACE } from '../types'
+import { ACTIVE_WORKSPACE, ADD_WORKSPACE } from '../../types'
 
 export const addWorkspaces = (workspace: IWorkspace) => {
   return {

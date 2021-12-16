@@ -2,14 +2,14 @@ import { Modal, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { StyledCard } from '../theme/uiComponents/Card'
-import { addActiveCard } from '../redux/action/cardActions'
 import { StyledModal } from '../theme/uiComponents/Modal'
 import { ICard } from 'tragile-card'
-import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
 import { Draggable } from 'react-beautiful-dnd'
 import { StyledButton } from '../theme/uiComponents/Button'
-import updateCardThunk from '../redux/thunk/updateCardThunk'
 import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon'
+import updateCardThunk from '../redux/thunk/cardThunk/updateCardThunk'
+import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk'
+import { addActiveCard } from '../redux/action/cardAction/cardActions'
 
 interface ListCardProps {
   card: ICard

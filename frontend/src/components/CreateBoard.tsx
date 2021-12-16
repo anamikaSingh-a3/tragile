@@ -4,12 +4,12 @@ import TextField from '@material-ui/core/TextField'
 import { useDispatch, useSelector } from 'react-redux'
 import { StyledModal } from '../theme/uiComponents/Modal'
 import { StyledButton } from '../theme/uiComponents/Button'
-import { createBoardThunk } from '../redux/thunk/createBoardThunk'
 import ModalContainer from './common/Modal'
 import Cards from './common/Card'
 import { IActiveWorkspaceState } from 'tragile-workspace'
 import { IBoard } from 'tragile-board'
 import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon'
+import { createBoardThunk } from '../redux/thunk/boardThunk/createBoardThunk'
 
 const CreateBoard: React.FC= () => {
   const [openModal, setOpenModal] = useState(false)

@@ -5,16 +5,16 @@ import {
   StyledListContainer
 } from '../theme/uiComponents/layout/Container'
 import { useDispatch, useSelector } from 'react-redux'
-import { getListByBoardThunk } from '../redux/thunk/getListByBoardThunk'
-import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
 import BoardList from '../components/BoardList'
 import { IActiveBoardListState, IList } from 'tragile-list'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
-import updateCardListIdThunk from '../redux/thunk/updateCardListIdThunk'
 import { IActiveBoardState } from 'tragile-board'
 import { IActiveCardState } from 'tragile-card'
 import Heading from '../components/common/Heading'
 import InputContainer from '../components/createComponent/InputContainer'
+import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk'
+import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk'
+import updateCardListIdThunk from '../redux/thunk/cardThunk/updateCardListIdThunk'
 
 interface IParams {
   id: string
@@ -28,7 +28,7 @@ const BoardPage: React.FC = () => {
     (state: IActiveBoardListState) => state.activeBoardList
   )
   const activeBoard = useSelector((state: IActiveBoardState) => state.activeBoard)
-
+  console.log("activeBoard", activeBoard)
   const activeCard = useSelector((state: IActiveCardState) => state.activeCard)
   useEffect(() => {
     return () => {

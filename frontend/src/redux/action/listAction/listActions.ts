@@ -5,7 +5,7 @@ import {
   ACTIVE_LIST,
   ADD_LIST,
   REST_ACTIVE_BOARDS_LIST
-} from '../types'
+} from '../../types'
 
 export const addList = (list: IList) => {
   return {

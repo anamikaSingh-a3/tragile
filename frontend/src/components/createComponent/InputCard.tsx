@@ -4,12 +4,12 @@ import ClearIcon from '@material-ui/icons/Clear'
 import { useDispatch, useSelector } from 'react-redux'
 import { IActiveListState, IList } from 'tragile-list'
 import { v4 as uuidv4 } from 'uuid'
-import createCardThunk from '../../redux/thunk/createCardThunk'
 import { ICard } from 'tragile-card'
-import { createListThunk } from '../../redux/thunk/createListThunk'
 import { IActiveBoardState } from 'tragile-board'
 import { StyledButton } from '../../theme/uiComponents/Button'
 import { StyledPaper } from '../../theme/uiComponents/layout/Paper'
+import createCardThunk from '../../redux/thunk/cardThunk/createCardThunk'
+import { createListThunk } from '../../redux/thunk/listThunk/createListThunk'
 
 interface InputCardProps {
   setOpen: any

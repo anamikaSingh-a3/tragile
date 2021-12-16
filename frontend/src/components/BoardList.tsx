@@ -1,7 +1,6 @@
 import { List, Typography } from '@material-ui/core'
 import { StyledList, StyledListItem } from '../theme/uiComponents/List'
 import { useDispatch, useSelector } from 'react-redux'
-import {  addActiveList } from '../redux/action'
 import ListCard from './ListCard'
 import { IAllCardState, ICard } from 'tragile-card'
 import { IList } from 'tragile-list'
@@ -9,7 +8,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { StyledDroppableList } from '../theme/uiComponents/layout/Container'
 import InputContainer from './createComponent/InputContainer'
 import { StyledHeader } from '../theme/uiComponents/layout/Header'
-
+import { addActiveList } from '../redux/action/listAction/listActions'
 
 interface IBoardListProps {
   list: IList

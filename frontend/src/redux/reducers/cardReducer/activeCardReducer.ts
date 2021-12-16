@@ -1,6 +1,6 @@
 import { ICard } from 'tragile-card'
 
-import { ACTIVE_CARD, RESET_ACTIVE_CARD } from "../types"
+import { ACTIVE_CARD, RESET_ACTIVE_CARD } from "../../types"
 
 const initialState: ICard = {
     card_id: "",

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useHistory } from 'react-router'
-import { activeWorkspace } from '../../redux/action'
 import { useDispatch, useSelector } from 'react-redux'
-import { createWorkspaceThunk } from '../../redux/thunk/createWorkspaceThunk'
 import {
   TextField,
   Menu,
@@ -21,9 +19,12 @@ import { StyledButton } from '../../theme/uiComponents/Button'
 import { StyledDrawer } from '../../theme/uiComponents/Drawer'
 import ModalContainer from '../common/Modal'
 import { options } from './menuOptions'
-import { getAllWorkspacesThunk } from '../../redux/thunk/getAllWorkspaceThunk'
 import { IWorkspace, IWorkspaceState } from 'tragile-workspace'
 import { StyledCloseIcon } from '../../theme/uiComponents/CloseIcon'
+import { activeWorkspace } from '../../redux/action/workspaceAction/workspaceActions'
+import { createWorkspaceThunk } from '../../redux/thunk/workspaceThunk/createWorkspaceThunk'
+import { getAllWorkspacesThunk } from '../../redux/thunk/workspaceThunk/getAllWorkspaceThunk'
+import { resetActiveBoards } from '../../redux/action/boardAction/boardActions'
 
 const SideDrawer: React.FC = () => {
   const history = useHistory()
@@ -46,6 +47,7 @@ const SideDrawer: React.FC = () => {
   const onWorkspaceHandler = (workspace: IWorkspace) => {
     dispatch(activeWorkspace(workspace))
     history.push('/workspaceBoards')
+    dispatch(resetActiveBoards())
   }
 
   const handleButtonClick = async () => {
