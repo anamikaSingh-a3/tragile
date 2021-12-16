@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { cardApi } from '../../endpoints.ts';
-import { addActiveCard, resetActiveCard } from '../action/cardActions';
+import { cardApi } from '../../../endpoints.ts';
+import { addActiveCard, resetActiveCard } from '../../action/cardActions';
 import { getAllCardsThunk } from './getAllCardThunk';
 
 const updateCardThunk = (requestBody: any) => async (dispatch: any) => {

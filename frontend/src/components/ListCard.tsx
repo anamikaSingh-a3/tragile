@@ -5,10 +5,10 @@ import { StyledCard } from '../theme/uiComponents/Card'
 import { addActiveCard } from '../redux/action/cardActions'
 import { StyledModal } from '../theme/uiComponents/Modal'
 import { ICard } from 'tragile-card'
-import { getAllCardsThunk } from '../redux/thunk/getAllCardThunk'
+import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk'
 import { Draggable } from 'react-beautiful-dnd'
 import { StyledButton } from '../theme/uiComponents/Button'
-import updateCardThunk from '../redux/thunk/updateCardThunk'
+import updateCardThunk from '../redux/thunk/cardThunk/updateCardThunk'
 import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon'
 
 interface ListCardProps {

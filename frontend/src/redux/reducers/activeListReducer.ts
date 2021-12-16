@@ -5,7 +5,7 @@ import { ACTIVE_LIST } from "../types"
 const initialState: IList = {
     list_id: "",
     title: "",
-    board_id: ""
+    board: ""
 }
 
 const activeListReducer = (

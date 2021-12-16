@@ -4,9 +4,9 @@ import ClearIcon from '@material-ui/icons/Clear'
 import { useDispatch, useSelector } from 'react-redux'
 import { IActiveListState, IList } from 'tragile-list'
 import { v4 as uuidv4 } from 'uuid'
-import createCardThunk from '../../redux/thunk/createCardThunk'
+import createCardThunk from '../../redux/thunk/cardThunk/createCardThunk'
 import { ICard } from 'tragile-card'
-import { createListThunk } from '../../redux/thunk/createListThunk'
+import { createListThunk } from '../../redux/thunk/listThunk/createListThunk'
 import { IActiveBoardState } from 'tragile-board'
 import { StyledButton } from '../../theme/uiComponents/Button'
 import { StyledPaper } from '../../theme/uiComponents/layout/Paper'
@@ -45,7 +45,7 @@ const InputCard: React.FC<InputCardProps> = (props: InputCardProps) => {
       const requestBody: IList = {
         list_id: uuidv4(),
         title: title,
-        board_id: activeBoard.board_id
+        board: activeBoard.board_id
       }
       dispatch(createListThunk(requestBody))
       setTitle('')

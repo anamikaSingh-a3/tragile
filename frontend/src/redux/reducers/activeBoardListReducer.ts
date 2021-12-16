@@ -5,8 +5,9 @@ import { ACTIVE_BOARD_LIST, REST_ACTIVE_BOARDS_LIST } from '../types'
 const initialState: IList[] = []
 
 const addActiveBoardListLogic = (state: IList[], payload: IList[]) => {
-  if (payload.length > 1) return [...payload]
-  return [...state, ...payload]
+  console.log("paylod", payload)
+  if (payload.length > 1) return [...state, ...payload]
+  else return [...state, payload]
 }
 const activeBoardListReducer = (
   state = initialState,

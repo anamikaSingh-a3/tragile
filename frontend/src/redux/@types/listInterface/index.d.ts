@@ -3,7 +3,7 @@ declare module 'tragile-list' {
     list_id: string
     title: string
     description?: string
-    board_id: string
+    board: string
   }
 
   export interface IActiveBoardListState {
