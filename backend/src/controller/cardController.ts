@@ -122,7 +122,7 @@ export const updateCardList = async (req: Request, res: Response) => {
     const id = req.body.card_id
     const listId = req.body.list_id
 
-    const card = await Card.query().findById(id).patch({
+    const card = await Card.query().findById(id).patchAndFetchById(id, {
       list: listId
     })
     response.statusCode = 200
