@@ -4,16 +4,16 @@ import knexFactory from 'knex';
 import knexSnakeseMapper, { Model } from 'objection'
 import { DATABASE, HOST, PASSWORD, USER } from '../constants'
 
-const knexConfig = {
-  development: {
-    client: 'postgresql',
-    // connection: {
-    //   database: 'Tragile_database',
-    //   user: USER,
-    //   password: PASSWORD,
-    //   host: HOST
-    // },
-    connection: `postgres://postgres:${PASSWORD}@${HOST}/${DATABASE}`,
+const knexConfig: Knex.Config = {
+  // development: {
+  client: 'postgres',
+  connection: {
+    database: 'Tragile_database',
+    user: USER,
+    password: PASSWORD,
+    host: HOST
+  },
+    // connection: `postgres://postgres:${PASSWORD}@${HOST}/${DATABASE}`,
     pool: {
       min: 2,
       max: 10
@@ -26,5 +26,5 @@ const knexConfig = {
     },
     ...knexSnakeseMapper
   }
-}
+// }
 export default knexConfig

@@ -6,7 +6,7 @@ import knexConfig from '../knexfile';
 // import connection  from '../knexfile';
 // const { Model } = require('objection')
 
-const knexConnection = Knex(knexConfig.development.connection)
+const knexConnection = Knex(knexConfig)
 
 Model.knex(knexConnection)
 
