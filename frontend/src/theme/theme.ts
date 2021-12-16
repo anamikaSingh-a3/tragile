@@ -31,7 +31,7 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: 'Rajdhani, sans-serif',
-   
+    fontSize: 12,
     h1: {
       fontSize: 36,
       lineHeight: 1.2,
