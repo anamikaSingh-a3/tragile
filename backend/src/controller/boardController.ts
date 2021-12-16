@@ -80,8 +80,8 @@ export const getWorkspaceBoard = async (req: Request, res: Response) => {
     const board = await Board.query().where('workspace', '=', `${workspace_id}`)
     if (!board.length) {
       logger.warn('No Board found!')
-      response.statusCode = 204
 
+      response.statusCode = 204
       response.payload = {}
       response.message = "No Board found"
       res.status(response.statusCode).send(response)

@@ -1,7 +1,8 @@
 import { Model, ModelOptions, QueryContext } from 'objection'
 import { Board } from './board'
+import { List } from './list'
 import { Workspace } from './workspace'
-export class card extends Model {
+export class Card extends Model {
     public title: string | undefined
     public description: string | undefined
     public list: number | undefined
@@ -38,7 +39,7 @@ export class card extends Model {
         return {
             card_list: {
                 relation: Model.HasManyRelation,
-                modelClass: card,
+                modelClass: List,
                 join: {
                     from: 'card.list',
                     to: 'list.list_id'
