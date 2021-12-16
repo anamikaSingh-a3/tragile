@@ -9,10 +9,22 @@ import { StyledIconButton } from '../../theme/uiComponents/toolbar/IconButton'
 import { StyledDropDownButton } from '../../theme/uiComponents/toolbar/DropDown'
 import { StyledAvatar } from '../../theme/uiComponents/toolbar/Avatar'
 import { StyledTitle } from '../../theme/uiComponents/toolbar/Title'
+import { useLocation } from 'react-router'
 
 const options = ['Workspaces', 'Recent', 'Starred', 'Templates']
 
 const TopNavbar: React.FC = () => {
+  let location = useLocation()
+  if (location.pathname === "/signIn" || location.pathname === "/signUp") {
+    return (<StyledToolbar> <StyledIconButton edge='start' color='inherit'>
+      <AppsIcon />
+      <AssessmentIcon />
+      <StyledTitle variant='h6' noWrap>
+        Tragile
+      </StyledTitle>
+    </StyledIconButton>
+    </StyledToolbar>)
+  } else
   return (
     <>
       <StyledToolbar>
