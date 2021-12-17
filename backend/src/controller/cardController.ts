@@ -1,8 +1,9 @@
-import { Response, Request } from 'express'
-import { ICard } from 'tragile-card'
-import { ITragileResponse } from 'tragile-response'
-import { Card } from '../database/models/card'
-import logger from '../utility/logger'
+import { Request, Response } from 'express';
+import { ICard } from 'tragile-card';
+import { ITragileResponse } from 'tragile-response';
+
+import { Card } from '../database/models/card';
+import logger from '../utility/logger';
 
 const response: ITragileResponse = {
   statusCode: 0,

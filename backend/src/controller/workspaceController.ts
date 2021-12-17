@@ -1,8 +1,9 @@
-import { Request, Response } from 'express'
-import { ITragileResponse } from 'tragile-response'
-import { IWorkspace } from 'tragile-workspace'
+import { Request, Response } from 'express';
+import { ITragileResponse } from 'tragile-response';
+import { IWorkspace } from 'tragile-workspace';
+
 import { Workspace } from '../database/models/workspace';
-import logger from '../utility/logger'
+import logger from '../utility/logger';
 
 const response: ITragileResponse = {
   statusCode: 0,

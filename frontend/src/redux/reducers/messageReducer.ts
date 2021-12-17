@@ -1,6 +1,6 @@
 import { ADD_ERROR_MESSAGE } from "../types"
 
-const errorReducer = (state = "", action: { type: string, payload: string }) => {
+const messageReducer = (state = "", action: { type: string, payload: string }) => {
     switch (action.type) {
         case ADD_ERROR_MESSAGE: {
             return action.payload
@@ -9,4 +9,4 @@ const errorReducer = (state = "", action: { type: string, payload: string }) => 
             return state
     }
 }
-export default errorReducer
+export default messageReducer

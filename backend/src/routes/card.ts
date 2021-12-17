@@ -1,5 +1,6 @@
-import express from 'express'
-import { createCard, getAllCard, getListCard, updateCardDescription, updateCardList } from '../controller/cardController'
+import express from 'express';
+
+import { createCard, getAllCard, getListCard, updateCardDescription, updateCardList } from '../controller/cardController';
 
 const router = express.Router()
 

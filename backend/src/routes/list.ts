@@ -1,5 +1,6 @@
-import express from 'express'
-import { createList, getBoardList } from '../controller/listController'
+import express from 'express';
+
+import { createList, getBoardList } from '../controller/listController';
 
 const router = express.Router()
 

@@ -1,10 +1,8 @@
-import { Model, ModelOptions, QueryContext } from 'objection';
-import { User } from './user';
 import Knex from 'knex';
+import { Model } from 'objection';
+
 import knexConfig from '../knexfile';
-// const connection = require('../knexfile')
-// import connection  from '../knexfile';
-// const { Model } = require('objection')
+import { User } from './user';
 
 const knexConnection = Knex(knexConfig)
 
@@ -15,8 +13,6 @@ export class Workspace extends Model {
   public type: string | undefined
   public description: string | undefined
   public created_by: number | undefined
-  // public created_At!: string;
-  // public updated_At!: string;
 
   static get tableName() {
     return "workspace";
@@ -25,12 +21,6 @@ export class Workspace extends Model {
   static get idColumn() {
     return 'workspace_id';
   }
-  // $beforeInsert(queryContext: QueryContext): void | Promise<any> {
-  //   this.created_At = new Date().toISOString();
-  // }
-  // $beforeUpdate(opt: ModelOptions, queryContext: QueryContext): void | Promise<any> {
-  //   this.updated_At = new Date().toISOString();
-  // }
 
   static get jsonSchema() {
     return {

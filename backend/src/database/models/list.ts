@@ -1,6 +1,7 @@
-import { Model, ModelOptions, QueryContext } from 'objection'
-import { Board } from './board'
-import { Workspace } from './workspace'
+import { Model } from 'objection';
+
+import { Board } from './board';
+
 export class List extends Model {
     public title: string | undefined
     public description: string | undefined
@@ -13,13 +14,6 @@ export class List extends Model {
     static get idColumn() {
         return 'list_id'
     }
-
-    // $beforeInsert(queryContext: QueryContext): void | Promise<any> {
-    //     this.created_At = new Date().toISOString();
-    // }
-    // $beforeUpdate(opt: ModelOptions, queryContext: QueryContext): void | Promise<any> {
-    //     this.updated_At = new Date().toISOString();
-    // }
 
     static get jsonSchema() {
         return {

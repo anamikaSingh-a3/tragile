@@ -1,8 +1,7 @@
-import { Model, ModelOptions, QueryContext } from 'objection'
+import { Model } from 'objection';
 
 export class User extends Model {
-  // created_At: string | undefined
-  // updated_At: string | undefined
+
   public user_id: number | undefined
   public name: string | undefined
   public username: string | undefined
@@ -16,12 +15,6 @@ export class User extends Model {
   static get idColumn() {
     return 'user_id'
   }
-  // $beforeInsert(queryContext: QueryContext): void | Promise<any> {
-  //     this.created_At = new Date().toISOString();
-  // }
-  // $beforeUpdate(opt: ModelOptions, queryContext: QueryContext): void | Promise<any> {
-  //     this.updated_At = new Date().toISOString();
-  // }
 
   static get jsonSchema() {
     return {

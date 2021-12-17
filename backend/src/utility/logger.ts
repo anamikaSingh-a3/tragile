@@ -1,4 +1,4 @@
-import * as winston from 'winston'
+import * as winston from 'winston';
 
 const customFormat = winston.format.combine(
   winston.format.timestamp(),

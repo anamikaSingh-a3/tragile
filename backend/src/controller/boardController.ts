@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
-import { IBoard } from 'tragile-board'
-import { ITragileResponse } from 'tragile-response'
-import { Board } from '../database/models/board'
+import { Request, Response } from 'express';
+import { IBoard } from 'tragile-board';
+import { ITragileResponse } from 'tragile-response';
 
-import logger from '../utility/logger'
+import { Board } from '../database/models/board';
+import logger from '../utility/logger';
 
 const response: ITragileResponse = {
   statusCode: 0,

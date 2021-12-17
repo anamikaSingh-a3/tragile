@@ -1,11 +1,9 @@
-// Update with your config settings.
-import { Knex, knex } from 'knex';
-import knexFactory from 'knex';
-import knexSnakeseMapper, { Model } from 'objection'
-import { DATABASE, HOST, PASSWORD, USER } from '../constants'
+import { Knex } from 'knex';
+import knexSnakeseMapper from 'objection';
+
+import { HOST, PASSWORD, USER } from '../constants';
 
 const knexConfig: Knex.Config = {
-  // development: {
   client: 'postgres',
   connection: {
     database: 'Tragile_db',
@@ -13,7 +11,6 @@ const knexConfig: Knex.Config = {
     password: PASSWORD,
     host: HOST
   },
-    // connection: `postgres://postgres:${PASSWORD}@${HOST}/${DATABASE}`,
     pool: {
       min: 2,
       max: 10
@@ -25,6 +22,5 @@ const knexConfig: Knex.Config = {
       directory: './seeds'
     },
     ...knexSnakeseMapper
-  }
-// }
+}
 export default knexConfig

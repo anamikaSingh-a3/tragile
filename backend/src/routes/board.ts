@@ -1,10 +1,6 @@
-import express from 'express'
-import {
-  createBoard,
-  getAllBoard,
-  getBoard,
-  getWorkspaceBoard
-} from '../controller/boardController'
+import express from 'express';
+
+import { createBoard, getAllBoard, getBoard, getWorkspaceBoard } from '../controller/boardController';
 
 const router = express.Router()
 

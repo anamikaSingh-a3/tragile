@@ -1,9 +1,7 @@
 declare module 'tragile-list' {
-    export interface IList {
-      list_id?: string
-        title: string
-        description?: string
-      board: number 
-      }
-      
+  export interface IList {
+    title: string
+    description?: string
+    board: number
+  }
 }

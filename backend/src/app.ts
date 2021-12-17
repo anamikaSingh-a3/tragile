@@ -1,11 +1,12 @@
-import express, { Application, Request, Response } from 'express'
-import cors from 'cors'
-import workspace from './routes/workspace'
-import board from './routes/board'
-import list from './routes/list'
-import card from './routes/card'
-import user from './routes/user'
-import logger from './utility/logger'
+import cors from 'cors';
+import express, { Application, Request, Response } from 'express';
+
+import board from './routes/board';
+import card from './routes/card';
+import list from './routes/list';
+import user from './routes/user';
+import workspace from './routes/workspace';
+import logger from './utility/logger';
 
 const app: Application = express()
 

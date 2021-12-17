@@ -1,4 +1,5 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 export const USER = process.env.DB_USER
