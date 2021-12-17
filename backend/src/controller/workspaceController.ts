@@ -3,6 +3,7 @@ import { ITragileResponse } from 'tragile-response';
 import { IWorkspace } from 'tragile-workspace';
 
 import { Workspace } from '../database/models/workspace';
+import { createWorkspaceSchema, getWorkspaceSchema } from '../schema/workspaceSchema';
 import logger from '../utility/logger';
 
 const response: ITragileResponse = {
@@ -19,21 +20,23 @@ export const createWorkspace = async (req: Request, res: Response) => {
       type: req.body.type,
       description: req.body.description,
     }
+    const workspace = await createWorkspaceSchema.validate(data)
     const newWorkspace = await Workspace.query().insert({
-      title: data.title,
-      type: data.type,
-      description: data.description,
+      title: workspace.title,
+      type: workspace.type,
+      description: workspace.description,
     })
     response.statusCode = 201
     response.payload = newWorkspace
-    res.status(response.statusCode).send(response)
+    response.message = "Workspace created"
     logger.info('New workspace created')
+    res.status(response.statusCode).send(response)
   } catch (error) {
-    logger.error("Create workspace API failed")
+    logger.error('Create board API failed')
     response.statusCode = 400
     response.payload = {}
-    response.message = "Workspace could not be created!"
-    logger.error(error)
+    response.message = `${error}`
+    logger.error('Workspace could not be created:', error)
     res.status(response.statusCode).send(response)
   }
 }
@@ -43,26 +46,29 @@ export const getWorkspace = async (req: Request, res: Response) => {
   try {
     const workspace_id = req.params.workspace_id
 
-    const workspace = await Workspace.query().findById(workspace_id)
+    const workspaceSchema = await getWorkspaceSchema.validate({workspace_id})
+    const workspace = await Workspace.query().findById(workspaceSchema.workspace_id)
+    
     if (!workspace) {
-      response.statusCode = 204
+      response.statusCode = 404
       response.payload = {}
       response.message = "No workspace found"
-      res.status(response.statusCode).send(response)
       logger.warn('No workspace found')
     }
     else {
       response.statusCode = 200
       response.payload = workspace
       response.message = 'Workspace fetched successfully'
-      res.status(response.statusCode).send(response)
       logger.info('Workspace fetched successfully')
     }
-  } catch (error) {
-    response.statusCode = 400
-    response.message = "Check workspace id"
     res.status(response.statusCode).send(response)
-    logger.error(error)
+  } catch (error) {
+    logger.error('Get workspace API failed')
+    response.statusCode = 400
+    response.payload = {}
+    response.message = `${error}`
+    res.status(response.statusCode).send(response)
+    logger.error('Workspace could not be fetched:', error)
   }
 }
 
@@ -71,22 +77,24 @@ export const getAllWorkspace = async (req: Request, res: Response) => {
   try {
     const workspaces = await Workspace.query();
     if (workspaces.length == 0) {
-      response.statusCode = 204
+      response.statusCode = 404
       response.payload = {}
       response.message = "No workspace found"
       logger.warn('No workspace found')
-      res.status(response.statusCode).send(response)
     }
     else {
       response.statusCode = 200
       response.payload = workspaces
       response.message = 'workspace fetched successfully'
-      res.status(response.statusCode).send(response)
       logger.info('Workspace fetched successfully')
     }
-  } catch (error) {
-    response.statusCode = 400
     res.status(response.statusCode).send(response)
-    logger.error(error)
+  } catch (error) {
+    logger.error('Get all workspace API failed')
+    response.statusCode = 400
+    response.payload = {}
+    response.message = `${error}`
+    res.status(response.statusCode).send(response)
+    logger.error('Workspace could not be fetched:', error)
   }
 }
