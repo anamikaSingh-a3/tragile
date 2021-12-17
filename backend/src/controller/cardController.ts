@@ -26,8 +26,6 @@ export const createCard = async (req: Request, res: Response) => {
       list: data.list
     })
 
-    console.log("newCard", newCard)
-
     response.statusCode = 201
     response.payload = newCard
     response.message = "Card created"

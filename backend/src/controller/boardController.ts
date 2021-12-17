@@ -24,7 +24,6 @@ export const createBoard = async (req: Request, res: Response) => {
       visibility: data.visibility,
       workspace: data.workspace
     })
-    console.log('newboard', newBoard)
 
     response.statusCode = 201
     response.payload = newBoard

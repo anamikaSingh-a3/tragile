@@ -26,10 +26,8 @@ export const signIn = async (req: Request, res: Response) => {
             .select('password')
             .where('email', '=', `${data.email}`)
         const userData = await User.query().where('email', '=', `${data.email}`)
-        console.log(user)
         if (user.length > 0) {
             const isMatch = await bcrypt.compare(data.password, `${user[0].password}`)
-            console.log('isMatch', isMatch)
             if (!isMatch) {
                 response.statusCode = 200
                 response.message = 'Wrong email or password'
@@ -68,8 +66,6 @@ export const signUp = async (req: Request, res: Response) => {
 
         const emailExists = await User.query().where('email', '=', `${data.email}`)
 
-
-        console.log('emailExists', emailExists)
         if (emailExists.length > 0) {
             response.statusCode = 200
             response.payload = {}

@@ -28,7 +28,6 @@ const SignUp: React.FC = () => {
       email: email,
       password: password
     }))
-    console.log("token", token)
     if (token)
       history.push('/signIn')
   }

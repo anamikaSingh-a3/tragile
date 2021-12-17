@@ -24,7 +24,6 @@ export const createList = async (req: Request, res: Response) => {
       description: data.description,
       board: data.board
     })
-    console.log("newList", newList)
     response.statusCode = 201
     response.payload = newList
     response.message = "List created"
@@ -44,7 +43,6 @@ export const getBoardList = async (req: Request, res: Response) => {
   try {
     const board_id = req.params.board_id
     const list = await List.query().where('board', '=', `${board_id}`)
-    console.log("list", list)
     if (!list.length) {
       response.statusCode = 204
       response.payload = {}

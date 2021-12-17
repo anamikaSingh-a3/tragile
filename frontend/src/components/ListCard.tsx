@@ -1,8 +1,8 @@
 import { Modal, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { useDispatch, useSelector } from 'react-redux';
-import { IActiveCardState, ICard } from 'tragile-card';
+import { useDispatch } from 'react-redux';
+import { ICard } from 'tragile-card';
 
 import { addActiveCard } from '../redux/action/cardActions/cardActions';
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
@@ -49,9 +49,6 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
     handleCloseCardModal()
   }
 
-  const activeCard = useSelector((state: IActiveCardState) => state.activeCard.card_id)
-  console.log("STRINGGGGGG", activeCard.toString())
-  console.log("DATA TYPE", typeof (activeCard.toString()))
   return (
     <>
       <Draggable draggableId={props.card.card_id.toString()} index={props.index}>
