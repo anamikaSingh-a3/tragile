@@ -11,7 +11,7 @@ export const getListByBoardThunk = (board_id: string) => async (
     const list = await axios.get(`${listApi}/getByBoard/${board_id}`)
     if (list.status === 200)
       dispatch(addActiveBoardsList(list.data.payload))
-    else if (list.status === 204)
+    else if (list.status === 404)
       dispatch(messageAction("No board found"))
   } catch (error) {
     dispatch(resetActiveBoardsList())

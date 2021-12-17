@@ -3,6 +3,7 @@ import { IList } from 'tragile-list';
 import { ITragileResponse } from 'tragile-response';
 
 import { List } from '../database/models/list';
+import { getBoardListSchema, listSchema } from '../schema/listSchema';
 import logger from '../utility/logger';
 
 const response: ITragileResponse = {
@@ -19,10 +20,11 @@ export const createList = async (req: Request, res: Response) => {
       description: req.body.description,
       board: req.body.board
     }
+    const list = await listSchema.validate(data)
     const newList = await List.query().insert({
-      title: data.title,
-      description: data.description,
-      board: data.board
+      title: list.title,
+      description: list.description,
+      board: list.board
     })
     response.statusCode = 201
     response.payload = newList
@@ -30,11 +32,12 @@ export const createList = async (req: Request, res: Response) => {
     res.status(response.statusCode).send(response)
     logger.info('New list created')
   } catch (error) {
+    logger.error('Create list API failed')
     response.statusCode = 400
     response.payload = {}
-    response.message = "List could not be created!"
+    response.message = `${error}`
     res.status(response.statusCode).send(response)
-    logger.error(error)
+    logger.error("List could not be created:", error)
   }
 }
 
@@ -42,24 +45,27 @@ export const getBoardList = async (req: Request, res: Response) => {
   logger.info('In get board list API')
   try {
     const board_id = req.params.board_id
-    const list = await List.query().where('board', '=', `${board_id}`)
+    const board = await getBoardListSchema.validate({board_id})
+    const list = await List.query().where('board', '=', `${board.board_id}`)
     if (!list.length) {
-      response.statusCode = 204
+      response.statusCode = 404
       response.payload = {}
       response.message = "No List found"
-      res.status(response.statusCode).send(response)
       logger.warn('No List found')
     }
     else {
       response.statusCode = 200
       response.payload = list
       response.message = 'Card fetched successfully'
-      res.status(response.statusCode).send(response)
       logger.info('List fetched successfully')
     }
-  } catch (error) {
-    response.statusCode = 400
     res.status(response.statusCode).send(response)
-    logger.error(error)
+  } catch (error) {
+    logger.error('Get board list API failed')
+    response.statusCode = 400
+    response.payload = {}
+    response.message = `${error}`
+    res.status(response.statusCode).send(response)
+    logger.error('List could not be fetched:', error)
   }
 }

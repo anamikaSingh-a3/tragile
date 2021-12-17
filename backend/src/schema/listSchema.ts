@@ -1,12 +1,11 @@
 import * as yup from 'yup';
 
 export const listSchema = yup.object().shape({
-  list_id: yup.string().required(),
   title: yup.string().required(),
   description: yup.string(),
-  board_id: yup.string()
+  board: yup.number()
 })
 
 export const getBoardListSchema = yup.object().shape({
-  list_id: yup.string().required()
+  board_id: yup.number().required()
 })
