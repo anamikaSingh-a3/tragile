@@ -156,7 +156,6 @@ const SideDrawer: React.FC = () => {
           {workspaces.length !== 0
             ? workspaces.map((array: IWorkspace) => (
               <ListItem
-                // key={array.workspace_id}
                 onClick={() => onWorkspaceHandler(array)}
               >
                 <ListItemIcon>
