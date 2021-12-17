@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { ITragileResponse } from 'tragile-response'
 import { IUser } from 'tragile-user'
+import { SECRET } from '../constants'
 
 import { User } from '../database/models/user'
 import { signInSchema, signUpSchema } from '../schema/userSchema'
@@ -36,7 +37,7 @@ export const signIn = async (req: Request, res: Response) => {
         response.message = 'Wrong email or password'
         response.payload = {}
       } else {
-        const token = jwt.sign(userSchema.email, 'secret')
+        const token = jwt.sign(userSchema.email, SECRET as string)
         response.statusCode = 202
         response.message = 'User successfully logged in'
         response.payload = { userData, token: token }

@@ -13,10 +13,6 @@ const app: Application = express()
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!..')
-})
-
 app.use('/api/workspace', workspace)
 app.use('/api/board', board)
 app.use('/api/list', list)
