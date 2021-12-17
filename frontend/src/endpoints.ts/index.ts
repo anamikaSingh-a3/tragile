@@ -1,4 +1,4 @@
-import { baseUrl } from "../constants";
+import { baseUrl } from '../constants';
 
 export const cardApi = baseUrl + '/api/card'
 export const boardApi = baseUrl + '/api/board'

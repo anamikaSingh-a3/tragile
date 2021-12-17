@@ -1,6 +1,8 @@
 import { IList } from 'tragile-list'
 
+
 import { ACTIVE_BOARD_LIST, REST_ACTIVE_BOARDS_LIST } from '../types'
+
 
 const initialState: IList[] = []
 

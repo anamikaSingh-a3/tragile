@@ -1,17 +1,18 @@
-import { CardActionArea, CardContent } from '@material-ui/core'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { StyledCard } from '../theme/uiComponents/Card'
-import { StyledBoardContainer, StyledContainer } from '../theme/uiComponents/layout/Container'
-import { getBoardByWorkspaceThunk } from '../redux/thunk/boardThunk/getBoardByWorkspaceThunk'
-import { useHistory } from 'react-router'
-import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk'
-import { getBoardByIdThunk } from '../redux/thunk/boardThunk/getBoardByIdThunk'
-import { IActiveWorkspaceBoardState, IBoard } from 'tragile-board'
-import { IActiveWorkspaceState } from 'tragile-workspace'
-import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk'
-import CreateBoard from '../components/CreateBoard'
-import Heading from '../components/common/Heading'
+import { CardActionArea, CardContent } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { IActiveWorkspaceBoardState, IBoard } from 'tragile-board';
+import { IActiveWorkspaceState } from 'tragile-workspace';
+
+import Heading from '../components/common/Heading';
+import CreateBoard from '../components/CreateBoard';
+import { getBoardByIdThunk } from '../redux/thunk/boardThunk/getBoardByIdThunk';
+import { getBoardByWorkspaceThunk } from '../redux/thunk/boardThunk/getBoardByWorkspaceThunk';
+import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
+import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk';
+import { StyledCard } from '../theme/uiComponents/Card';
+import { StyledBoardContainer, StyledContainer } from '../theme/uiComponents/layout/Container';
 
 const Board: React.FC = () => {
   const dispatch = useDispatch()

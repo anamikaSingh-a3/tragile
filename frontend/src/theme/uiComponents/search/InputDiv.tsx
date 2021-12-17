@@ -1,5 +1,5 @@
-import { styled } from '@material-ui/core'
-import { alpha } from '@material-ui/core/styles'
+import { styled } from '@material-ui/core';
+import { alpha } from '@material-ui/core/styles';
 
 export const StyledSearch = styled('div')(({ theme }) => ({
   marginRight: '10px',

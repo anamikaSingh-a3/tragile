@@ -1,6 +1,7 @@
-import { Chip } from '@material-ui/core'
-import React from 'react'
-import { StyledHeader } from '../../theme/uiComponents/layout/Header'
+import { Chip } from '@material-ui/core';
+import React from 'react';
+
+import { StyledHeader } from '../../theme/uiComponents/layout/Header';
 
 interface IHeadingProps {
   type: string

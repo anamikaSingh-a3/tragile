@@ -1,4 +1,4 @@
-import { styled, Typography } from '@material-ui/core'
+import { styled, Typography } from '@material-ui/core';
 
 export const StyledTitle = styled(Typography)(({ theme }) => ({
   flexGrow: 1,

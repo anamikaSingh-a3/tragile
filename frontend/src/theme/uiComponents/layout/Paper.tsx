@@ -1,5 +1,5 @@
-import { Paper } from '@material-ui/core'
-import { fade, styled } from '@material-ui/core/styles'
+import { Paper } from '@material-ui/core';
+import { fade, styled } from '@material-ui/core/styles';
 
 export const StyledPaper = styled(Paper)(({ theme }) => ({
   width: 170,

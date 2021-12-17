@@ -1,4 +1,4 @@
-import { ADD_ERROR_MESSAGE } from "../types"
+import { ADD_ERROR_MESSAGE } from '../types';
 
 export const errorMessage = (message: string) => {
     return {

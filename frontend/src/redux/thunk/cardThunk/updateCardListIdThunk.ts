@@ -1,7 +1,8 @@
-import axios from "axios"
-import { cardApi } from "../../../endpoints.ts"
-import { addActiveCard, resetActiveCard } from "../../action"
-import { errorMessage } from "../../action/errorAction"
+import axios from 'axios';
+
+import { cardApi } from '../../../endpoints.ts';
+import { addActiveCard, resetActiveCard } from '../../action';
+import { errorMessage } from '../../action/errorAction';
 
 const updateCardListIdThunk = (requestBody: any) => async (dispatch: any) => {
     try {

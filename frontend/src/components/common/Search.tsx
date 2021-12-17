@@ -1,7 +1,8 @@
-import React from 'react'
-import { StyledSearchIcon } from '../../theme/uiComponents/search/Icon'
-import { StyledInputBase } from '../../theme/uiComponents/search/InputBase'
-import { StyledSearch } from '../../theme/uiComponents/search/InputDiv'
+import React from 'react';
+
+import { StyledSearchIcon } from '../../theme/uiComponents/search/Icon';
+import { StyledInputBase } from '../../theme/uiComponents/search/InputBase';
+import { StyledSearch } from '../../theme/uiComponents/search/InputDiv';
 
 const Search: React.FC = () => {
   return (

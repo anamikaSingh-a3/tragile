@@ -1,8 +1,9 @@
-import { addWorkspaces } from '../../action'
-import { workspaceApi } from '../../../endpoints.ts'
-import axios from 'axios'
-import { IWorkspace } from 'tragile-workspace'
-import { errorMessage } from '../../action/errorAction'
+import axios from 'axios';
+import { IWorkspace } from 'tragile-workspace';
+
+import { workspaceApi } from '../../../endpoints.ts';
+import { addWorkspaces } from '../../action';
+import { errorMessage } from '../../action/errorAction';
 
 export const createWorkspaceThunk = (requestBody: IWorkspace) => async (
   dispatch: any

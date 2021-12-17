@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router'
-import {
-  StyledContainer,
-  StyledListContainer
-} from '../theme/uiComponents/layout/Container'
-import { useDispatch, useSelector } from 'react-redux'
-import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk'
-import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk'
-import BoardList from '../components/BoardList'
-import { IActiveBoardListState, IList } from 'tragile-list'
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
-import updateCardListIdThunk from '../redux/thunk/cardThunk/updateCardListIdThunk'
-import { IActiveBoardState } from 'tragile-board'
-import { IActiveCardState } from 'tragile-card'
-import Heading from '../components/common/Heading'
-import InputContainer from '../components/createComponent/InputContainer'
+import React, { useEffect } from 'react';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { IActiveBoardState } from 'tragile-board';
+import { IActiveBoardListState, IList } from 'tragile-list';
+
+import BoardList from '../components/BoardList';
+import Heading from '../components/common/Heading';
+import InputContainer from '../components/createComponent/InputContainer';
+import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
+import updateCardListIdThunk from '../redux/thunk/cardThunk/updateCardListIdThunk';
+import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk';
+import { StyledContainer, StyledListContainer } from '../theme/uiComponents/layout/Container';
 
 interface IParams {
   id: string
@@ -29,7 +26,6 @@ const BoardPage: React.FC = () => {
   )
   const activeBoard = useSelector((state: IActiveBoardState) => state.activeBoard)
 
-  const activeCard = useSelector((state: IActiveCardState) => state.activeCard)
   useEffect(() => {
     return () => {
       dispatch(getListByBoardThunk(id))

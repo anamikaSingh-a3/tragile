@@ -1,5 +1,5 @@
-import { styled } from '@material-ui/core/styles'
-import { Card } from '@material-ui/core'
+import { Card } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 
 export const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 300,

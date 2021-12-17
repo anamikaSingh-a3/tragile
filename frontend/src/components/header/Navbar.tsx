@@ -1,6 +1,7 @@
-import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import TopNavbar from './Toolbar'
+import AppBar from '@material-ui/core/AppBar';
+import React from 'react';
+
+import TopNavbar from './Toolbar';
 
 const Navbar: React.FC = () => {
   return (

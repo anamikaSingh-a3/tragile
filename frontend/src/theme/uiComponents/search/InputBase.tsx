@@ -1,5 +1,5 @@
-import { styled } from '@material-ui/core'
-import InputBase from '@material-ui/core/InputBase'
+import { styled } from '@material-ui/core';
+import InputBase from '@material-ui/core/InputBase';
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {

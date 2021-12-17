@@ -1,5 +1,5 @@
-import { Drawer } from '@material-ui/core'
-import { styled } from '@material-ui/core/styles'
+import { Drawer } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 
 const drawerWidth = 240
 

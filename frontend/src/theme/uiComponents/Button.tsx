@@ -1,5 +1,5 @@
-import { Button } from '@material-ui/core'
-import { fade, styled } from '@material-ui/core/styles'
+import { Button } from '@material-ui/core';
+import { fade, styled } from '@material-ui/core/styles';
 
 export const StyledButton = styled(Button)(({ theme }) => ({
   marginTop: 20,

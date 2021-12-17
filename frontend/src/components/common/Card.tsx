@@ -1,7 +1,8 @@
-import React from 'react'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
-import { StyledCard } from '../../theme/uiComponents/Card'
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import React from 'react';
+
+import { StyledCard } from '../../theme/uiComponents/Card';
 
 interface CardProps {
   title: string

@@ -1,15 +1,16 @@
-import React from 'react'
-import AppsIcon from '@material-ui/icons/Apps'
-import AssessmentIcon from '@material-ui/icons/Assessment'
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline'
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'
-import Search from '../common/Search'
-import { StyledToolbar } from '../../theme/uiComponents/toolbar/ToolbarContainer'
-import { StyledIconButton } from '../../theme/uiComponents/toolbar/IconButton'
-import { StyledDropDownButton } from '../../theme/uiComponents/toolbar/DropDown'
-import { StyledAvatar } from '../../theme/uiComponents/toolbar/Avatar'
-import { StyledTitle } from '../../theme/uiComponents/toolbar/Title'
-import { useLocation } from 'react-router'
+import AppsIcon from '@material-ui/icons/Apps';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import React from 'react';
+import { useLocation } from 'react-router';
+
+import { StyledAvatar } from '../../theme/uiComponents/toolbar/Avatar';
+import { StyledDropDownButton } from '../../theme/uiComponents/toolbar/DropDown';
+import { StyledIconButton } from '../../theme/uiComponents/toolbar/IconButton';
+import { StyledTitle } from '../../theme/uiComponents/toolbar/Title';
+import { StyledToolbar } from '../../theme/uiComponents/toolbar/ToolbarContainer';
+import Search from '../common/Search';
 
 const options = ['Workspaces', 'Recent', 'Starred', 'Templates']
 

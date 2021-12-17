@@ -1,7 +1,8 @@
-import axios from 'axios'
-import { workspaceApi } from '../../../endpoints.ts'
-import { addWorkspaces } from '../../action'
-import { errorMessage } from '../../action/errorAction'
+import axios from 'axios';
+
+import { workspaceApi } from '../../../endpoints.ts';
+import { addWorkspaces } from '../../action';
+import { errorMessage } from '../../action/errorAction';
 
 export const getAllWorkspacesThunk = () => async (dispatch: any) => {
   try {

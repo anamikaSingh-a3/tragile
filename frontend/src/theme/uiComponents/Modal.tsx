@@ -1,4 +1,4 @@
-import { styled } from '@material-ui/core/styles'
+import { styled } from '@material-ui/core/styles';
 
 const top = 0
 const right = 90

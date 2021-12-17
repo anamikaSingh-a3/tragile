@@ -1,14 +1,15 @@
-import { Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
-import Copyright from '../components/common/Copyright'
-import { StyledButton } from '../theme/uiComponents/Button'
-import { StyledContainerUser } from '../theme/uiComponents/layout/Container'
-import { StyledPaperUser } from '../theme/uiComponents/layout/Paper'
+import { Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInThunk } from '../redux/thunk/userThunk/signInThunk'
-import { resetUser } from '../redux/action/userActions'
-import { IUserState } from 'tragile-user'
+import { useHistory } from 'react-router';
+import { IUserState } from 'tragile-user';
+
+import Copyright from '../components/common/Copyright';
+import { resetUser } from '../redux/action/userActions';
+import { signInThunk } from '../redux/thunk/userThunk/signInThunk';
+import { StyledButton } from '../theme/uiComponents/Button';
+import { StyledContainerUser } from '../theme/uiComponents/layout/Container';
+import { StyledPaperUser } from '../theme/uiComponents/layout/Paper';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('')

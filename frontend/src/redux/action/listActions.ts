@@ -1,11 +1,13 @@
 import { IList } from 'tragile-list'
 
+
 import {
   ACTIVE_BOARD_LIST,
   ACTIVE_LIST,
   ADD_LIST,
   REST_ACTIVE_BOARDS_LIST
 } from '../types'
+
 
 export const addList = (list: IList) => {
   return {

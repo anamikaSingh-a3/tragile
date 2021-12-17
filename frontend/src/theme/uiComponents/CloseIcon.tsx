@@ -1,4 +1,4 @@
-import { styled } from "@material-ui/core";
+import { styled } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 export const StyledCloseIcon = styled(CloseIcon)({

@@ -1,5 +1,7 @@
-import { IUser } from "tragile-user"
-import { ADD_TOKEN, ADD_USER, RESET_TOKEN, RESET_USER } from "../types"
+import { IUser } from 'tragile-user'
+
+import { ADD_TOKEN, ADD_USER, RESET_TOKEN, RESET_USER } from '../types'
+
 
 export const addToken = (token: string) => {
     return {

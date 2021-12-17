@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
-import { InputBase, IconButton, Box } from '@material-ui/core'
-import ClearIcon from '@material-ui/icons/Clear'
-import { useDispatch, useSelector } from 'react-redux'
-import { IActiveListState, IList } from 'tragile-list'
-import { v4 as uuidv4 } from 'uuid'
-import createCardThunk from '../../redux/thunk/cardThunk/createCardThunk'
-import { ICard } from 'tragile-card'
-import { createListThunk } from '../../redux/thunk/listThunk/createListThunk'
-import { IActiveBoardState } from 'tragile-board'
-import { StyledButton } from '../../theme/uiComponents/Button'
-import { StyledPaper } from '../../theme/uiComponents/layout/Paper'
+import { Box, IconButton, InputBase } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { IActiveBoardState } from 'tragile-board';
+import { ICard } from 'tragile-card';
+import { IActiveListState, IList } from 'tragile-list';
+import { v4 as uuidv4 } from 'uuid';
+
+import createCardThunk from '../../redux/thunk/cardThunk/createCardThunk';
+import { createListThunk } from '../../redux/thunk/listThunk/createListThunk';
+import { StyledButton } from '../../theme/uiComponents/Button';
+import { StyledPaper } from '../../theme/uiComponents/layout/Paper';
 
 interface InputCardProps {
   setOpen: any

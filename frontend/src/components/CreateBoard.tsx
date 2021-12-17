@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
-import TextField from '@material-ui/core/TextField'
-import { useDispatch, useSelector } from 'react-redux'
-import { StyledModal } from '../theme/uiComponents/Modal'
-import { StyledButton } from '../theme/uiComponents/Button'
-import { createBoardThunk } from '../redux/thunk/boardThunk/createBoardThunk'
-import ModalContainer from './common/Modal'
-import Cards from './common/Card'
-import { IActiveWorkspaceState } from 'tragile-workspace'
-import { IBoard } from 'tragile-board'
-import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon'
+import TextField from '@material-ui/core/TextField';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { IBoard } from 'tragile-board';
+import { IActiveWorkspaceState } from 'tragile-workspace';
+import { v4 as uuidv4 } from 'uuid';
+
+import { createBoardThunk } from '../redux/thunk/boardThunk/createBoardThunk';
+import { StyledButton } from '../theme/uiComponents/Button';
+import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon';
+import { StyledModal } from '../theme/uiComponents/Modal';
+import Cards from './common/Card';
+import ModalContainer from './common/Modal';
 
 const CreateBoard: React.FC= () => {
   const [openModal, setOpenModal] = useState(false)

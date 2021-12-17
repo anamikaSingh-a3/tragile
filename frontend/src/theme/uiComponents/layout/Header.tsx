@@ -1,4 +1,4 @@
-import { styled, Box } from '@material-ui/core';
+import { Box, styled } from '@material-ui/core';
 
 export const StyledHeader = styled(Box)(({ theme }) => ({
     width: "100%",

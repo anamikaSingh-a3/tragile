@@ -1,11 +1,12 @@
-import { Modal } from '@material-ui/core'
+import { Modal } from '@material-ui/core';
+import React from 'react';
 
 interface ModalContainerProps {
   openModal: boolean
   body: JSX.Element
 }
 
-const ModalContainer = (props: ModalContainerProps) => {
+const ModalContainer: React.FC<ModalContainerProps> = (props: ModalContainerProps) => {
   return (
     <>
       <Modal

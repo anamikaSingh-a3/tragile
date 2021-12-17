@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
-import { useHistory } from 'react-router'
-import { activeWorkspace, resetActiveBoards } from '../../redux/action'
-import { useDispatch, useSelector } from 'react-redux'
-import { createWorkspaceThunk } from '../../redux/thunk/workspaceThunk/createWorkspaceThunk'
-import {
-  TextField,
-  Menu,
-  MenuItem,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-} from '@material-ui/core'
-import AssessmentIcon from '@material-ui/icons/Assessment'
-import AddIcon from '@material-ui/icons/Add'
-import { StyledModal } from '../../theme/uiComponents/Modal'
-import { StyledButton } from '../../theme/uiComponents/Button'
-import { StyledDrawer } from '../../theme/uiComponents/Drawer'
-import ModalContainer from '../common/Modal'
-import { options } from './menuOptions'
-import { getAllWorkspacesThunk } from '../../redux/thunk/workspaceThunk/getAllWorkspaceThunk'
-import { IWorkspace, IWorkspaceState } from 'tragile-workspace'
-import { StyledCloseIcon } from '../../theme/uiComponents/CloseIcon'
-import { useLocation } from 'react-router-dom'
+import { Divider, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, TextField } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
+import { IWorkspace, IWorkspaceState } from 'tragile-workspace';
+import { v4 as uuidv4 } from 'uuid';
+
+import { activeWorkspace, resetActiveBoards } from '../../redux/action';
+import { createWorkspaceThunk } from '../../redux/thunk/workspaceThunk/createWorkspaceThunk';
+import { getAllWorkspacesThunk } from '../../redux/thunk/workspaceThunk/getAllWorkspaceThunk';
+import { StyledButton } from '../../theme/uiComponents/Button';
+import { StyledCloseIcon } from '../../theme/uiComponents/CloseIcon';
+import { StyledDrawer } from '../../theme/uiComponents/Drawer';
+import { StyledModal } from '../../theme/uiComponents/Modal';
+import ModalContainer from '../common/Modal';
+import { options } from './menuOptions';
 
 
 const SideDrawer: React.FC = () => {

@@ -1,7 +1,8 @@
-import axios from "axios";
-import { userApi } from "../../../endpoints.ts";
-import { errorMessage } from "../../action/errorAction";
-import { addUser } from "../../action/userActions";
+import axios from 'axios';
+
+import { userApi } from '../../../endpoints.ts';
+import { errorMessage } from '../../action/errorAction';
+import { addUser } from '../../action/userActions';
 
 export const signInThunk = (email: string, password: string) => async (dispatch: any) => {
 

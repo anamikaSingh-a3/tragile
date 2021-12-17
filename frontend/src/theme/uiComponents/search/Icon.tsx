@@ -1,5 +1,5 @@
-import { styled } from "@material-ui/core";
-import SearchIcon from '@material-ui/icons/Search'
+import { styled } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
 export const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
     padding: theme.spacing(0, 2),

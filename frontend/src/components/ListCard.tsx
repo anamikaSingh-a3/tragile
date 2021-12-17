@@ -1,15 +1,16 @@
-import { Modal, TextField } from '@material-ui/core'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { StyledCard } from '../theme/uiComponents/Card'
-import { addActiveCard } from '../redux/action/cardActions'
-import { StyledModal } from '../theme/uiComponents/Modal'
-import { IActiveCardState, ICard } from 'tragile-card'
-import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk'
-import { Draggable } from 'react-beautiful-dnd'
-import { StyledButton } from '../theme/uiComponents/Button'
-import updateCardThunk from '../redux/thunk/cardThunk/updateCardThunk'
-import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon'
+import { Modal, TextField } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { IActiveCardState, ICard } from 'tragile-card';
+
+import { addActiveCard } from '../redux/action/cardActions';
+import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
+import updateCardThunk from '../redux/thunk/cardThunk/updateCardThunk';
+import { StyledButton } from '../theme/uiComponents/Button';
+import { StyledCard } from '../theme/uiComponents/Card';
+import { StyledCloseIcon } from '../theme/uiComponents/CloseIcon';
+import { StyledModal } from '../theme/uiComponents/Modal';
 
 interface ListCardProps {
   card: ICard

@@ -1,14 +1,11 @@
-import axios from 'axios'
-import { listApi } from '../../../endpoints.ts'
-import { errorMessage } from '../../action/errorAction'
-import {
-  addActiveBoardsList,
-  resetActiveBoardsList
-} from '../../action/listActions'
+import axios from 'axios';
+
+import { listApi } from '../../../endpoints.ts';
+import { errorMessage } from '../../action/errorAction';
+import { addActiveBoardsList, resetActiveBoardsList } from '../../action/listActions';
 
 export const getListByBoardThunk = (board_id: string) => async (
   dispatch: any,
-  getState: any
 ) => {
   try {
     const list = await axios.get(`${listApi}/getByBoard/${board_id}`)

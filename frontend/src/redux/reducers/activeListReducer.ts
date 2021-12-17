@@ -1,6 +1,6 @@
-import { IList } from 'tragile-list'
+import { IList } from 'tragile-list';
 
-import { ACTIVE_LIST } from "../types"
+import { ACTIVE_LIST } from '../types';
 
 const initialState: IList = {
     list_id: "",

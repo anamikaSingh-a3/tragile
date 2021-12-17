@@ -2,8 +2,7 @@ declare module 'tragile-board' {
   export interface IBoard {
     board_id: string
     title: string
-workspace: string
-
+    workspace: string
     visibility: string
   }
   export interface IBoardState {
@@ -12,8 +11,7 @@ workspace: string
   export interface IActiveBoard {
     board_id: string
     title: string
-workspace: string
-
+    workspace: string
     visibility: string
   }
   export interface IActiveWorkspaceBoardState {
@@ -22,6 +20,4 @@ workspace: string
   export interface IActiveBoardState {
     activeBoard: IActiveBoard
   }
-
-
 }

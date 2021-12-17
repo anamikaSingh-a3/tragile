@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Typography, Collapse, Box } from '@material-ui/core'
-import InputCard from './InputCard'
-import { StyledPaper } from '../../theme/uiComponents/layout/Paper'
+import { Box, Collapse, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+
+import { StyledPaper } from '../../theme/uiComponents/layout/Paper';
+import InputCard from './InputCard';
 
 interface IInputContainerProps {
   listId: string

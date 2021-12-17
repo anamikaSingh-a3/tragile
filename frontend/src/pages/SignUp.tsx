@@ -1,25 +1,15 @@
-import {
-  Box,
-  Button,
-  Container,
-  CssBaseline,
-  Grid,
-  Link,
-  TextField,
-  Typography
-} from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
-
-import { StyledContainerUser } from '../theme/uiComponents/layout/Container'
-import { StyledPaperUser } from '../theme/uiComponents/layout/Paper'
-import { StyledButton } from '../theme/uiComponents/Button'
-import { useHistory } from 'react-router'
-import Copyright from '../components/common/Copyright'
+import { Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { stringify } from 'querystring'
-import { signUpThunk } from '../redux/thunk/userThunk/signUpThunk'
-import { resetToken } from '../redux/action/userActions'
-import { ITokenState } from 'tragile-user'
+import { useHistory } from 'react-router';
+import { ITokenState } from 'tragile-user';
+
+import Copyright from '../components/common/Copyright';
+import { resetToken } from '../redux/action/userActions';
+import { signUpThunk } from '../redux/thunk/userThunk/signUpThunk';
+import { StyledButton } from '../theme/uiComponents/Button';
+import { StyledContainerUser } from '../theme/uiComponents/layout/Container';
+import { StyledPaperUser } from '../theme/uiComponents/layout/Paper';
 
 
 const SignUp: React.FC = () => {
@@ -110,9 +100,6 @@ const SignUp: React.FC = () => {
               >
                 Sign Up
               </StyledButton>
-              {/* <Typography>
-                By signing up, you confirm that you've read and accepted our Terms of Service and Privacy Policy.
-              </Typography> */}
               <Grid container>
                 <Grid item>
                   <Button

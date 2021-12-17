@@ -1,6 +1,5 @@
 declare module 'tragile-user' {
     export interface IUser {
-        //   workspace_id: string
         name: string
         username?: string
         bio?: string
