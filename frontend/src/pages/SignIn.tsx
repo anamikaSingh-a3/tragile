@@ -1,21 +1,33 @@
 import { Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import Copyright from '../components/common/Copyright'
 import { StyledButton } from '../theme/uiComponents/Button'
 import { StyledContainerUser } from '../theme/uiComponents/layout/Container'
 import { StyledPaperUser } from '../theme/uiComponents/layout/Paper'
+import { useDispatch, useSelector } from 'react-redux';
+import { signInThunk } from '../redux/thunk/userThunk/signInThunk'
+import { resetUser } from '../redux/action/userActions'
+import { IUserState } from 'tragile-user'
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const history = useHistory()
-
+  const dispatch = useDispatch()
+  const user = useSelector((state: IUserState) => state.user.token)
   const signUpHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    alert(email + "," + password)
+    dispatch(signInThunk(email, password))
+    if (user) history.push('/')
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetUser())
+    }
+  }, [email, password])
 
   return (
     <>

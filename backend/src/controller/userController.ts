@@ -20,6 +20,7 @@ export const signIn = async (req: Request, res: Response) => {
             password: req.body.password
         }
         const user = await User.query().select('password').where('email', '=', `${data.email}`)
+        const userData = await User.query().where('email', '=', `${data.email}`)
         console.log(user)
         if (user.length > 0) {
             const isMatch = await bcrypt.compare(data.password, `${user[0].password}`)
@@ -29,15 +30,22 @@ export const signIn = async (req: Request, res: Response) => {
                 response.message = "Wrong email or password"
                 response.payload = {}
                 res.status(response.statusCode).send(response)
-            }
-            const token = jwt.sign(data.email, 'secret')
-            response.statusCode = 200
-            response.message = "User successfully logged in"
-            response.payload = token
-            res.status(response.statusCode).send(response)
-        }
-    } catch {
+            } else {
 
+                const token = jwt.sign(data.email, 'secret')
+                response.statusCode = 202
+                response.message = "User successfully logged in"
+                response.payload = { userData, token: token }
+                res.status(response.statusCode).send(response)
+            }
+        }
+    } catch (error) {
+        logger.error("User signup API failed")
+        response.statusCode = 400
+        response.payload = {}
+        response.message = "User could not be created!"
+        logger.error(error)
+        res.status(response.statusCode).send(response)
     }
 }
 

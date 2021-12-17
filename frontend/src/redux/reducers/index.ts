@@ -10,8 +10,12 @@ import cardReducer from './cardReducer'
 import activeCardReducer from './activeCardReducer'
 import activeListReducer from './activeListReducer'
 import errorReducer from './errorReducer';
+import addUserReducer from './userReducer'
+import addTokenReducer from './tokenReducer';
 
 export default combineReducers({
+  user: addUserReducer,
+  token: addTokenReducer,
   boards: boardsReducer,
   workspaces: workspaceReducer,
   list: listReducer,

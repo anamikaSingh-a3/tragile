@@ -8,13 +8,18 @@ import {
   TextField,
   Typography
 } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { StyledContainerUser } from '../theme/uiComponents/layout/Container'
 import { StyledPaperUser } from '../theme/uiComponents/layout/Paper'
 import { StyledButton } from '../theme/uiComponents/Button'
 import { useHistory } from 'react-router'
 import Copyright from '../components/common/Copyright'
+import { useDispatch, useSelector } from 'react-redux';
+import { stringify } from 'querystring'
+import { signUpThunk } from '../redux/thunk/userThunk/signUpThunk'
+import { resetToken } from '../redux/action/userActions'
+import { ITokenState } from 'tragile-user'
 
 
 const SignUp: React.FC = () => {
@@ -23,10 +28,26 @@ const SignUp: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const dispatch = useDispatch()
+
+  const token = useSelector((state: ITokenState) => state.token)
   const signUpHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    alert(name + ',' + email + ',' + password)
+    dispatch(signUpThunk({
+      name: name,
+      email: email,
+      password: password
+    }))
+    console.log("token", token)
+    if (token)
+      history.push('/signIn')
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetToken())
+    }
+  }, [name, email, password])
 
   return (
     <>
