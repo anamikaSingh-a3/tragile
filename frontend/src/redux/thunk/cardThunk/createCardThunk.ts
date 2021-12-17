@@ -2,8 +2,8 @@ import axios from 'axios';
 import { ICard } from 'tragile-card';
 
 import { cardApi } from '../../../endpoints.ts';
-import { addCard } from '../../action/cardActions';
-import { errorMessage } from '../../action/errorAction';
+import { addCard } from '../../action/cardActions/cardActions';
+import { messageAction } from '../../action/messageActions/messageAction';
 
 
 const createCardThunk = (requestBody: ICard) => async (dispatch: any) => {
@@ -11,9 +11,9 @@ const createCardThunk = (requestBody: ICard) => async (dispatch: any) => {
         const response = await axios.post(`${cardApi}/create`, requestBody)
         if (response.status === 201) dispatch(addCard(response.data.payload))
         else
-            dispatch(errorMessage(response.data.message))
+            dispatch(messageAction(response.data.message))
     } catch (error) {
-        dispatch(errorMessage("Card could not be created"))
+        dispatch(messageAction("Card could not be created"))
     }
 }
 export default createCardThunk

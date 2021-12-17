@@ -1,4 +1,4 @@
-import { ADD_TOKEN, RESET_TOKEN } from '../types';
+import { ADD_TOKEN, RESET_TOKEN } from '../../types';
 
 const initialState = {
     token: ''

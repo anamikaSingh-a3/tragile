@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import { ITokenState } from 'tragile-user';
 
 import Copyright from '../components/common/Copyright';
-import { resetToken } from '../redux/action/userActions';
+import { resetToken } from '../redux/action/userActions/userActions';
 import { signUpThunk } from '../redux/thunk/userThunk/signUpThunk';
 import { StyledButton } from '../theme/uiComponents/Button';
 import { StyledContainerUser } from '../theme/uiComponents/layout/Container';
@@ -37,7 +37,7 @@ const SignUp: React.FC = () => {
     return () => {
       dispatch(resetToken())
     }
-  }, [name, email, password])
+  }, [name, email, password, dispatch])
 
   return (
     <>

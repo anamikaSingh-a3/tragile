@@ -1,4 +1,4 @@
-import { ADD_USER, RESET_USER } from '../types';
+import { ADD_USER, RESET_USER } from '../../types';
 
 const initialState = {
     userData: [{

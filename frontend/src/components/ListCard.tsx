@@ -4,7 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { IActiveCardState, ICard } from 'tragile-card';
 
-import { addActiveCard } from '../redux/action/cardActions';
+import { addActiveCard } from '../redux/action/cardActions/cardActions';
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
 import updateCardThunk from '../redux/thunk/cardThunk/updateCardThunk';
 import { StyledButton } from '../theme/uiComponents/Button';

@@ -1,6 +1,6 @@
 import { IList } from 'tragile-list';
 
-import { ACTIVE_LIST } from '../types';
+import { ACTIVE_LIST } from '../../types';
 
 const initialState: IList = {
     list_id: "",
@@ -9,16 +9,16 @@ const initialState: IList = {
 }
 
 const activeListReducer = (
-    state= initialState,
+    state = initialState,
     action: { type: string, payload: IList }
 ) => {
     switch (action.type) {
         case ACTIVE_LIST: {
-          return action.payload
+            return action.payload
         }
         default:
-          return state
-      }
+            return state
+    }
 }
 
 export default activeListReducer

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 import { userApi } from '../../../endpoints.ts';
-import { errorMessage } from '../../action/errorAction';
-import { addUser } from '../../action/userActions';
+import { messageAction } from '../../action/messageActions/messageAction';
+import { addUser } from '../../action/userActions/userActions';
 
 export const signInThunk = (email: string, password: string) => async (dispatch: any) => {
 
@@ -11,11 +11,11 @@ export const signInThunk = (email: string, password: string) => async (dispatch:
         const response = await axios.post(`${userApi}/signIn`, user)
         if (response.status === 202) {
             dispatch(addUser(response.data.payload))
-            dispatch(errorMessage(response.data.message))
+            dispatch(messageAction(response.data.message))
         }
-        else if (response.status === 200) dispatch(errorMessage(response.data.message))
+        else if (response.status === 200) dispatch(messageAction(response.data.message))
 
     } catch (error) {
-        dispatch(errorMessage('User could not be signed in'))
+        dispatch(messageAction('User could not be signed in'))
     }
 }

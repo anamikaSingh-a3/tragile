@@ -1,4 +1,4 @@
-import { ADD_ERROR_MESSAGE } from '../types';
+import { ADD_ERROR_MESSAGE } from '../../types';
 
 const messageReducer = (state = "", action: { type: string, payload: string }) => {
     switch (action.type) {

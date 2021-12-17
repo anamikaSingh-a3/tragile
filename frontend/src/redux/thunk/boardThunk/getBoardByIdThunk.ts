@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { boardApi } from '../../../endpoints.ts';
 import { addActiveWorkspaceBoard, resetActiveBoardsList, resetActiveWorkspaceBoard } from '../../action';
-import { errorMessage } from '../../action/errorAction';
+import { messageAction } from '../../action/messageActions/messageAction';
 
 export const getBoardByIdThunk = (boardId: string) => async (
   dispatch: any,
@@ -15,9 +15,9 @@ export const getBoardByIdThunk = (boardId: string) => async (
       dispatch(resetActiveBoardsList())
     }
     else if (board.status === 204)
-      dispatch(errorMessage("No board found"))
+      dispatch(messageAction("No board found"))
   } catch (error) {
     dispatch(resetActiveWorkspaceBoard())
-    dispatch(errorMessage("Failed get board API'"))
+    dispatch(messageAction("Failed get board API'"))
   }
 }

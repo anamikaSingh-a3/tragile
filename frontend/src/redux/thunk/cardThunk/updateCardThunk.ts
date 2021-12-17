@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 import { cardApi } from '../../../endpoints.ts';
-import { addActiveCard, resetActiveCard } from '../../action/cardActions';
-import { errorMessage } from '../../action/errorAction';
+import { addActiveCard, resetActiveCard } from '../../action/cardActions/cardActions';
+import { messageAction } from '../../action/messageActions/messageAction';
 import { getAllCardsThunk } from './getAllCardThunk';
 
 const updateCardThunk = (requestBody: any) => async (dispatch: any) => {
@@ -13,10 +13,10 @@ const updateCardThunk = (requestBody: any) => async (dispatch: any) => {
             dispatch(addActiveCard(response.data.payload))
             dispatch(getAllCardsThunk())
         }
-        else dispatch(errorMessage("Card description could not be updated"))
+        else dispatch(messageAction("Card description could not be updated"))
     } catch (error) {
         dispatch(resetActiveCard())
-        dispatch(errorMessage("Update card description API failed"))
+        dispatch(messageAction("Update card description API failed"))
     }
 }
 export default updateCardThunk

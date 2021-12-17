@@ -1,6 +1,6 @@
 import { ICard } from 'tragile-card';
 
-import { ADD_CARD } from '../types';
+import { ADD_CARD } from '../../types';
 
 const initialState: ICard[] = []
 

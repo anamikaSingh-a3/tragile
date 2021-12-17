@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { workspaceApi } from '../../../endpoints.ts';
 import { addWorkspaces } from '../../action';
-import { errorMessage } from '../../action/errorAction';
+import { messageAction } from '../../action/messageActions/messageAction';
 
 export const getAllWorkspacesThunk = () => async (dispatch: any) => {
   try {
@@ -10,8 +10,8 @@ export const getAllWorkspacesThunk = () => async (dispatch: any) => {
     if (workspace.status === 200)
       dispatch(addWorkspaces(workspace.data.payload))
     else
-      dispatch(errorMessage(workspace.data.message))
+      dispatch(messageAction(workspace.data.message))
   } catch (error) {
-    dispatch(errorMessage("Failed getAll Workspace API"))
+    dispatch(messageAction("Failed getAll Workspace API"))
   }
 }

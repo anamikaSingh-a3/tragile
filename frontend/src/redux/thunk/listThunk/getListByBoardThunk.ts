@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 import { listApi } from '../../../endpoints.ts';
-import { errorMessage } from '../../action/errorAction';
-import { addActiveBoardsList, resetActiveBoardsList } from '../../action/listActions';
+import { addActiveBoardsList, resetActiveBoardsList } from '../../action/listActions/listActions';
+import { messageAction } from '../../action/messageActions/messageAction';
 
 export const getListByBoardThunk = (board_id: string) => async (
   dispatch: any,
@@ -12,9 +12,9 @@ export const getListByBoardThunk = (board_id: string) => async (
     if (list.status === 200)
       dispatch(addActiveBoardsList(list.data.payload))
     else if (list.status === 204)
-      dispatch(errorMessage("No board found"))
+      dispatch(messageAction("No board found"))
   } catch (error) {
     dispatch(resetActiveBoardsList())
-    dispatch(errorMessage('Failed getAll list by board API'))
+    dispatch(messageAction('Failed getAll list by board API'))
   }
 }

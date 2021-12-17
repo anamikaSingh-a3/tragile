@@ -3,7 +3,7 @@ import { IList } from 'tragile-list';
 
 import { listApi } from '../../../endpoints.ts';
 import { addActiveBoardsList, resetActiveBoardsList } from '../../action';
-import { errorMessage } from '../../action/errorAction';
+import { messageAction } from '../../action/messageActions/messageAction';
 
 
 export const createListThunk = (requestBody: IList) => async (
@@ -14,9 +14,9 @@ export const createListThunk = (requestBody: IList) => async (
     if (response.status === 201) {
       dispatch(addActiveBoardsList(response.data.payload))
     }
-    else dispatch(errorMessage(response.data.message))
+    else dispatch(messageAction(response.data.message))
   } catch (error) {
-    dispatch(errorMessage('List could not be created'))
+    dispatch(messageAction('List could not be created'))
     dispatch(resetActiveBoardsList())
   }
 }

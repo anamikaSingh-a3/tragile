@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import { IUserState } from 'tragile-user';
 
 import Copyright from '../components/common/Copyright';
-import { resetUser } from '../redux/action/userActions';
+import { resetUser } from '../redux/action/userActions/userActions';
 import { signInThunk } from '../redux/thunk/userThunk/signInThunk';
 import { StyledButton } from '../theme/uiComponents/Button';
 import { StyledContainerUser } from '../theme/uiComponents/layout/Container';
@@ -28,7 +28,7 @@ const SignIn: React.FC = () => {
     return () => {
       dispatch(resetUser())
     }
-  }, [email, password])
+  }, [email, password, dispatch])
 
   return (
     <>

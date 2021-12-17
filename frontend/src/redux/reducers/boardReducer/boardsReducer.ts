@@ -1,6 +1,6 @@
 import { IBoard } from 'tragile-board';
 
-import { ADD_BOARD } from '../types';
+import { ADD_BOARD } from '../../types';
 
 const initialState: IBoard[] = []
 

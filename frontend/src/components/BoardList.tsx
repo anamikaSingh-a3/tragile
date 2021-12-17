@@ -2,7 +2,7 @@ import { List, Typography } from '@material-ui/core';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAllCardState, ICard } from 'tragile-card';
-import { IActiveListState, IList } from 'tragile-list';
+import { IList } from 'tragile-list';
 
 import { addActiveList } from '../redux/action';
 import { StyledDroppableList } from '../theme/uiComponents/layout/Container';
@@ -21,7 +21,6 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
 
   const cards = useSelector((state: IAllCardState) => state.card)
 
-  const activeList = useSelector((state: IActiveListState) => state.activeList.list_id)
   return (
     <Draggable draggableId={props.list.list_id} index={props.index}>
       {provided => (

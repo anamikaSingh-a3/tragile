@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 
-import activeBoardListReducer from './activeBoardListReducer';
-import activeBoardReducer from './activeBoardReducer';
-import activeCardReducer from './activeCardReducer';
-import activeListReducer from './activeListReducer';
-import activeWorkspaceBoardReducer from './activeWorkspaceBoardsReducer';
-import activeWorkspaceReducer from './activeWorkspaceReducer';
-import boardsReducer from './boardsReducer';
-import cardReducer from './cardReducer';
-import listReducer from './listReducer';
-import errorReducer from './messageReducer';
-import addTokenReducer from './tokenReducer';
-import addUserReducer from './userReducer';
-import workspaceReducer from './workspaceReducer';
+import activeBoardReducer from './boardReducer/activeBoardReducer';
+import activeWorkspaceBoardReducer from './boardReducer/activeWorkspaceBoardsReducer';
+import boardsReducer from './boardReducer/boardsReducer';
+import activeCardReducer from './cardReducer/activeCardReducer';
+import cardReducer from './cardReducer/cardReducer';
+import activeBoardListReducer from './listReducer/activeBoardListReducer';
+import activeListReducer from './listReducer/activeListReducer';
+import listReducer from './listReducer/listReducer';
+import errorReducer from './messageReducer/messageReducer';
+import addTokenReducer from './userReducer/tokenReducer';
+import addUserReducer from './userReducer/userReducer';
+import activeWorkspaceReducer from './workspaceReducer/activeWorkspaceReducer';
+import workspaceReducer from './workspaceReducer/workspaceReducer';
 
 export default combineReducers({
   user: addUserReducer,
