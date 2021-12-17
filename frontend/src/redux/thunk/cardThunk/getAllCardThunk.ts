@@ -9,7 +9,7 @@ export const getAllCardsThunk = () => async (dispatch: any) => {
     const cards = await axios.get(`${cardApi}/getAll`)
     if (cards.status === 200)
       dispatch(addCard(cards.data.payload))
-    else if (cards.status === 204)
+    else if (cards.status === 404)
       dispatch(messageAction("No card found"))
   } catch (error) {
     dispatch(messageAction("Failed getAll Card API"))

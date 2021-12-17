@@ -14,7 +14,7 @@ export const getBoardByIdThunk = (boardId: string) => async (
       dispatch(addActiveWorkspaceBoard(board.data.payload))
       dispatch(resetActiveBoardsList())
     }
-    else if (board.status === 204)
+    else if (board.status === 404)
       dispatch(messageAction("No board found"))
   } catch (error) {
     dispatch(resetActiveWorkspaceBoard())

@@ -3,6 +3,7 @@ import { IBoard } from 'tragile-board';
 import { ITragileResponse } from 'tragile-response';
 
 import { Board } from '../database/models/board';
+import { boardSchema, getBoardSchema, getWorkspaceBoardSchema } from '../schema/boardSchema';
 import logger from '../utility/logger';
 
 const response: ITragileResponse = {
@@ -19,25 +20,24 @@ export const createBoard = async (req: Request, res: Response) => {
       workspace: req.body.workspace,
       visibility: req.body.visibility
     }
-    const newBoard = await Board.query().insert({
-      title: data.title,
-      visibility: data.visibility,
-      workspace: data.workspace
-    })
+    const board = await boardSchema.validate(data)
 
+    const newBoard = await Board.query().insert({
+      title: board.title,
+      visibility: board.visibility,
+      workspace: board.workspace
+    })
     response.statusCode = 201
     response.payload = newBoard
-
     response.message = "Board created"
     logger.info('New board created')
     res.status(response.statusCode).send(response)
   } catch (error) {
     logger.error('Create board API failed')
-
     response.statusCode = 400
     response.payload = {}
-    response.message = "Board could not be created!"
-    logger.error(error)
+    response.message = `${error}`
+    logger.error('Board could not be created:', error)
     res.status(response.statusCode).send(response)
   }
 }
@@ -47,27 +47,29 @@ export const getBoard = async (req: Request, res: Response) => {
 
   try {
     const board_id = req.params.board_id
-    const board = await Board.query().findById(board_id)
+    await getBoardSchema.validate({ board_id })
+    const board = await Board.query().findById(req.params.board_id)
 
     if (!board) {
-      response.statusCode = 204
+      response.statusCode = 404
       response.payload = {}
       response.message = "No board found"
       logger.warn('No board found')
-      res.status(response.statusCode).send(response)
     }
     else {
       response.statusCode = 200
       response.payload = board
-
       response.message = 'Board fetched successfully'
-      res.status(response.statusCode).send(response)
       logger.info('Board fetched successfully')
     }
-  } catch (error) {
-    response.statusCode = 400
     res.status(response.statusCode).send(response)
-    logger.error(error)
+  } catch (error) {
+    logger.error('Get board API failed')
+    response.statusCode = 400
+    response.payload = {}
+    response.message = `${error}`
+    res.status(response.statusCode).send(response)
+    logger.error('Board could not be fetched:', error)
   }
 }
 
@@ -76,27 +78,29 @@ export const getWorkspaceBoard = async (req: Request, res: Response) => {
 
   try {
     const workspace_id = req.params.workspace_id
+    await getWorkspaceBoardSchema.validate({ workspace_id })
+
     const board = await Board.query().where('workspace', '=', `${workspace_id}`)
     if (!board.length) {
       logger.warn('No Board found!')
-
-      response.statusCode = 204
+      response.statusCode = 404
       response.payload = {}
       response.message = "No Board found"
-      res.status(response.statusCode).send(response)
     }
     else {
       logger.info('Boards fetched successfully')
       response.statusCode = 200,
-        response.payload = board
-
+      response.payload = board
       response.message = "Boards fetched successfully"
-      res.status(response.statusCode).send(response)
     }
-  } catch (error) {
-    logger.error(error)
-    response.statusCode = 400
     res.status(response.statusCode).send(response)
+  } catch (error) {
+    logger.error('Get workspace API failed')
+    response.statusCode = 400
+    response.payload = {}
+    response.message = `${error}`
+    res.status(response.statusCode).send(response)
+    logger.error('Board could not be fetched:', error)
   }
 }
 
@@ -105,23 +109,24 @@ export const getAllBoard = async (req: Request, res: Response) => {
   try {
     const boards = await Board.query()
     if (boards.length == 0) {
-      response.statusCode = 204
+      response.statusCode = 404
       response.payload = {}
       response.message = "No board found"
       logger.warn('No board found')
-      res.status(response.statusCode).send(response)
     }
     else {
       response.statusCode = 200
       response.payload = boards
-
       response.message = 'Board fetched successfully'
-      res.status(response.statusCode).send(response)
       logger.info('Board fetched successfully')
     }
-  } catch (error) {
-    response.statusCode = 400
     res.status(response.statusCode).send(response)
-    logger.error(error)
+  } catch (error) {
+    logger.error('Get all board API failed')
+    response.statusCode = 400
+    response.payload = {}
+    response.message = `${error}`
+    res.status(response.statusCode).send(response)
+    logger.error('Board could not be fetched:', error)
   }
 }

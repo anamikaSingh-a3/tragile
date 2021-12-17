@@ -13,7 +13,7 @@ export const getBoardByWorkspaceThunk = (workspaceId: string) => async (
     if (board.status === 200) {
       dispatch(addActiveBoards(board.data.payload))
     }
-    else if (board.status === 204) dispatch(messageAction("No board found"))
+    else if (board.status === 404) dispatch(messageAction("No board found"))
   } catch (error) {
     dispatch(resetActiveBoards())
     dispatch(resetActiveBoardsList())

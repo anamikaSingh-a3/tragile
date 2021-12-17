@@ -95,8 +95,6 @@ export const signUp = async (req: Request, res: Response) => {
         logger.error('User signup API failed')
         response.statusCode = 400
         response.payload = {}
-
-
         response.message = 'User could not be created!'
         logger.error(error)
         res.status(response.statusCode).send(response)
