@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
+import checkAuth from './controller/authController';
 
 import board from './routes/board';
 import card from './routes/card';
@@ -13,10 +14,10 @@ const app: Application = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/api/workspace', workspace)
-app.use('/api/board', board)
-app.use('/api/list', list)
-app.use('/api/card',card)
+app.use('/api/workspace', checkAuth, workspace)
+app.use('/api/board', checkAuth, board)
+app.use('/api/list', checkAuth, list)
+app.use('/api/card', checkAuth, card)
 app.use('/api/user',user)
 
 const port = process.env.PORT || 3002
