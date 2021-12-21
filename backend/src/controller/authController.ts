@@ -12,10 +12,10 @@ const checkAuth = (
         const bearer: string[] = bearerHeader.split(" ");
         const bearerToken: string = bearer[1];
         if (bearerToken == null) {
-            res.sendStatus(401);
+            res.status(400);
         }
         jwt.verify(bearerToken, SECRET as string, (err, user) => {
-            if (err) return res.sendStatus(403);
+            if (err) return res.status(403);
         });
 
     } else {

@@ -10,6 +10,7 @@ export const signInThunk = (email: string, password: string) => async (dispatch:
     try {
         const response = await axios.post(`${userApi}/signIn`, user)
         if (response.status === 202) {
+            localStorage.setItem("token", JSON.stringify(response.data.payload.token));
             dispatch(addUser(response.data.payload))
             dispatch(messageAction(response.data.message))
         }
