@@ -3,6 +3,7 @@ declare module 'tragile-workspace' {
         title: string
         type: string
         description?: string
+        created_by: number
     }
 }
     

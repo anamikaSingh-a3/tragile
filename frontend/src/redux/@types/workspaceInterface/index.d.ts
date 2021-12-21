@@ -5,6 +5,7 @@ declare module 'tragile-workspace' {
     type: string
     description: string
     createdAt?: Date
+    created_by: number
   }
   export interface IWorkspaceState {
     workspaces: IWorkspace[]

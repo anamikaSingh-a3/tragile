@@ -4,6 +4,7 @@ export const createWorkspaceSchema = yup.object().shape({
   title: yup.string().required('Workspace title is required'),
   type: yup.string().required('Workspace type is required'),
   description: yup.string(),
+  created_by: yup.number().required()
 })
 
 export const getWorkspaceSchema = yup.object().shape({

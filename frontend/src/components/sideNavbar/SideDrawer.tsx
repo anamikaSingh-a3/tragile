@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
+import { IUserState } from 'tragile-user';
 import { IWorkspace, IWorkspaceState } from 'tragile-workspace';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -30,6 +31,7 @@ const SideDrawer: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
+  const user = useSelector((state: IUserState) => state.user.userData[0].user_id)
 
   const handleClose = () => {
     setOpenModal(false)
@@ -49,6 +51,7 @@ const SideDrawer: React.FC = () => {
       title: title,
       type: options[selectedIndex],
       description: description,
+      created_by: user ? user : 0
     }
     dispatch(createWorkspaceThunk(requestBody))
     handleClose()

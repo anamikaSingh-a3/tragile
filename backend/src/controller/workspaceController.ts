@@ -19,12 +19,14 @@ export const createWorkspace = async (req: Request, res: Response) => {
       title: req.body.title,
       type: req.body.type,
       description: req.body.description,
+      created_by: req.body.created_by
     }
     const workspace = await createWorkspaceSchema.validate(data)
     const newWorkspace = await Workspace.query().insert({
       title: workspace.title,
       type: workspace.type,
       description: workspace.description,
+      created_by: workspace.created_by
     })
     response.statusCode = 201
     response.payload = newWorkspace

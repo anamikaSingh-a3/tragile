@@ -1,5 +1,6 @@
 declare module 'tragile-user' {
     export interface IUser {
+        user_id?: number
         name: string
         username?: string
         bio?: string
@@ -21,7 +22,7 @@ declare module 'tragile-user' {
     }
     export interface IUserState {
         user: {
-            userDate: [IUser],
+            userData: IUser[],
             token: string
         }
     }
