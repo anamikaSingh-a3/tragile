@@ -136,8 +136,8 @@ const SideDrawer: React.FC = () => {
   )
 
   useEffect(() => {
-    dispatch(getAllWorkspacesThunk())
-  }, [dispatch])
+    dispatch(getAllWorkspacesThunk(user ? user : 0))
+  }, [user, dispatch])
 
   let location = useLocation()
 

@@ -21,7 +21,8 @@ const SignIn: React.FC = () => {
   const signUpHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(signInThunk(email, password))
-    if (user) history.push('/')
+    // if (user) 
+    history.push('/')
   }
 
   useEffect(() => {

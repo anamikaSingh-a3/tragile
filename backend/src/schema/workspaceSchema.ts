@@ -11,6 +11,6 @@ export const getWorkspaceSchema = yup.object().shape({
   workspace_id: yup.number().required("Workspace id is required")
 })
 
-export const workspaceByIdSchema = yup.object().shape({
-  workspace_id: yup.string(),
+export const workspaceByUserId = yup.object().shape({
+  user_id: yup.number().required('User id is required'),
 })

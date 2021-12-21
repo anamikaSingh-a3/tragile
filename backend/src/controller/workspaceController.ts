@@ -3,7 +3,7 @@ import { ITragileResponse } from 'tragile-response';
 import { IWorkspace } from 'tragile-workspace';
 
 import { Workspace } from '../database/models/workspace';
-import { createWorkspaceSchema, getWorkspaceSchema } from '../schema/workspaceSchema';
+import { createWorkspaceSchema, getWorkspaceSchema, workspaceByUserId } from '../schema/workspaceSchema';
 import logger from '../utility/logger';
 
 const response: ITragileResponse = {
@@ -47,7 +47,6 @@ export const getWorkspace = async (req: Request, res: Response) => {
   logger.info('In get workspace API')
   try {
     const workspace_id = req.params.workspace_id
-
     const workspaceSchema = await getWorkspaceSchema.validate({workspace_id})
     const workspace = await Workspace.query().findById(workspaceSchema.workspace_id)
     
@@ -77,7 +76,9 @@ export const getWorkspace = async (req: Request, res: Response) => {
 export const getAllWorkspace = async (req: Request, res: Response) => {
   logger.info('In get all workspace API')
   try {
-    const workspaces = await Workspace.query();
+    const user_id = req.params.user_id
+    const workspace = await workspaceByUserId.validate({ user_id })
+    const workspaces = await Workspace.query().where('created_by', '=', `${workspace.user_id}`);
     if (workspaces.length == 0) {
       response.statusCode = 404
       response.payload = {}

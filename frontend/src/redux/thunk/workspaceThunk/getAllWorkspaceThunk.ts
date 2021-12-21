@@ -5,9 +5,9 @@ import { addWorkspaces } from '../../action';
 import { messageAction } from '../../action/messageActions/messageAction';
 import config from '../header';
 
-export const getAllWorkspacesThunk = () => async (dispatch: any) => {
+export const getAllWorkspacesThunk = (user_id: number) => async (dispatch: any) => {
   try {
-    const workspace = await axios.get(`${workspaceApi}/getAll`, { ...config })
+    const workspace = await axios.get(`${workspaceApi}/getAll/${user_id}`, { ...config })
     if (workspace.status === 200)
       dispatch(addWorkspaces(workspace.data.payload))
     else
