@@ -1,8 +1,6 @@
 import axios from "axios"
-import { IUserEmailVerification } from "tragile-user"
 import { userApi } from "../../../endpoints.ts"
 
-// export const sendEmailThunk = (userEmail: IUserEmailVerification) => async (dispatch: any) => {
 export const sendEmailThunk = (email: string, name: string) => async (dispatch: any) => {
     try {
         const response = await axios.post(`${userApi}/getVerificationEmail`, { email, name })

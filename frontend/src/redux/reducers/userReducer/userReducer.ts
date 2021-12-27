@@ -1,4 +1,4 @@
-import { ADD_USER, ADD_USER_WITH_TOKEN, RESET_USER } from '../../types';
+import { ADD_USER, RESET_USER } from '../../types';
 
 const initialState = {
     userData: [{
@@ -22,9 +22,6 @@ const UserReducer = (state = initialState, action: { type: string, payload: stri
         case RESET_USER: {
             return initialState
         }
-        // case ADD_USER_WITH_TOKEN: {
-        //     return action.payload
-        // }
         default:
             return state
     }

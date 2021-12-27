@@ -3,7 +3,6 @@ import {
   Container,
   CssBaseline,
   TextField,
-  Typography
 } from '@material-ui/core'
 import React, { useState } from 'react'
 import Copyright from '../components/common/Copyright'
@@ -16,10 +15,11 @@ import { sendEmailThunk } from '../redux/thunk/userThunk/sendEmailThunk'
 const EmailVerification = () => {
   const [email, setEmail] = useState<string>('')
   const [name, setName] = useState<string>('')
-
   const [message, setMessage] = useState<any>('')
   const [loading, setLoading] = useState<boolean>(false)
+
   const dispatch = useDispatch()
+
   const signHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -27,7 +27,6 @@ const EmailVerification = () => {
     setLoading(true)
     const response = await dispatch(sendEmailThunk(email, name))
 
-    console.log('Response', response)
     setMessage(response)
     setLoading(false)
   }

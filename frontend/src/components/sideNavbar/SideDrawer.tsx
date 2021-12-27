@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom';
 import { IUserState } from 'tragile-user';
 import { IWorkspace, IWorkspaceState } from 'tragile-workspace';
 import { v4 as uuidv4 } from 'uuid';
-
 import { activeWorkspace, resetActiveBoards } from '../../redux/action';
 import { createWorkspaceThunk } from '../../redux/thunk/workspaceThunk/createWorkspaceThunk';
 import { getAllWorkspacesThunk } from '../../redux/thunk/workspaceThunk/getAllWorkspaceThunk';
@@ -142,8 +141,7 @@ const SideDrawer: React.FC = () => {
 
   let location = useLocation()
 
-  // if(location.pathname === "/" || location.pathname==="/signIn" || location.pathname==="/signUp/:payload" || location.pathname==="/verify" || location.pathname==="/sign") {
-  if (location.pathname !== "/" && location.pathname !== "/workspaceBoards" && location.pathname !== "/board/") {
+  if (location.pathname !== "/" && location.pathname !== "/workspaceBoards" && location.pathname !== "/board/:id") {
     return null
   } else
 

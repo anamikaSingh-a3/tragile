@@ -1,19 +1,14 @@
 import { Box, Button, Container, CssBaseline, Grid, List, ListItem, ListItemText, Menu, MenuItem, TextField, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router'
 import { v4 as uuidv4 } from 'uuid';
-
-import { ITokenState, IUserState, IMessageState } from 'tragile-user';
-
-
+import { ITokenState, IUserState } from 'tragile-user';
 import Copyright from '../components/common/Copyright';
-import { resetToken } from '../redux/action/userActions/userActions';
 import { signUpThunk } from '../redux/thunk/userThunk/signUpThunk';
 import { StyledButton } from '../theme/uiComponents/Button';
 import { StyledContainerUser } from '../theme/uiComponents/layout/Container';
 import { StyledPaperUser } from '../theme/uiComponents/layout/Paper';
-import { SECRET } from '../constants'
 import ModalContainer from '../components/common/Modal';
 import { StyledModal } from '../theme/uiComponents/Modal';
 import { options } from '../components/sideNavbar/menuOptions';
@@ -27,8 +22,6 @@ interface IParams {
   name: string
 }
 
-
-
 const SignUp: React.FC = () => {
   const history = useHistory()
   const [title, setTile] = useState<string>('')
@@ -37,15 +30,11 @@ const SignUp: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
-  console.log("PAYLOAD", email, name)
-  // const [name, setName] = useState('')
-// const [email, setEmail] = useState('')
 
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
-  // const message = useSelector((state: IMessageState) => state.responseMessage.message ? state.responseMessage.message : '')
   const user = useSelector((state: IUserState) => state.user.userData ? state.user.userData[0].user_id : 1)
 
   const token = useSelector((state: ITokenState) => state.token)
@@ -155,9 +144,7 @@ const SignUp: React.FC = () => {
       email: email,
       password: password
     }))
-    // alert(token)
     if (response !== null) {
-      console.log("message", token.length)
       setLoading(false)
       if (!token.length) {
         setOpenModal(true)
@@ -170,15 +157,6 @@ const SignUp: React.FC = () => {
       }
     }
   }
-
-// const userEmail = jwt.verify(emailToken, SECRET as string)
-// console.log("userEmail", userEmail)
-
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(resetToken())
-  //   }
-  // }, [])
 
   return (
     <>
@@ -203,8 +181,7 @@ const SignUp: React.FC = () => {
                 placeholder='Enter email'
                 name='email'
                 autoComplete='email'
-                value={email}
-                // onChange={e => setEmail(e.target.value)}
+                    value={email}
                 disabled={true}
                 autoFocus
               />
@@ -218,8 +195,7 @@ const SignUp: React.FC = () => {
                 placeholder='Enter name'
                 name='name'
                 autoComplete='name'
-                value={name}
-                // onChange={e => setName(e.target.value)}
+                    value={name}
                 disabled={true}
                 autoFocus
               />

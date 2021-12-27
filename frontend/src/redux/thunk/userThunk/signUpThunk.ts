@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { IUser } from 'tragile-user';
-
 import { userApi } from '../../../endpoints.ts';
 import { messageAction } from '../../action/messageActions/messageAction';
-import { addToken, addUser, addUserToken } from '../../action/userActions/userActions';
+import { addToken, addUserToken } from '../../action/userActions/userActions';
 
 export const signUpThunk = (user: IUser) => async (dispatch: any) => {
     try {

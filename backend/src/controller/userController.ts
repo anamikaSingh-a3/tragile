@@ -106,7 +106,6 @@ export const signUp = async (req: Request, res: Response) => {
 export const sendVerificationEmail = async (req: Request, res: Response) => {
   logger.info('In verify email API')
   try {
-    console.log(req.body)
     const data: IVerifyUser = {
       email: req.body.email,
       name: req.body.name
