@@ -18,12 +18,30 @@ declare module 'tragile-user' {
         name: string
         username?: string
         email: string
-        password: string
+        password?: string
+    }
+
+    export interface IUserTokenState {
+        userToken: IUserToken
+    }
+    export interface IUserToken {
+        name: string
+        email: string
     }
     export interface IUserState {
         user: {
             userData: IUser[],
             token: string
         }
+    }
+    export interface IUserEmailVerification {
+        email: string
+    }
+
+    export interface IMessage {
+        message: string
+    }
+    export interface IMessageState {
+        message: ''
     }
 }

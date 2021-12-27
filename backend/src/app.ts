@@ -14,6 +14,9 @@ const app: Application = express()
 app.use(express.json())
 app.use(cors())
 
+// app.use(express.urlencoded());
+// npm i body-parser --save
+
 app.use('/api/workspace', checkAuth, workspace)
 app.use('/api/board', checkAuth, board)
 app.use('/api/list', checkAuth, list)

@@ -8,6 +8,7 @@ export class User extends Model {
   public email: string | undefined
   public bio: string | undefined
   public password: string | undefined
+  public verified: boolean | undefined
 
   static get tableName() {
     return 'users'
@@ -26,7 +27,8 @@ export class User extends Model {
         username: { type: 'string' },
         bio: { type: 'string' },
         email: { type: 'string' },
-        password: { type: 'string' }
+        password: { type: 'string' },
+        verified: { type: 'boolean' }
       }
     }
   }

@@ -8,6 +8,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('bio')
     table.string('email').notNullable()
     table.string('password').notNullable()
+    table.boolean('verified').nullable().defaultTo(false)
     table.timestamps(true, true)
   })
 }

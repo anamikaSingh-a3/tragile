@@ -31,7 +31,7 @@ const SideDrawer: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const workspaces = useSelector((state: IWorkspaceState) => state.workspaces)
-  const user = useSelector((state: IUserState) => state.user.userData[0].user_id)
+  const user = useSelector((state: IUserState) => state.user.userData ? state.user.userData[0].user_id : 0)
 
   const handleClose = () => {
     setOpenModal(false)
@@ -136,12 +136,14 @@ const SideDrawer: React.FC = () => {
   )
 
   useEffect(() => {
-    dispatch(getAllWorkspacesThunk(user ? user : 0))
+    if (user)
+      dispatch(getAllWorkspacesThunk(user))
   }, [user, dispatch])
 
   let location = useLocation()
 
-  if(location.pathname==="/signIn" || location.pathname==="/signUp") {
+  // if(location.pathname === "/" || location.pathname==="/signIn" || location.pathname==="/signUp/:payload" || location.pathname==="/verify" || location.pathname==="/sign") {
+  if (location.pathname !== "/" && location.pathname !== "/workspaceBoards" && location.pathname !== "/board/") {
     return null
   } else
 

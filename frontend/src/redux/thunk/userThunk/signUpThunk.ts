@@ -3,7 +3,7 @@ import { IUser } from 'tragile-user';
 
 import { userApi } from '../../../endpoints.ts';
 import { messageAction } from '../../action/messageActions/messageAction';
-import { addToken } from '../../action/userActions/userActions';
+import { addToken, addUser, addUserToken } from '../../action/userActions/userActions';
 
 export const signUpThunk = (user: IUser) => async (dispatch: any) => {
     try {
@@ -12,7 +12,11 @@ export const signUpThunk = (user: IUser) => async (dispatch: any) => {
             dispatch(addToken(response.data.payload))
             dispatch(messageAction(response.data.message))
         }
-        else dispatch(messageAction(response.data.message))
+        else if (response.status === 200) {
+            dispatch(messageAction(response.data.message))
+            localStorage.setItem("token", JSON.stringify(response.data.payload.token));
+            dispatch(addUserToken(response.data.payload))
+        }
 
     } catch (error) {
         dispatch(messageAction('User could not be signed up'))

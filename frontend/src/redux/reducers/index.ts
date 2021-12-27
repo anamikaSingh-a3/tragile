@@ -11,12 +11,14 @@ import listReducer from './listReducer/listReducer';
 import errorReducer from './messageReducer/messageReducer';
 import addTokenReducer from './userReducer/tokenReducer';
 import addUserReducer from './userReducer/userReducer';
+import UserTokenReducer from './userReducer/userTokenReducer';
 import activeWorkspaceReducer from './workspaceReducer/activeWorkspaceReducer';
 import workspaceReducer from './workspaceReducer/workspaceReducer';
 
 export default combineReducers({
   user: addUserReducer,
   token: addTokenReducer,
+  userToken: UserTokenReducer,
   boards: boardsReducer,
   workspaces: workspaceReducer,
   list: listReducer,

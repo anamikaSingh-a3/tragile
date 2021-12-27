@@ -1,6 +1,6 @@
-import { IUser } from 'tragile-user';
+import { IUser, IUserToken } from 'tragile-user';
 
-import { ADD_TOKEN, ADD_USER, RESET_TOKEN, RESET_USER } from '../../types';
+import { ADD_TOKEN, ADD_USER, ADD_USER_WITH_TOKEN, RESET_TOKEN, RESET_USER } from '../../types';
 
 
 export const addToken = (token: string) => {
@@ -13,6 +13,13 @@ export const addToken = (token: string) => {
 export const addUser = (user: IUser) => {
     return {
         type: ADD_USER,
+        payload: user
+    }
+}
+
+export const addUserToken = (user: IUserToken) => {
+    return {
+        type: ADD_USER_WITH_TOKEN,
         payload: user
     }
 }

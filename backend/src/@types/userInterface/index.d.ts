@@ -6,4 +6,8 @@ declare module 'tragile-user' {
         password: string,
         bio?: string,
     }
+    export interface IVerifyUser {
+        email: string,
+        name: string
+    }
 }

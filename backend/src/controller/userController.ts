@@ -2,12 +2,14 @@ import bcrypt from 'bcrypt'
 import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { ITragileResponse } from 'tragile-response'
-import { IUser } from 'tragile-user'
-import { SECRET } from '../constants'
+import { IUser, IVerifyUser } from 'tragile-user'
+import { SECRET, USER_EMAIL, USER_PASSWORD } from '../constants'
 
 import { User } from '../database/models/user'
-import { signInSchema, signUpSchema } from '../schema/userSchema'
+import { signInSchema, signUpSchema, verifyEmailSchema } from '../schema/userSchema'
 import logger from '../utility/logger'
+
+import nodemailer from 'nodemailer'
 
 const response: ITragileResponse = {
   statusCode: 0,
@@ -16,7 +18,6 @@ const response: ITragileResponse = {
 }
 export const signIn = async (req: Request, res: Response) => {
   logger.info('In signIn API')
-
   try {
     const data = {
       email: req.body.email,
@@ -85,7 +86,7 @@ export const signUp = async (req: Request, res: Response) => {
         password: hashedPassword,
         bio: user.bio
       })
-      const token = jwt.sign(user.email, 'secret')
+      const token = jwt.sign(user.email, SECRET as string)
       response.statusCode = 201
       response.payload = token
       response.message = 'User registered'
@@ -99,5 +100,86 @@ export const signUp = async (req: Request, res: Response) => {
     response.message = `${error}`
     res.status(response.statusCode).send(response)
     logger.error('User not created:', error)
+  }
+}
+
+export const sendVerificationEmail = async (req: Request, res: Response) => {
+  logger.info('In verify email API')
+  try {
+    console.log(req.body)
+    const data: IVerifyUser = {
+      email: req.body.email,
+      name: req.body.name
+    }
+    logger.info(data.email)
+    logger.info(data.name)
+
+    const user = await verifyEmailSchema.validate(data)
+    logger.info(user.email)
+    logger.info(user.name)
+    const userToken = jwt.sign({ email: req.body.email, name: req.body.name }, SECRET as string)
+    logger.info("token", userToken)
+    const link = `http://localhost:3000/verify/${userToken}`
+
+    const mailOptions = {
+      from: 'Anamika',
+      to: `${user.email}`,
+      subject: 'Tragile - verify your email',
+      html: `<b> Hello, from Tragile. Please verify your email by clicking on the below link.</b><a href=${link}>Click here to verify</a>`
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      port: 587,
+      auth: {
+        user: USER_EMAIL,
+        pass: USER_PASSWORD
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    })
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        logger.error('Error:', error)
+        response.statusCode = 404
+        response.payload = {}
+        response.message = 'Email verification failed'
+      }
+      else {
+        logger.info('Email verification sent')
+        response.statusCode = 200
+        response.payload = userToken
+        response.message = 'Email verification sent'
+      }
+      res.status(response.statusCode).send(response)
+    })
+  } catch (error) {
+    logger.error('Send verification mail api failed')
+    response.statusCode = 400
+    response.payload = `${error}`
+    response.message = `${error}`
+    res.status(response.statusCode).send(response)
+    logger.error('Email not sent:', error)
+  }
+}
+
+export const verifyEmailToken = async (req: Request, res: Response) => {
+  try {
+    const userToken = req.params.userToken;
+    const user = jwt.verify(userToken, SECRET as string)
+    logger.info("user", user)
+    response.statusCode = 200
+    response.payload = user
+    response.message = "Email is verified",
+      res.status(response.statusCode).send(response)
+  } catch (error) {
+    logger.error('Email verification failed')
+    response.statusCode = 400
+    response.payload = {}
+    response.message = `${error}`
+    logger.error('Verification failed:', error)
+    res.status(response.statusCode).send(response)
   }
 }

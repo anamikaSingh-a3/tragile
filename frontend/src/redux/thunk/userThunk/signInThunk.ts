@@ -5,7 +5,6 @@ import { messageAction } from '../../action/messageActions/messageAction';
 import { addUser } from '../../action/userActions/userActions';
 
 export const signInThunk = (email: string, password: string) => async (dispatch: any) => {
-
     const user = { email, password }
     try {
         const response = await axios.post(`${userApi}/signIn`, user)

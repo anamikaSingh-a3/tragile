@@ -3,7 +3,9 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import React from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useHistory } from 'react-router'
+import { StyledButton } from '../../theme/uiComponents/Button'
+
 
 import { StyledAvatar } from '../../theme/uiComponents/toolbar/Avatar';
 import { StyledDropDownButton } from '../../theme/uiComponents/toolbar/DropDown';
@@ -15,8 +17,17 @@ import Search from '../common/Search';
 const options = ['Workspaces', 'Recent', 'Starred', 'Templates']
 
 const TopNavbar: React.FC = () => {
-  let location = useLocation()
-  if (location.pathname === "/signIn" || location.pathname === "/signUp") {
+const location = useLocation()
+const history = useHistory()
+const onSignUpHandler = () => {
+  history.push('/sign')
+}
+
+const onSignInHandler = () => {
+  history.push('/signIn')
+}
+
+  if (location.pathname === "/signIn" || location.pathname === "/signUp/") {
     return (<StyledToolbar> <StyledIconButton edge='start' color='inherit'>
       <AppsIcon />
       <AssessmentIcon />
@@ -54,6 +65,18 @@ const TopNavbar: React.FC = () => {
             <h6> AS </h6>
           </StyledAvatar>
         </StyledIconButton>
+{
+  location.pathname !== '/signIn' &&
+  location.pathname !== '/signUp/:payload' ? (
+    <>
+      <StyledButton onClick={onSignUpHandler}>SignUP</StyledButton>
+      <StyledButton onClick={onSignInHandler}>SignIn</StyledButton>
+    </>
+  ) : (
+    <></>
+  )
+}
+
       </StyledToolbar>
     </>
   )

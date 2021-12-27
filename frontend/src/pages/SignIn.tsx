@@ -18,7 +18,7 @@ const SignIn: React.FC = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const user = useSelector((state: IUserState) => state.user.token)
-  const signUpHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const signUpHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(signInThunk(email, password))
     // if (user) 
