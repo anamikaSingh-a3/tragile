@@ -14,8 +14,16 @@ import addUserReducer from './userReducer/userReducer';
 import UserTokenReducer from './userReducer/userTokenReducer';
 import activeWorkspaceReducer from './workspaceReducer/activeWorkspaceReducer';
 import workspaceReducer from './workspaceReducer/workspaceReducer';
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
-export default combineReducers({
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['activeWorkspace', 'workspaces', 'user', 'boards', 'list', 'activeWorkspaceBoard', 'activeBoard', 'activeBoardList', 'card']
+}
+
+const rootReducer = combineReducers({
   user: addUserReducer,
   token: addTokenReducer,
   userToken: UserTokenReducer,
@@ -32,3 +40,4 @@ export default combineReducers({
   message: errorReducer
 })
 
+export default persistReducer(persistConfig, rootReducer)
