@@ -36,6 +36,7 @@ export const signIn = async (req: Request, res: Response) => {
       response.statusCode = 401
       response.message = 'Wrong email or password'
       response.payload = {}
+      logger.warn('Wrong email or password')
     }
     else if (user.length > 0) {
       const isMatch = await bcrypt.compare(userSchema.password, `${user[0].password}`)
@@ -43,11 +44,13 @@ export const signIn = async (req: Request, res: Response) => {
         response.statusCode = 401
         response.message = 'Wrong email or password'
         response.payload = {}
+        logger.warn('Wrong email or password')
       } else {
         const token = jwt.sign(userSchema.email, SECRET as string)
         response.statusCode = 200
         response.message = 'User successfully logged in'
         response.payload = { userData, token: token }
+        logger.info('User successfully logged in')
       }
     }
     res.status(response.statusCode).send(response)
