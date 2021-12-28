@@ -16,6 +16,7 @@ const response: ITragileResponse = {
   payload: {},
   message: 'Something went wrong!'
 }
+
 export const signIn = async (req: Request, res: Response) => {
   logger.info('In signIn API')
   try {
@@ -31,15 +32,20 @@ export const signIn = async (req: Request, res: Response) => {
 
     const userData = await User.query().where('email', '=', `${userSchema.email}`)
 
-    if (user.length > 0) {
+    if (userData.length === 0) {
+      response.statusCode = 401
+      response.message = 'Wrong email or password'
+      response.payload = {}
+    }
+    else if (user.length > 0) {
       const isMatch = await bcrypt.compare(userSchema.password, `${user[0].password}`)
       if (!isMatch) {
-        response.statusCode = 200
+        response.statusCode = 401
         response.message = 'Wrong email or password'
         response.payload = {}
       } else {
         const token = jwt.sign(userSchema.email, SECRET as string)
-        response.statusCode = 202
+        response.statusCode = 200
         response.message = 'User successfully logged in'
         response.payload = { userData, token: token }
       }
@@ -110,14 +116,11 @@ export const sendVerificationEmail = async (req: Request, res: Response) => {
       email: req.body.email,
       name: req.body.name
     }
-    logger.info(data.email)
-    logger.info(data.name)
 
     const user = await verifyEmailSchema.validate(data)
-    logger.info(user.email)
-    logger.info(user.name)
+
     const userToken = jwt.sign({ email: req.body.email, name: req.body.name }, SECRET as string)
-    logger.info("token", userToken)
+
     const link = `http://localhost:3000/verify/${userToken}`
 
     const mailOptions = {
@@ -168,11 +171,12 @@ export const verifyEmailToken = async (req: Request, res: Response) => {
   try {
     const userToken = req.params.userToken;
     const user = jwt.verify(userToken, SECRET as string)
-    logger.info("user", user)
+
     response.statusCode = 200
     response.payload = user
     response.message = "Email is verified",
       res.status(response.statusCode).send(response)
+
   } catch (error) {
     logger.error('Email verification failed')
     response.statusCode = 400
