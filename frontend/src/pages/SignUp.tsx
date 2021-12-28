@@ -68,7 +68,7 @@ const SignUp: React.FC = () => {
     }
     dispatch(createWorkspaceThunk(requestBody))
     handleClose()
-    history.push('/')
+    history.push('/dashboard')
   }
 
 

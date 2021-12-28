@@ -141,7 +141,7 @@ const SideDrawer: React.FC = () => {
 
   let location = useLocation()
 
-  if (location.pathname !== "/" && location.pathname !== "/workspaceBoards" && location.pathname !== "/board/:id") {
+  if (location.pathname !== "/dashboard" && location.pathname !== "/workspaceBoards" && location.pathname !== "/board/:id") {
     return null
   } else
 

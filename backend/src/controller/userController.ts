@@ -12,7 +12,7 @@ import logger from '../utility/logger'
 import nodemailer from 'nodemailer'
 
 const response: ITragileResponse = {
-  statusCode: 0,
+  statusCode: 400,
   payload: {},
   message: 'Something went wrong!'
 }

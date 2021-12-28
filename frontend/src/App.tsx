@@ -12,7 +12,7 @@ const App = () => {
       <Box maxWidth='lg'>
         <BrowserRouter>
           <Navbar />
-          <SideDrawer />
+          {/* <SideDrawer /> */}
           <Routes />
         </BrowserRouter>
       </Box>

@@ -19,7 +19,7 @@ const SignIn: React.FC = () => {
   const signUpHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(signInThunk(email, password))
-    history.push('/')
+    history.push('/dashboard')
   }
 
   useEffect(() => {

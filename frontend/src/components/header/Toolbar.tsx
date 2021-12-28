@@ -27,7 +27,7 @@ const onSignInHandler = () => {
   history.push('/signIn')
 }
 
-  if (location.pathname === "/signIn" || location.pathname === "/signUp/") {
+  if (location.pathname === "/signIn" || location.pathname === "/signUp/" || location.pathname === "/sign" || location.pathname === "/") {
     return (<StyledToolbar> <StyledIconButton edge='start' color='inherit'>
       <AppsIcon />
       <AssessmentIcon />
