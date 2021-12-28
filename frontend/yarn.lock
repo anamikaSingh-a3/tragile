@@ -1929,13 +1929,6 @@
     "@types/prop-types" "*"
     "csstype" "^3.0.2"
 
-"@types/redux-persist@^4.3.1":
-  "integrity" "sha1-qkyHaFngvqUVXl95gOW4xGmdwuY="
-  "resolved" "https://registry.npmjs.org/@types/redux-persist/-/redux-persist-4.3.1.tgz"
-  "version" "4.3.1"
-  dependencies:
-    "redux-persist" "*"
-
 "@types/resolve@0.0.8":
   "integrity" "sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ=="
   "resolved" "https://registry.npmjs.org/@types/resolve/-/resolve-0.0.8.tgz"
@@ -9841,7 +9834,7 @@
   "resolved" "https://registry.npmjs.org/redux-devtools-extension/-/redux-devtools-extension-2.13.9.tgz"
   "version" "2.13.9"
 
-"redux-persist@*", "redux-persist@^6.0.0":
+"redux-persist@^6.0.0":
   "integrity" "sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ=="
   "resolved" "https://registry.npmjs.org/redux-persist/-/redux-persist-6.0.0.tgz"
   "version" "6.0.0"
