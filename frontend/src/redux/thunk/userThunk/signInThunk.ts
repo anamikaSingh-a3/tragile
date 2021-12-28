@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { userApi } from '../../../endpoints.ts';
 import { messageAction } from '../../action/messageActions/messageAction';
-import { addUser } from '../../action/userActions/userActions';
+import { addToken, addUser, addUserToken, resetUser } from '../../action/userActions/userActions';
 
 export const signInThunk = (email: string, password: string) => async (dispatch: any) => {
     const user = { email, password }
@@ -11,9 +11,13 @@ export const signInThunk = (email: string, password: string) => async (dispatch:
         if (response.status === 200) {
             localStorage.setItem("token", JSON.stringify(response.data.payload.token));
             dispatch(addUser(response.data.payload))
+            dispatch(addToken(response.data.payload.token))
             dispatch(messageAction(response.data.message))
         }
-        else if (response.status === 401) dispatch(messageAction(response.data.message))
+        else if (response.status === 401) {
+            dispatch(resetUser())
+            dispatch(messageAction(response.data.message))
+        }
 
     } catch (error) {
         dispatch(messageAction('User could not be signed in'))

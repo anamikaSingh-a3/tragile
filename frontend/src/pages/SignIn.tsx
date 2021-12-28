@@ -1,7 +1,8 @@
 import { Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { ITokenState, IUserState } from 'tragile-user';
 import Copyright from '../components/common/Copyright';
 import { resetUser } from '../redux/action/userActions/userActions';
 import { signInThunk } from '../redux/thunk/userThunk/signInThunk';
@@ -16,10 +17,20 @@ const SignIn: React.FC = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const token = useSelector((state: ITokenState) => state.token)
   const signUpHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(signInThunk(email, password))
-    history.push('/dashboard')
+    // alert(token)
+    const check = () => {
+
+      console.log("token", token)
+      if (token.length > 0)
+        history.push('/dashboard')
+      else
+        console.log('Check your credentials')
+    }
+    setTimeout(check, 3000)
   }
 
   useEffect(() => {
