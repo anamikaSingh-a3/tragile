@@ -4,7 +4,6 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { useLocation } from 'react-router-dom';
 import { IUserState } from 'tragile-user';
 import { IWorkspace, IWorkspaceState } from 'tragile-workspace';
 import { v4 as uuidv4 } from 'uuid';
@@ -138,12 +137,6 @@ const SideDrawer: React.FC = () => {
     if (user)
       dispatch(getAllWorkspacesThunk(user))
   }, [user, dispatch])
-
-  let location = useLocation()
-
-  if (location.pathname !== "/dashboard" && location.pathname !== "/workspaceBoards" && location.pathname !== "/board/:id") {
-    return null
-  } else
 
   return (
     <>

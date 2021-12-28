@@ -8,6 +8,7 @@ import { IActiveBoardListState, IList } from 'tragile-list';
 import BoardList from '../components/BoardList';
 import Heading from '../components/common/Heading';
 import InputContainer from '../components/createComponent/InputContainer';
+import SideDrawer from '../components/sideNavbar/SideDrawer';
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
 import updateCardListIdThunk from '../redux/thunk/cardThunk/updateCardListIdThunk';
 import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk';
@@ -46,6 +47,8 @@ const BoardPage: React.FC = () => {
     )
   }
   return (
+    <>
+      <SideDrawer />
     <StyledContainer maxWidth='lg'>
       <Heading type={'Board '} value={activeBoard.title} />
       <StyledListContainer maxWidth='lg'>
@@ -68,6 +71,7 @@ const BoardPage: React.FC = () => {
         <InputContainer type='list' listId={''} />
       </StyledListContainer>
     </StyledContainer>
+    </>
   )
 }
 

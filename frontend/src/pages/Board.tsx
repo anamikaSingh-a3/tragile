@@ -7,6 +7,7 @@ import { IActiveWorkspaceState } from 'tragile-workspace';
 
 import Heading from '../components/common/Heading';
 import CreateBoard from '../components/CreateBoard';
+import SideDrawer from '../components/sideNavbar/SideDrawer';
 import { getBoardByIdThunk } from '../redux/thunk/boardThunk/getBoardByIdThunk';
 import { getBoardByWorkspaceThunk } from '../redux/thunk/boardThunk/getBoardByWorkspaceThunk';
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
@@ -38,6 +39,7 @@ const Board: React.FC = () => {
 
   return (
     <>
+      <SideDrawer />
       <StyledContainer maxWidth='lg'>
         <Heading type={'WorkSpace'} value={activeWorkspace.title} />
         <StyledBoardContainer maxWidth='lg'>
