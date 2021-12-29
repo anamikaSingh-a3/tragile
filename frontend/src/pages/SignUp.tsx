@@ -35,7 +35,7 @@ const SignUp: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
-  const user = useSelector((state: IUserState) => state.user.userData ? state.user.userData[0].user_id : 1)
+  const user = useSelector((state: IUserState) => state.user.userData[0].user_id)
 
   const token = useSelector((state: ITokenState) => state.token)
 
@@ -64,7 +64,7 @@ const SignUp: React.FC = () => {
       title: title,
       type: options[selectedIndex],
       description: description,
-      created_by: user ? user : 1
+      created_by: user
     }
     dispatch(createWorkspaceThunk(requestBody))
     handleClose()

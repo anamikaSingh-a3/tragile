@@ -17,6 +17,10 @@ declare module 'tragile-user' {
         loader: boolean
     }
 
+    export interface ILogoutState {
+        logout: boolean
+    }
+
     export interface IUser {
         name: string
         username?: string

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { ILoaderState, ITokenState, IUserState } from 'tragile-user';
 import Copyright from '../components/common/Copyright';
 import { resetUser } from '../redux/action/userActions/userActions';
+import { logoutThunk } from '../redux/thunk/userThunk/logoutThunk';
 import { signInThunk } from '../redux/thunk/userThunk/signInThunk';
 import { StyledButton } from '../theme/uiComponents/Button';
 import { StyledContainerUser } from '../theme/uiComponents/layout/Container';
@@ -29,11 +30,11 @@ const SignIn: React.FC = () => {
     history.push('/dashboard')
   }
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetUser())
-    }
-  }, [email, password, dispatch])
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(logoutThunk())
+  //   }
+  // }, [])
 
   return (
     <>

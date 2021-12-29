@@ -1,6 +1,6 @@
 import { IUser, IUserToken } from 'tragile-user';
 
-import { ADD_TOKEN, ADD_USER, ADD_USER_WITH_TOKEN, RESET_TOKEN, RESET_USER } from '../../types';
+import { ADD_TOKEN, ADD_USER, ADD_USER_WITH_TOKEN, LOGOUT_USER, RESET_TOKEN, RESET_USER } from '../../types';
 
 
 export const addToken = (token: string) => {
@@ -33,5 +33,12 @@ export const resetToken = () => {
 export const resetUser = () => {
     return {
         type: RESET_USER,
+    }
+}
+
+export const logout = (logout: boolean) => {
+    return {
+        type: LOGOUT_USER,
+        payload: logout
     }
 }

@@ -2,13 +2,14 @@ import axios from 'axios';
 
 import { userApi } from '../../../endpoints.ts';
 import { messageAction } from '../../action/messageActions/messageAction';
-import { addToken, addUser, resetUser } from '../../action/userActions/userActions';
+import { addToken, addUser, addUserToken, logout, resetUser } from '../../action/userActions/userActions';
 import { setLoader } from '../../action/LoaderActions/loaderActions';
 // import { useHistory } from 'react-router';
 
 export const signInThunk = (email: string, password: string) => async (dispatch: any) => {
     const user = { email, password }
     dispatch(setLoader(true))
+    dispatch(logout(false))
     try {
         const response = await axios.post(`${userApi}/signIn`, user)
         if (response.status === 200) {
@@ -16,7 +17,9 @@ export const signInThunk = (email: string, password: string) => async (dispatch:
             dispatch(addUser(response.data.payload))
             dispatch(addToken(response.data.payload.token))
             dispatch(messageAction(response.data.message))
+            dispatch(addUserToken(response.data.payload))
             dispatch(setLoader(false))
+            dispatch(logout(true))
             alert("login succseefull")
         }
         else if (response.status === 401) {
@@ -24,11 +27,13 @@ export const signInThunk = (email: string, password: string) => async (dispatch:
             dispatch(messageAction(response.data.message))
             dispatch(setLoader(false))
             alert('check your credentials')
+            dispatch(logout(false))
         }
 
     } catch (error) {
         dispatch(messageAction('User could not be signed in'))
         dispatch(setLoader(false))
+        dispatch(logout(false))
         alert('check your credentials')
 
     }
