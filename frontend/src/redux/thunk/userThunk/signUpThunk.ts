@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IUser } from 'tragile-user';
 import { userApi } from '../../../endpoints.ts';
 import { messageAction } from '../../action/messageActions/messageAction';
-import { addToken, addUserToken, logout } from '../../action/userActions/userActions';
+import { addToken, addUserToken, logoutAction } from '../../action/userActions/userActions';
 
 export const signUpThunk = (user: IUser) => async (dispatch: any) => {
     try {
@@ -10,13 +10,13 @@ export const signUpThunk = (user: IUser) => async (dispatch: any) => {
         if (response.status === 201) {
             dispatch(addToken(response.data.payload))
             dispatch(messageAction(response.data.message))
-            dispatch(logout(true))
+            dispatch(logoutAction(true))
         }
         else if (response.status === 200) {
             dispatch(messageAction(response.data.message))
             localStorage.setItem("token", JSON.stringify(response.data.payload.token));
             dispatch(addUserToken(response.data.payload))
-            dispatch(logout(false))
+            dispatch(logoutAction(false))
         }
 
     } catch (error) {

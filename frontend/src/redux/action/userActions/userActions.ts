@@ -36,7 +36,7 @@ export const resetUser = () => {
     }
 }
 
-export const logout = (logout: boolean) => {
+export const logoutAction = (logout: boolean) => {
     return {
         type: LOGOUT_USER,
         payload: logout

@@ -24,11 +24,11 @@ const Home: React.FC = () => {
         dispatch(logoutThunk())
         history.push('/signIn')
     }
-    // useEffect(() => {
-    //     return () => {
-    //         dispatch(logoutThunk())
-    //     }
-    // }, [])
+    useEffect(() => {
+        return () => {
+            dispatch(logoutThunk())
+        }
+    }, [])
     return (
         <>
             <StyledContainerUser maxWidth='lg'>
