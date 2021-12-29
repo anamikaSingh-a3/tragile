@@ -13,6 +13,9 @@ declare module 'tragile-user' {
     export interface ITokenState {
         token: ''
     }
+    export interface ILoaderState {
+        loader: boolean
+    }
 
     export interface IUser {
         name: string

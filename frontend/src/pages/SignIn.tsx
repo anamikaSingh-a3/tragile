@@ -2,7 +2,7 @@ import { Box, Button, Container, CssBaseline, Grid, TextField, Typography } from
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { ITokenState, IUserState } from 'tragile-user';
+import { ILoaderState, ITokenState, IUserState } from 'tragile-user';
 import Copyright from '../components/common/Copyright';
 import { resetUser } from '../redux/action/userActions/userActions';
 import { signInThunk } from '../redux/thunk/userThunk/signInThunk';
@@ -18,19 +18,15 @@ const SignIn: React.FC = () => {
   const dispatch = useDispatch()
 
   const token = useSelector((state: ITokenState) => state.token)
+  const loader = useSelector((state: ILoaderState) => state.loader)
+
   const signUpHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(signInThunk(email, password))
-    // alert(token)
-    const check = () => {
+  }
 
-      console.log("token", token)
-      if (token.length > 0)
-        history.push('/dashboard')
-      else
-        console.log('Check your credentials')
-    }
-    setTimeout(check, 3000)
+  if (token.length > 0) {
+    history.push('/dashboard')
   }
 
   useEffect(() => {
@@ -45,6 +41,13 @@ const SignIn: React.FC = () => {
         <Container component='main' maxWidth='xs'>
           <CssBaseline />
           <StyledPaperUser elevation={3} >
+            {loader ? <>
+              <Typography component='h6' variant='h5'>
+                Loading...
+              </Typography>
+            </> :
+
+              <>
             <Typography component='h1' variant='h5'>
               Sign in
             </Typography>
@@ -99,6 +102,8 @@ const SignIn: React.FC = () => {
                 </Grid>
               </Grid>
             </form>
+              </>
+            }
           </StyledPaperUser>
           <Box mt={8}>
             <Copyright />

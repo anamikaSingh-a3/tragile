@@ -16,6 +16,7 @@ import activeWorkspaceReducer from './workspaceReducer/activeWorkspaceReducer';
 import workspaceReducer from './workspaceReducer/workspaceReducer';
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import loaderReducer from './loaderReducer/loaderReducer';
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +25,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
+  loader: loaderReducer,
   user: addUserReducer,
   token: addTokenReducer,
   userToken: UserTokenReducer,
