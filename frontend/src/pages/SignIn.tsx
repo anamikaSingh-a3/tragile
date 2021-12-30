@@ -2,9 +2,9 @@ import { Box, Button, Container, CssBaseline, Grid, TextField, Typography } from
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { ILoaderState, ITokenState, IUserState } from 'tragile-user';
+import { ILoaderState, ILogoutState, ITokenState, IUserState } from 'tragile-user';
 import Copyright from '../components/common/Copyright';
-import { resetUser } from '../redux/action/userActions/userActions';
+import { resetUser, resetToken } from '../redux/action/userActions/userActions';
 import { logoutThunk } from '../redux/thunk/userThunk/logoutThunk';
 import { signInThunk } from '../redux/thunk/userThunk/signInThunk';
 import { StyledButton } from '../theme/uiComponents/Button';
@@ -20,19 +20,21 @@ const SignIn: React.FC = () => {
 
   const token = useSelector((state: ITokenState) => state.token)
   const loader = useSelector((state: ILoaderState) => state.loader)
+  const logout = useSelector((state: ILogoutState) => state.logout)
 
-  const signUpHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const signInHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(signInThunk(email, password))
   }
 
-  if (token.length > 0) {
+  if (logout && token.length > 0) {
     history.push('/dashboard')
   }
 
   // useEffect(() => {
   //   return () => {
-  //     dispatch(logoutThunk())
+  //     dispatch(resetToken())
+  //     dispatch(resetUser())
   //   }
   // }, [])
 
@@ -85,7 +87,7 @@ const SignIn: React.FC = () => {
                 fullWidth
                 variant='contained'
                 color='primary'
-                onClick={(e) => signUpHandler(e)}
+                    onClick={(e) => signInHandler(e)}
               >
                 Sign In
               </StyledButton>

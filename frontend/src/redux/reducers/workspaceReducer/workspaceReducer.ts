@@ -1,6 +1,6 @@
 import { IWorkspace } from 'tragile-workspace';
 
-import { ADD_WORKSPACE } from '../../types';
+import { ADD_WORKSPACE, LOGOUT_RESET_STATE } from '../../types';
 
 const initialState: IWorkspace[] = []
 
@@ -14,6 +14,10 @@ const workspaceReducer = (
       else if (state.length >= 1 && action.payload.length >= 1) return [...state]
       else return [...state, action.payload]
     }
+    case LOGOUT_RESET_STATE: {
+      return initialState
+    }
+
     default:
       return state
   }

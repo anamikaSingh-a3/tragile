@@ -1,9 +1,11 @@
+import { Container, CssBaseline, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { IActiveBoardState } from 'tragile-board';
 import { IActiveBoardListState, IList } from 'tragile-list';
+import { ILogoutState } from 'tragile-user';
 
 import BoardList from '../components/BoardList';
 import Heading from '../components/common/Heading';
@@ -12,7 +14,9 @@ import SideDrawer from '../components/sideNavbar/SideDrawer';
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
 import updateCardListIdThunk from '../redux/thunk/cardThunk/updateCardListIdThunk';
 import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk';
-import { StyledContainer, StyledListContainer } from '../theme/uiComponents/layout/Container';
+import { StyledButton } from '../theme/uiComponents/Button';
+import { StyledContainer, StyledContainerUser, StyledListContainer } from '../theme/uiComponents/layout/Container';
+import { StyledPaperUser } from '../theme/uiComponents/layout/Paper';
 
 interface IParams {
   id: string
@@ -21,11 +25,13 @@ interface IParams {
 const BoardPage: React.FC = () => {
   const { id } = useParams<IParams>()
   const dispatch = useDispatch()
-
+  const history = useHistory()
   const list = useSelector(
     (state: IActiveBoardListState) => state.activeBoardList
   )
   const activeBoard = useSelector((state: IActiveBoardState) => state.activeBoard)
+
+  const logout = useSelector((state: ILogoutState) => state.logout)
 
   useEffect(() => {
     return () => {
@@ -47,6 +53,9 @@ const BoardPage: React.FC = () => {
     )
   }
   return (
+    <>
+      {logout ?
+
     <>
       <SideDrawer />
     <StyledContainer maxWidth='lg'>
@@ -71,6 +80,26 @@ const BoardPage: React.FC = () => {
         <InputContainer type='list' listId={''} />
       </StyledListContainer>
     </StyledContainer>
+        </> : <>
+          <StyledContainerUser maxWidth='lg'>
+            <Container component='main' maxWidth='xs'>
+              <CssBaseline />
+              <StyledPaperUser elevation={3} >
+                <Typography component='h1' variant='h5'>
+                  Please login or sign up..
+                  <StyledButton onClick={() => history.push('/')}>
+                    Go to gome
+                  </StyledButton>
+                  {/* <Box>
+                                        <StyledButton onClick={onSignUpHandler}>SignUP</StyledButton>
+                                        <StyledButton onClick={onSignInHandler}>SignIn</StyledButton>
+                                    </Box> */}
+                </Typography>
+              </StyledPaperUser>
+            </Container>
+          </StyledContainerUser>
+
+        </>}
     </>
   )
 }

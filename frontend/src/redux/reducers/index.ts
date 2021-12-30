@@ -18,11 +18,13 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import loaderReducer from './loaderReducer/loaderReducer';
 import logoutReducer from './userReducer/logoutReducer';
+import { LOGOUT_USER } from '../types';
+import { store } from '../store';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['activeWorkspace', 'workspaces', 'user', 'boards', 'list', 'activeWorkspaceBoard', 'activeBoard', 'activeBoardList', 'card']
+  whitelist: ['loader', 'logout', 'user', 'token', 'userToken', 'boards', 'workspaces', 'list', 'activeWorkspace', 'activeWorkspaceBoard', 'activeBoard', 'activeBoardList', 'card', 'activeCard', 'activeList', 'message']
 }
 
 const rootReducer = combineReducers({

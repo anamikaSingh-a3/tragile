@@ -1,6 +1,6 @@
 import { IList } from 'tragile-list';
 
-import { ACTIVE_LIST, ADD_LIST } from '../../types';
+import { ACTIVE_LIST, ADD_LIST, LOGOUT_RESET_STATE } from '../../types';
 
 const initialState: IList[] = []
 
@@ -21,6 +21,9 @@ const listReducer = (
     }
     case ACTIVE_LIST: {
       return action.payload
+    }
+    case LOGOUT_RESET_STATE: {
+      return initialState
     }
     default:
       return state

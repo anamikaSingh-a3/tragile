@@ -41,20 +41,18 @@ const BoardList: React.FC<IBoardListProps> = (props: IBoardListProps) => {
                         {props.list.title}
                       </Typography>
                     </StyledHeader>
+                    {cards.map((card: ICard, index: number) =>
+                      props.list.list_id === card.list ? (
                     <StyledListItem
                       button
                       disableRipple
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                    >
-                      {cards.map((card: ICard, index: number) =>
-                        props.list.list_id === card.list ? (
-                          <ListCard card={card} index={index} />
-                        ) : (
-                          ''
-                        )
-                      )}
+                        >
+                          <ListCard card={card} index={index} key={card.card_id} />
                     </StyledListItem>
+                      ) : ''
+                    )}
                     {provided.placeholder}
                   </>
                 )}

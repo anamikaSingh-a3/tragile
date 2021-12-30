@@ -1,8 +1,8 @@
 import { Modal, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { useDispatch } from 'react-redux';
-import { ICard } from 'tragile-card';
+import { useDispatch, useSelector } from 'react-redux';
+import { IActiveCardState, ICard } from 'tragile-card';
 
 import { addActiveCard } from '../redux/action/cardActions/cardActions';
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
@@ -30,9 +30,7 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
   }
 
   const onCardHandler = () => {
-    dispatch(getAllCardsThunk())
     dispatch(addActiveCard(props.card))
-
     setOpen(true)
   }
 

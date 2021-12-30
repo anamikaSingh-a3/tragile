@@ -1,6 +1,6 @@
 import { ICard } from 'tragile-card';
 
-import { ADD_CARD } from '../../types';
+import { ADD_CARD, LOGOUT_RESET_STATE } from '../../types';
 
 const initialState: ICard[] = []
 
@@ -15,6 +15,9 @@ const cardReducer = (
   switch (action.type) {
     case ADD_CARD: {
       return addCardLogic(state, action.payload)
+    }
+    case LOGOUT_RESET_STATE: {
+      return initialState
     }
     default:
       return state

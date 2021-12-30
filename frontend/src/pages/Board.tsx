@@ -1,8 +1,9 @@
-import { CardActionArea, CardContent } from '@material-ui/core';
+import { CardActionArea, CardContent, Container, CssBaseline, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { IActiveWorkspaceBoardState, IBoard } from 'tragile-board';
+import { ILogoutState } from 'tragile-user';
 import { IActiveWorkspaceState } from 'tragile-workspace';
 
 import Heading from '../components/common/Heading';
@@ -12,12 +13,16 @@ import { getBoardByIdThunk } from '../redux/thunk/boardThunk/getBoardByIdThunk';
 import { getBoardByWorkspaceThunk } from '../redux/thunk/boardThunk/getBoardByWorkspaceThunk';
 import { getAllCardsThunk } from '../redux/thunk/cardThunk/getAllCardThunk';
 import { getListByBoardThunk } from '../redux/thunk/listThunk/getListByBoardThunk';
+import { StyledButton } from '../theme/uiComponents/Button';
 import { StyledCard } from '../theme/uiComponents/Card';
-import { StyledBoardContainer, StyledContainer } from '../theme/uiComponents/layout/Container';
+import { StyledBoardContainer, StyledContainer, StyledContainerUser } from '../theme/uiComponents/layout/Container';
+import { StyledPaperUser } from '../theme/uiComponents/layout/Paper';
 
 const Board: React.FC = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+
+  const logout = useSelector((state: ILogoutState) => state.logout)
 
   const board = useSelector(
     (state: IActiveWorkspaceBoardState) => state.activeWorkspaceBoard
@@ -39,6 +44,8 @@ const Board: React.FC = () => {
 
   return (
     <>
+      {logout ?
+        <>
       <SideDrawer />
       <StyledContainer maxWidth='lg'>
         <Heading type={'WorkSpace'} value={activeWorkspace.title} />
@@ -57,6 +64,26 @@ const Board: React.FC = () => {
           <CreateBoard />
         </StyledBoardContainer>
       </StyledContainer>
+        </> : <>
+          <StyledContainerUser maxWidth='lg'>
+            <Container component='main' maxWidth='xs'>
+              <CssBaseline />
+              <StyledPaperUser elevation={3} >
+                <Typography component='h1' variant='h5'>
+                  Please login or sign up..
+                  <StyledButton onClick={() => history.push('/')}>
+                    Go to gome
+                  </StyledButton>
+                  {/* <Box>
+                                        <StyledButton onClick={onSignUpHandler}>SignUP</StyledButton>
+                                        <StyledButton onClick={onSignInHandler}>SignIn</StyledButton>
+                                    </Box> */}
+                </Typography>
+              </StyledPaperUser>
+            </Container>
+          </StyledContainerUser>
+
+        </>}
     </>
   )
 }

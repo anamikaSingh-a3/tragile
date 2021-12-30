@@ -1,6 +1,6 @@
 import { IList } from 'tragile-list';
 
-import { ACTIVE_BOARD_LIST, REST_ACTIVE_BOARDS_LIST } from '../../types';
+import { ACTIVE_BOARD_LIST, LOGOUT_RESET_STATE, REST_ACTIVE_BOARDS_LIST } from '../../types';
 
 
 
@@ -19,6 +19,9 @@ const activeBoardListReducer = (
       return addActiveBoardListLogic(state, action.payload)
     }
     case REST_ACTIVE_BOARDS_LIST: {
+      return initialState
+    }
+    case LOGOUT_RESET_STATE: {
       return initialState
     }
     default:

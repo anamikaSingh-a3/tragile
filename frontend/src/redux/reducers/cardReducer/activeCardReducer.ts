@@ -1,6 +1,6 @@
 import { ICard } from 'tragile-card';
 
-import { ACTIVE_CARD, RESET_ACTIVE_CARD } from '../../types';
+import { ACTIVE_CARD, LOGOUT_RESET_STATE, RESET_ACTIVE_CARD } from '../../types';
 
 
 
@@ -21,6 +21,9 @@ const activeCardReducer = (
         }
         case RESET_ACTIVE_CARD: {
             return state
+        }
+        case LOGOUT_RESET_STATE: {
+            return initialState
         }
         default:
             return state

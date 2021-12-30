@@ -1,4 +1,4 @@
-import { ADD_TOKEN, RESET_TOKEN } from '../../types';
+import { ADD_TOKEN, LOGOUT_RESET_STATE, RESET_TOKEN } from '../../types';
 
 const initialState = {
     token: ''
@@ -9,6 +9,9 @@ const tokenReducer = (state = initialState, action: { type: string, payload: str
             return action.payload
         }
         case RESET_TOKEN: {
+            return initialState
+        }
+        case LOGOUT_RESET_STATE: {
             return initialState
         }
         default:

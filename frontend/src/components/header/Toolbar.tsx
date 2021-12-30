@@ -18,7 +18,7 @@ const TopNavbar: React.FC = () => {
   const logout = useSelector((state: ILogoutState) => state.logout)
   const logoutHandler = () => {
     dispatch(logoutThunk())
-    // history.push('/signIn')
+    history.push('/signIn')
   }
   return (
     <>

@@ -1,6 +1,6 @@
 import { IBoard } from 'tragile-board';
 
-import { ADD_BOARD } from '../../types';
+import { ADD_BOARD, LOGOUT_RESET_STATE } from '../../types';
 
 const initialState: IBoard[] = []
 
@@ -12,7 +12,9 @@ const boardsReducer = (
     case ADD_BOARD: {
       return [...state, action.payload]
     }
-
+    case LOGOUT_RESET_STATE: {
+      return initialState
+    }
     default:
       return state
   }

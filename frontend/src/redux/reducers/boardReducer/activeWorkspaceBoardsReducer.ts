@@ -1,6 +1,6 @@
 import { IBoard } from 'tragile-board';
 
-import { ACTIVE_BOARD, RESET_BOARD } from '../../types';
+import { ACTIVE_BOARD, LOGOUT_RESET_STATE, RESET_BOARD } from '../../types';
 
 const initialState: IBoard[] = []
 
@@ -17,6 +17,9 @@ const activeWorkspaceBoardsReducer = (
       return activeWorkspaceBoardReducerLogic(state, action.payload)
     }
     case RESET_BOARD: {
+      return initialState
+    }
+    case LOGOUT_RESET_STATE: {
       return initialState
     }
     default:
