@@ -1,0 +1,26 @@
+import { IBoard } from 'tragile-board';
+
+import { ACTIVE_BOARD_IN_BOARDPAGE, LOGOUT_RESET_STATE, RESET_ACTIVE_BOARD_IN_BOARDPAGE } from '../../types';
+
+const initialState: IBoard[] = []
+
+const activeBoardReducer = (
+  state = initialState,
+  action: { type: string; payload: IBoard[] }
+) => {
+  switch (action.type) {
+    case ACTIVE_BOARD_IN_BOARDPAGE: {
+      return action.payload
+    }
+    case RESET_ACTIVE_BOARD_IN_BOARDPAGE: {
+      return initialState
+    }
+    case LOGOUT_RESET_STATE: {
+      return initialState
+    }
+    default:
+      return state
+  }
+}
+
+export default activeBoardReducer
